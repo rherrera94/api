@@ -1,0 +1,42 @@
+const express= require('express');
+const app=express.Router();
+const servicios= require('./services/servicesTLicitacion')
+
+app.get('/',async (req,res)=>{
+    try{
+        let registros=await servicios.tlicitacionListado();
+        if (registros.length==0){
+            throw new Error ('No se han encontrado tipos de licitaciones.');
+        }
+        res.status(200).send(registros);
+    }
+    catch(error){
+        if (error.message!='No se han encontrado tipos de licitaciones.'){
+            res.status(413).send({"Mensaje":'error inesperado'});    
+        }
+        res.status(404).send({"Mensaje":error.message});
+    }
+})
+
+/*******************************************************************************/
+
+app.get('/:id',async (req,res)=>{
+    try{
+        let registros=await servicios.tlicitacionGetter(req.params.id);
+        if (registros.length==0){
+            throw new Error ('No se han encontrado tipos de licitaciones con ese id.');
+        } 
+        res.status(200).send(registros);
+    }
+    catch(error){
+        if(error.message!= 'No se han encontrado tipos de licitaciones con ese id.'){
+            res.status(413).send({"Mensaje": "error inesperado"});
+            return;    
+        }
+        res.status(404).send({"Mensaje": error.message});
+    }
+})
+
+/*******************************************************************************/
+
+module.exports=app;
