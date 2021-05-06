@@ -2,6 +2,11 @@ const express= require('express');
 const app=express.Router();
 const servicios= require('./services/servicesProveedor')
 
+/**
+ * Devuelve un listado general de todos los proveedores que hay en la tabla de 
+ * proveedores.
+ * Formato de devolución: JSON
+ */
 app.get('/',async (req,res)=>{
     try{
         let registros=await servicios.proveedoresListado();
@@ -20,7 +25,11 @@ app.get('/',async (req,res)=>{
 })
 
 /*******************************************************************************/
-
+/**
+ * Devuelve la información del proveedor que tiene número de id igual al que se 
+ * pasa por parámetro.
+ * Formato de devolución: JSON
+ */
 app.get('/:id',async (req,res)=>{
     try{
         let registros=await servicios.proveedorGetter(req.params.id);
@@ -39,7 +48,11 @@ app.get('/:id',async (req,res)=>{
 })
 
 /*******************************************************************************/
-
+/**
+ * Devuelve la información del proveedor que tiene número de cuit igual al que se 
+ * pasa por parámetro.
+ * Formato de devolución: JSON
+ */
 app.get('/cuit/:cuit',async (req,res)=>{
     try{
         let registros=await servicios.cuitGetter(req.params.cuit);

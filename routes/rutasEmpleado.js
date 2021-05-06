@@ -2,6 +2,12 @@ const express= require('express');
 const app=express.Router();
 const servicios= require('./services/servicesEmpleado')
 
+/**
+ * Devuelve un listado general de todo los empleados que hay registrados 
+ * en la tabla de empleados con toda su información.
+ * Formato de devolución: JSON
+ */
+
 app.get('/',async (req,res)=>{
     try{
         let registros=await servicios.empleadosListado();
@@ -19,6 +25,12 @@ app.get('/',async (req,res)=>{
 })
 
 /*******************************************************************************/
+
+/**
+ * Devuelve la información del empleado que tiene número de id igual al que se 
+ * pasa por parámetro.
+ * Formato de devolución: JSON
+ */
 
 app.get('/:id',async (req,res)=>{
     try{
@@ -38,6 +50,12 @@ app.get('/:id',async (req,res)=>{
 })
 
 /*******************************************************************************/
+
+/**
+ * Devuelve la información del empleado que tiene número de cuil igual al que se 
+ * pasa por parámetro.
+ * Formato de devolución: JSON
+ */
 
 app.get('/cuil/:cuil',async (req,res)=>{
     try{
