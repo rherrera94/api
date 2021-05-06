@@ -42,10 +42,10 @@ async function cuitGet (cuit){
     return registros;
 }
 
-async function proveedorBorrado(id){
-    let query = 'UPDATE proveedor SET eliminado=? WHERE id = ?';
-    await qy(query, [1, id]);
-    return await proveedorGet(id);
+async function proveedorBorrado(cuit){
+    let query = 'UPDATE proveedor SET eliminado=? WHERE cuit = ?';
+    await qy(query, [1, cuit]);
+    return await cuitGet(cuit);
 }
 module.exports={
     proveedorGet,

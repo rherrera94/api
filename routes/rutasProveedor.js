@@ -71,19 +71,19 @@ app.get('/cuit/:cuit',async (req,res)=>{
 })
 /*******************************************************************************/
 /**
- * Borrado logico del proveedor que tiene número de id igual al 
+ * Borrado logico del proveedor que tiene número de cuit igual al 
  * que se pasa por parámetro. Devuelve el registro con el campo eliminado en 1.
  * Formato de devolución: JSON
  */
 
- app.put('/borrado/:id', async (req,res)=>{
+ app.put('/borrado/:cuit', async (req,res)=>{
     try{
-        let registros=await servicios.proveedorGetter(req.params.id);
+        let registros=await servicios.proveedorGetter(req.params.cuit);
         if (registros.length==0){
             throw new Error ('No se han encontrado proveedores con ese id.');
         } 
 
-        registros=await servicios.proveedorBorrado(req.params.id)
+        registros=await servicios.proveedorBorrado(req.params.cuit)
         res.status(200).send(registros);
 
     } catch (error) {
