@@ -25,21 +25,21 @@ conexion.connect((error)=>{
 const qy= util.promisify(conexion.query).bind(conexion); //permitira el uso de async-await en la conexion mysql
 /*********************************************************************/
 
-async function tlicitacionesList(){
-    let registros=await qy ('SELECT * FROM tLicitacion');
+async function direccionesList(){
+    let registros=await qy ('SELECT * FROM direccion');
     return registros;
 
 }
 
-async function tlicitacionGet (id){
+async function direccionGet (id){
 
-    let query='SELECT * FROM tLicitacion WHERE id=?';
+    let query='SELECT * FROM direccion WHERE id=?';
     let registros=await qy (query,id);
     return registros;
 
 }
 
 module.exports={
-    tlicitacionGet,
-    tlicitacionesList
+    direccionGet,
+    direccionesList
 }

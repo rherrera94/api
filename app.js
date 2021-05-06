@@ -15,17 +15,20 @@ app.use(express.urlencoded({ extended: true }));
  * Empleado (/empleado)-> Empleado de un Organismo del Estado, que esta inscripto en el sistema.
  * Organismo (/organismo)-> Organismo perteneciente al Estado, que esta inscripto en el sistema.
  * tlicitacion (/tlicitacion)-> tipo de licitacion.
+ * direccion (/direccion)-> direcciones.
  */
 
 const routeProveedor= require('./routes/rutasProveedor');
 const routeEmpleado= require('./routes/rutasEmpleado');
 const routeOrganismo= require('./routes/rutasOrganismo');
 const routeTLicitacion= require('./routes/rutasTLicitacion');
+const routeDireccion= require('./routes/rutasDireccion');
 
 app.use('/proveedor',routeProveedor);
 app.use('/empleado',routeEmpleado);
 app.use('/organismo',routeOrganismo);
 app.use('/tlicitacion',routeTLicitacion);
+app.use('/direccion',routeDireccion);
 
 /*************************************************************************/
 
