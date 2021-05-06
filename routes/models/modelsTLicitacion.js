@@ -39,7 +39,14 @@ async function tlicitacionGet (id){
 
 }
 
+async function tlicitacionBorrado(id){
+    let query = 'UPDATE tlicitacion SET eliminado=? WHERE id = ?';
+    await qy(query, [1, id]);
+    return await tlicitacionGet(id);
+}
+
 module.exports={
     tlicitacionGet,
-    tlicitacionesList
+    tlicitacionesList,
+    tlicitacionBorrado
 }

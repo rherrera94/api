@@ -13,8 +13,17 @@ async function tlicitacionListado(){
 async function tlicitacionGetter (id){
     return await model.tlicitacionGet(id);
 }
+/**
+ * Borrado logico del tipo de licitación que tiene número de id igual al 
+ * que se pasa por parámetro. Devuleve el registro con el campo eliminado en 1.
+ * Formato de devolución: JSON
+ */
+async function tlicitacionBorrado(id){
+    return await model.tlicitacionBorrado(id);
+}
 
 module.exports={
     tlicitacionListado,
-    tlicitacionGetter
+    tlicitacionGetter,
+    tlicitacionBorrado
 }

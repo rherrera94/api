@@ -21,9 +21,17 @@ async function proveedorGetter (id){
 async function cuitGetter (cuit){
     return await model.cuitGet(cuit);
 }
-
+/**
+ * Borrado logico del proveedor que tiene número de id igual al 
+ * que se pasa por parámetro. Devuelve el registro con el campo eliminado en 1.
+ * Formato de devolución: JSON
+ */
+ async function proveedorBorrado(id){
+    return await model.proveedorBorrado(id);
+}
 module.exports={
     proveedorGetter,
     proveedoresListado,
-    cuitGetter
+    cuitGetter,
+    proveedorBorrado
 }
