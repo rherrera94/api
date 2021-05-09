@@ -24,23 +24,27 @@ conexion.connect((error)=>{
     
 const qy= util.promisify(conexion.query).bind(conexion); //permitira el uso de async-await en la conexion mysql
 /*********************************************************************/
-
+/**
+ * @returns {JSON} Devuelve el resultado de la consulta generalizada
+ * a la tabla tlicitacion.  
+ */
 async function tlicitacionesList(){
     let registros=await qy ('SELECT * FROM tLicitacion');
     return registros;
-
 }
-
+/**
+ * @param {Integer} id id del tipo de licitación
+ * @returns {JSON} devuelve los registros de la tabla tLicitacion donde el id
+ * es igual al que se pase por parámetros. 
+ */
 async function tlicitacionGet (id){
-
     let query='SELECT * FROM tLicitacion WHERE id=?';
     let registros=await qy (query,id);
     return registros;
-
 }
 
 async function tlicitacionBorrado(id){
-    let query = 'UPDATE tlicitacion SET eliminado=? WHERE id = ?';
+    let query = 'UPDATE tLicitacion SET eliminado=? WHERE id = ?';
     await qy(query, [1, id]);
     return await tlicitacionGet(id);
 }
