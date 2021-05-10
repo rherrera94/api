@@ -1,0 +1,30 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "cors": "^2.8.5",
+    "dotenv": "^9.0.1",
+    "express": "^4.17.1",
+    "express-unless": "^0.5.0",
+    "jsonwebtoken": "^8.5.1",
+    "mysql": "^2.18.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rherrera94/api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rherrera94/api/issues"
+  },
+  "homepage": "https://github.com/rherrera94/api#readme"
+}
