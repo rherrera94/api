@@ -5,7 +5,7 @@ const servicios= require('./services/servicesDireccion')
 /**
  * Devuelve un listado generalizado de las direcciones que hay
  * registrados en la tabla direccion.
- * Formato de devolución: JSON
+ * @returns {JSON} json
  */
 app.get('/',async (req,res)=>{
     try{
@@ -27,7 +27,7 @@ app.get('/',async (req,res)=>{
 /**
  * Devuelve la información de la direccion que tiene número de id igual al 
  * que se pasa por parámetro.
- * Formato de devolución: JSON
+ * @returns {JSON} json
  */
 
 app.get('/:id',async (req,res)=>{

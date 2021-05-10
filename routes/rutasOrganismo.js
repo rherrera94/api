@@ -6,7 +6,7 @@ const servicios= require('./services/servicesOrganismo')
 /**
  * Devuelve un listado generalizado con todos los organismo existentes en la 
  * base de datos.
- * Formato de devolución: JSON
+ * @returns {JSON} json
  */
 app.get('/',async (req,res)=>{
     try{
@@ -29,7 +29,7 @@ app.get('/',async (req,res)=>{
 /**
  * Devuelve la información del organismo que tiene número de id igual al que se 
  * pasa por parámetro.
- * Formato de devolución: JSON
+ * @returns {JSON} json
  */
 app.get('/:id',async (req,res)=>{
     try{
@@ -52,7 +52,7 @@ app.get('/:id',async (req,res)=>{
 /**
  * Devuelve la información del organismo que tiene número de cuit igual al que se 
  * pasa por parámetro.
- * Formato de devolución: JSON
+ * @returns {JSON} json
  */
 app.get('/cuit/:cuit',async (req,res)=>{
     try{

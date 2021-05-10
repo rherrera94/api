@@ -5,7 +5,7 @@ const servicios= require('./services/servicesTLicitacion')
 /**
  * Devuelve un listado generalizado de los tipos de licitación que hay
  * registrados en la tabla tlicitacion.
- * Formato de devolución: JSON
+ * @returns {JSON} json
  */
 app.get('/',async (req,res)=>{
     try{
@@ -27,7 +27,7 @@ app.get('/',async (req,res)=>{
 /**
  * Devuelve la información del tipo de licitación que tiene número de id igual al 
  * que se pasa por parámetro.
- * Formato de devolución: JSON
+ * @returns {JSON} json
  */
 
 app.get('/:id',async (req,res)=>{
@@ -52,7 +52,7 @@ app.get('/:id',async (req,res)=>{
 /**
  * Borrado logico del tipo de licitación que tiene número de id igual al 
  * que se pasa por parámetro. Devuleve el registro con el campo eliminado en 1.
- * Formato de devolución: JSON
+ * @returns {JSON} json
  */
 
 app.put('/borrado/:id', async (req,res)=>{

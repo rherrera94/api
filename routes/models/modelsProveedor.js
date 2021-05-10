@@ -36,7 +36,7 @@ async function proveedoresList(){
 }
 /**
  * Realiza la consulta a la base de datos, especificamente a la tabla
- * proveedor en busca de del proveedor con numero de id que se pasa
+ * proveedor en busca del proveedor con numero de id que se pasa
  * por parámetro.
  * @param {Integer} id id del proveedor a buscar
  * @returns {JSON} devuelve un JSON con la respuesta de la tabla proveedor.
@@ -49,7 +49,7 @@ async function proveedorGet (id){
 }
 /**
 * Realiza la consulta a la base de datos, especificamente a la tabla
-* proveedor en busca de del proveedor con numero de cuit que se pasa
+* proveedor en busca del proveedor con numero de cuit que se pasa
 * por parámetro. 
 * @param {String} ciut cuit del proveedor a buscar.
 * @returns {JSON} devuelve un JSON con la respuesta de la tabla proveedor.  
@@ -70,7 +70,7 @@ async function cuitGet (cuit){
 async function proveedorBorrado(cuit){
     let query = 'UPDATE proveedor SET eliminado=? WHERE cuit = ?';
     await qy(query, [1, cuit]);
-    return cuitGet(cuit);
+    return await cuitGet(cuit);
 }
 module.exports={
     proveedorGet,

@@ -42,7 +42,13 @@ async function tlicitacionGet (id){
     let registros=await qy (query,id);
     return registros;
 }
-
+/**
+ * Borrado logico del tipo de licitacion que tiene número de id igual al 
+ * que se pasa por parámetro. 
+ * @param {String} id id del tipo de licitacion que se desea borrar.
+ * @returns {JSON} Devuleve un JSON del registro borrado con el campo
+ * eliminado en 1. En el caso de existir algun error lo devuelve.
+ */
 async function tlicitacionBorrado(id){
     let query = 'UPDATE tLicitacion SET eliminado=? WHERE id = ?';
     await qy(query, [1, id]);

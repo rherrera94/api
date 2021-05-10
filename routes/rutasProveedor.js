@@ -5,7 +5,7 @@ const servicios= require('./services/servicesProveedor')
 /**
  * Devuelve un listado general de todos los proveedores que hay en la tabla de 
  * proveedores.
- * Formato de devolución: JSON
+ * @returns {JSON} json
  */
 app.get('/',async (req,res)=>{
     try{
@@ -28,7 +28,7 @@ app.get('/',async (req,res)=>{
 /**
  * Devuelve la información del proveedor que tiene número de id igual al que se 
  * pasa por parámetro.
- * Formato de devolución: JSON
+ * @returns {JSON} json
  */
 app.get('/:id',async (req,res)=>{
     try{
@@ -51,7 +51,7 @@ app.get('/:id',async (req,res)=>{
 /**
  * Devuelve la información del proveedor que tiene número de cuit igual al que se 
  * pasa por parámetro.
- * Formato de devolución: JSON
+ * @returns {JSON} json
  */
 app.get('/cuit/:cuit',async (req,res)=>{
     try{
@@ -73,7 +73,7 @@ app.get('/cuit/:cuit',async (req,res)=>{
 /**
  * Borrado logico del proveedor que tiene número de cuit igual al 
  * que se pasa por parámetro. Devuelve el registro con el campo eliminado en 1.
- * Formato de devolución: JSON
+ * @returns {JSON} json
  */
 
  app.put('/borrado/:cuit', async (req,res)=>{
