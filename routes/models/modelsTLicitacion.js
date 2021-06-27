@@ -42,6 +42,26 @@ async function tlicitacionGet (id){
     let registros=await qy (query,id);
     return registros;
 }
+
+/**
+ * @param {string} licitacion nombre del tipo de licitación
+ * @returns {JSON} devuelve los registros de la tabla tLicitacion donde el nombre
+ * es igual al que se pase por parámetros. 
+ */
+ async function tlicitacionNGet (licitacion){
+    let query='SELECT * FROM tLicitacion WHERE nombre=?';
+    let registros=await qy (query,licitacion);
+    return registros;
+}
+
+/**
+ * @param {string} licitacion nombre del tipo de licitación 
+ */
+ async function tlicitacion (licitacion){
+    let query='INSERT INTO tlicitacion (nombre) value (?)';
+    await qy (query,licitacion);
+}
+
 /**
  * Borrado logico del tipo de licitacion que tiene número de id igual al 
  * que se pasa por parámetro. 
@@ -57,6 +77,8 @@ async function tlicitacionBorrado(id){
 
 module.exports={
     tlicitacionGet,
+    tlicitacionNGet,
     tlicitacionesList,
+    tlicitacion,
     tlicitacionBorrado
 }

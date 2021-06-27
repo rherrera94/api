@@ -1,6 +1,31 @@
 const express= require('express');
 const app=express.Router();
 const servicios= require('./services/servicesTLicitacion')
+app.post ('/',async (req, res)=> {
+    try{
+        if (!req.body.licitacion ){
+             throw new Error('faltan datos');
+         }
+         if(req.body.licitacion.trim()==""){
+             throw new Error('No se puede realizar envio de información en blanco');
+         }
+         let tLicitacion=req.body.licitacion.toUpperCase();
+         let revisiontLicitacion=await servicios.tlicitacionGetterN(tLicitacion);
+         if(revisiontLicitacion.length!=0){
+             throw new Error('El tipo de licitacion ya se encuentra registrado revise los datos');
+         }
+         await servicios.tlicitacion(tLicitacion);
+         revisiontLicitacion=await servicios.tlicitacionGetterN(tLicitacion);
+         res.status(200).send(revisiontLicitacion);
+    }
+    catch(e){
+        if (e.message=='faltan datos'||e.message=='No se puede realizar envio de información en blanco'||e.message=='El tipo de licitacion ya se encuentra registrado revise los datos'){
+            res.status(404).send({"Mensaje":e.message});
+        }
+        res.status(404).send({"Mensaje":"Error inesperado"});
+        
+    }
+ })
 
 /**
  * Devuelve un listado generalizado de los tipos de licitación que hay
