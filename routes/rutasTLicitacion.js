@@ -1,6 +1,16 @@
 const express= require('express');
 const app=express.Router();
 const servicios= require('./services/servicesTLicitacion')
+
+/**
+ * Crea un nuevo tipo de licitación. Recibira por el body un string con 
+ * el nuevo tipo de licitacion que se agregara a la base de datos.
+ * En caso de que la peticion haya salido bien devolverá status 200 y
+ * un json con el nuevo tipo de licitación. De existir algún error lo
+ * devolverá con Status 404.
+ * @returns {JSON} json
+ */
+
 app.post ('/',async (req, res)=> {
     try{
         if (!req.body.licitacion ){
@@ -23,7 +33,6 @@ app.post ('/',async (req, res)=> {
             res.status(404).send({"Mensaje":e.message});
         }
         res.status(404).send({"Mensaje":"Error inesperado"});
-        
     }
  })
 
