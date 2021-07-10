@@ -19,10 +19,16 @@ app.post ('/',async (req, res)=> {
             !req.body.justificacion ||!req.body.actodispo){
             throw new Error('faltan datos');
         }
-        if(req.body.organismo.trim()==""|| req.body.proveedor.trim()==""|| req.body.descripcion.trim()==""||
-        req.body.fechaInicio.trim()==""|| req.body.fechaFin.trim()==""|| req.body.monto.trim()==""||
+        if(isNaN(req.body.proveedor)){
+           throw new Error ("En el campo proveedor debe haber un número de cuit"); 
+        }
+        if(isNaN(req.body.monto)){
+            throw new Error ("En el campo monto debe haber un número"); 
+        } 
+        if(req.body.organismo.trim()==""|| req.body.descripcion.trim()==""||
+        req.body.fechaInicio.trim()==""|| req.body.fechaFin.trim()==""||
         req.body.justificacion.trim()==""|| req.body.actodispo.trim()==""){
-            throw new Error('No se puede realizar envio de información en blanco');
+            throw new Error('No se puede realizar envio de información en blanco.');
         }
         //me fijo si el organismo ingresado existe y si es asi me guardo el id
         let organismo=await serviceOrganismo.denominacionGetter(req.body.organismo.toUpperCase());
@@ -36,17 +42,20 @@ app.post ('/',async (req, res)=> {
         }
         //hasta implementar la seccion usuario el id de usuario sera 2
         let legitimoAb={
-            "organismo": organismo.id,
-            "proveedor": proveedor.id,
+            "organismo": organismo[0].id,
+            "proveedor": proveedor[0].id,
             "descripcion": req.body.descripcion.toUpperCase(),
             "fechaInicio": req.body.fechaInicio,
             "fechaFin": req.body.fechaFin,
             "monto": req.body.monto,
             "justificacion": req.body.justificacion.toUpperCase(),
-            "actoDispositivo": req.body.actodispo,//por el momento sera un string
+            "actoDispositivo": req.body.actodispo,
             "idusuario":2
         }
         let registro=await servicios.legitimoAb(legitimoAb);
+        if (registro.length==0){
+            throw new Error ("Ha surgido un inconveniente al guardar el legitimo abono");
+        }
         res.status(200).send(registro);         
     }
     catch(e){

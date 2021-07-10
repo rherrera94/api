@@ -26,8 +26,11 @@ const qy= util.promisify(conexion.query).bind(conexion); //permitira el uso de a
  * @param {object} legitimoAbono objeto con la informacion del legitimo abono a agregar 
  */
 async function legitimoAb(legitimoAbono){
-    let query='INSERT INTO legitimoabono (idorganismo,idproveedor,descripcion,fechainicio,fechafin,monto,justificacion,actodispositivo,idusuario) value (?,?,?,?,?,?,?,?,?)';
-    await qy (query,[legitimoAbono.organismo, legitimoAbono.proveedor, legitimoAbono.descripcion,legitimoAbono.fechaInicio,legitimoAbono.fechaFin, legitimoAbono.monto, legitimoAbono.justificacion,legitimoAbono.actodispositivo, legitimoAbono.idusuario]);
+    let query='INSERT INTO legitimoabono (idorganismo,idproveedor,descripcion,fechainicio,fechafin,monto,justificacion,actoDispositivo,idusuario) values (?,?,?,?,?,?,?,?,?)';
+    await qy (query,[legitimoAbono.organismo, legitimoAbono.proveedor, legitimoAbono.descripcion,legitimoAbono.fechaInicio,legitimoAbono.fechaFin, legitimoAbono.monto, legitimoAbono.justificacion,legitimoAbono.actoDispositivo, legitimoAbono.idusuario]);
+    query='SELECT * FROM legitimoabono WHERE idorganismo=? and idproveedor=? and descripcion=? and fechainicio=? and fechafin=? and monto=? and justificacion=? and actodispositivo=? and idusuario=?';
+    let resultado = await qy (query,[legitimoAbono.organismo, legitimoAbono.proveedor, legitimoAbono.descripcion,legitimoAbono.fechaInicio,legitimoAbono.fechaFin, legitimoAbono.monto, legitimoAbono.justificacion,legitimoAbono.actoDispositivo, legitimoAbono.idusuario]);
+    return resultado;
 }
 
 
