@@ -1,7 +1,8 @@
 const express= require('express');
 const app=express.Router();
-const servicios= require('./services/servicesLegitimoAb')
-
+const servicios= require('./services/servicesLegitimoAb');
+const serviceOrganismo= require('./services/servicesOrganismo');
+const serviceProveedor= require('./services/servicesProveedor');
 /**
  * Crea un nuevo legitimo abono. Recibira por el body los datos 
  * del nuevo legitimo abono que se agregara a la base de datos.
@@ -23,13 +24,33 @@ app.post ('/',async (req, res)=> {
         req.body.justificacion.trim()==""|| req.body.actodispo.trim()==""){
             throw new Error('No se puede realizar envio de información en blanco');
         }
-        let organismo=req.body.organismo.toUpperCase();
-        let proveedor=req.body.proveedor.toUpperCase();
-        let descripcion= req.body.descripcion.toUpperCase();
-        let justificacion= req.body.justificacion.toUpperCase(); 
+        //me fijo si el organismo ingresado existe y si es asi me guardo el id
+        let organismo=await serviceOrganismo.denominacionGetter(req.body.organismo.toUpperCase());
+        if (organismo.length==0){
+            throw new Error ("Organismo inexistente");
+        }
+        //me fijo si el proveedor ingresado existe y si es asi me guardo el id
+        let proveedor=await serviceProveedor.cuitGetter(req.body.proveedor);
+        if (proveedor.length==0){
+            throw new Error ("Proveedor inexistente");
+        }
+        //hasta implementar la seccion usuario el id de usuario sera 2
+        let legitimoAb={
+            "organismo": organismo.id,
+            "proveedor": proveedor.id,
+            "descripcion": req.body.descripcion.toUpperCase(),
+            "fechaInicio": req.body.fechaInicio,
+            "fechaFin": req.body.fechaFin,
+            "monto": req.body.monto,
+            "justificacion": req.body.justificacion.toUpperCase(),
+            "actoDispositivo": req.body.actodispo,//por el momento sera un string
+            "idusuario":2
+        }
+        let registro=await servicios.legitimoAb(legitimoAb);
+        res.status(200).send(registro);         
     }
     catch(e){
-        
+        res.status(404).send({"Mensaje": e.message});
     }
  })
 
@@ -64,7 +85,7 @@ app.get('/:id',async (req,res)=>{
     }
     catch(error){
         if(error.message!= 'No se han encontrado tipos de licitaciones con ese id.'){
-            res.status(413).send({"Mensaje": "error inesperado"});
+            res.status(404).send({"Mensaje": "error inesperado"});
             return;    
         }
         res.status(404).send({"Mensaje": error.message});
@@ -91,7 +112,7 @@ app.put('/borrado/:id', async (req,res)=>{
 
     } catch (error) {
         if (error.message!='No se han encontrado tipos de licitaciones con ese id.'){
-            res.status(400).send({"Mensaje": "error inesperado"});
+            res.status(404).send({"Mensaje": "error inesperado"});
         }
         res.status(404).send({"Mensaje": error.message});
     }

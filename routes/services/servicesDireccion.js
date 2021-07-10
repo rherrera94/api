@@ -2,7 +2,6 @@ const model= require ('../models/modelsDireccion');
 /**
  * @returns {JSON} Devuelve un listado general de todas las direcciones
  * que hay registradas en la tabla de direccion.
- * En el caso de existir algun error lo devuelve.
  */
 async function direccionListado(){
     return await model.direccionesList();
@@ -10,8 +9,7 @@ async function direccionListado(){
 /**
  * @param {Integer} id id de la direccion a buscar
  * @returns {JSON} devuelve un JSON con la información de la direccion
- * que tiene número de id igual al que se pasa por parámetro.
- * En el caso de existir algun error lo devuelve. 
+ * que tiene número de id igual al que se pasa por parámetro. 
  */
 async function direccionGetter (id){
     return await model.direccionGet(id);

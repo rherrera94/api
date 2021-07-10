@@ -69,7 +69,27 @@ app.get('/cuit/:cuit',async (req,res)=>{
         res.status(404).send({"Mensaje": error.message});
     }
 })
-
+/**
+ * Devuelve la información del organismo que tiene número de id igual al que se 
+ * pasa por parámetro.
+ * @returns {JSON} json
+ */
+ app.get('/denominacion/:denominacion',async (req,res)=>{
+    try{
+        let registros=await servicios.denominacionGetter(req.params.denominacion);
+        if (registros.length==0){
+            throw new Error ('No se han encontrado organismos con esa denominación.');
+        } 
+        res.status(200).send(registros);
+    }
+    catch(error){
+        if(error.message!= 'No se han encontrado organismos con esa denominación.'){
+            res.status(404).send({"Mensaje": "error inesperado"});
+            return;    
+        }
+        res.status(404).send({"Mensaje": error.message});
+    }
+})
 /*******************************************************************************/
 
 module.exports=app;

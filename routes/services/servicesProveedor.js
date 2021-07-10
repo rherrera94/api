@@ -2,8 +2,7 @@ const model= require ('../models/modelsProveedor');
 
 /**
  * @returns {JSON} Devuelve un listado general de todos los proveedores
- * que hay en la tabla de proveedores. En el caso de existir algun error
- * lo devuelve.
+ * que hay en la tabla de proveedores.
  */
 async function proveedoresListado(){
     return await model.proveedoresList();
@@ -12,8 +11,7 @@ async function proveedoresListado(){
 /**
  * @param {Integer} id id del proveedor a buscar
  * @returns {JSON} devuelve un JSON con la información del proveedor
- * que tiene número de id igual al que se pasa por parámetro. En el 
- * caso de existir algun error lo devuelve. 
+ * que tiene número de id igual al que se pasa por parámetro. 
  */
 async function proveedorGetter (id){
     return await model.proveedorGet(id);
@@ -21,8 +19,7 @@ async function proveedorGetter (id){
 /**
 * @param {String} ciut cuit del proveedor a buscar.
 * @returns {JSON} devuelve un JSON con la información del proveedor
-* que tiene número de cuit igual al que se pasa por parámetro. En el 
-* caso de existir algun error lo devuelve. 
+* que tiene número de cuit igual al que se pasa por parámetro.  
 */
 async function cuitGetter (cuit){
     return await model.cuitGet(cuit);
@@ -32,7 +29,7 @@ async function cuitGetter (cuit){
  * que se pasa por parámetro. 
  * @param {String} ciut cuit del proveedor a buscar.
  * @returns {JSON} Devuleve un JSON del registro borrado con el campo
- * eliminado en 1. En el caso de existir algun error lo devuelve.
+ * eliminado en 1. 
  */
  async function proveedorBorrado(cuit){
     return await model.proveedorBorrado(cuit);
