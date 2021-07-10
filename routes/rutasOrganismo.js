@@ -2,7 +2,6 @@ const express= require('express');
 const app=express.Router();
 const servicios= require('./services/servicesOrganismo')
 
-//falta el borrado logico
 /**
  * Devuelve un listado generalizado con todos los organismo existentes en la 
  * base de datos.
