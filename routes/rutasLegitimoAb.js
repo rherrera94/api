@@ -59,6 +59,12 @@ app.post ('/',async (req, res)=> {
         res.status(200).send(registro);         
     }
     catch(e){
+        if (e.message!="El Legitimo abono ha sido ingresado. Error de lectura de la base de datos." ||
+        e.message!="Proveedor inexistente"|| e.message!= "Organismo inexistente"|| 
+        e.message!= 'No se puede realizar envio de información en blanco.'|| e.message!= "En el campo monto debe haber un número" ||
+        e.message!= "En el campo proveedor debe haber un número de cuit" || e.message!='faltan datos'){
+            res.status(404).send({"Mensaje": "Error inesperado. Comuniquese con el administrador"});
+        }
         res.status(404).send({"Mensaje": e.message});
     }
  })
