@@ -54,7 +54,7 @@ app.post ('/',async (req, res)=> {
         }
         let registro=await servicios.legitimoAb(legitimoAb);
         if (registro.length==0){
-            throw new Error ("Ha surgido un inconveniente al guardar el legitimo abono");
+            throw new Error ("El Legitimo abono ha sido ingresado. Error de lectura de la base de datos.");
         }
         res.status(200).send(registro);         
     }
