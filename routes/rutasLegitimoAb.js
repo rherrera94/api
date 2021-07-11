@@ -3,6 +3,7 @@ const app=express.Router();
 const servicios= require('./services/servicesLegitimoAb');
 const serviceOrganismo= require('./services/servicesOrganismo');
 const serviceProveedor= require('./services/servicesProveedor');
+
 /**
  * Crea un nuevo legitimo abono. Recibira por el body los datos 
  * del nuevo legitimo abono que se agregara a la base de datos.
@@ -78,10 +79,17 @@ app.post ('/',async (req, res)=> {
  */
 app.get('/',async (req,res)=>{
     try{
-        
+        let registros=await servicios.legitimoAbListado();
+        if (registros.length==0){
+            throw new Error ('No se han encontrado legitimos abonos.');
+        }
+        res.status(200).send(registros);
     }
     catch(error){
-        
+        if (error.message!='No se han encontrado legitimos abonos.'){
+            res.status(413).send({"Mensaje":'error inesperado'});    
+        }
+        res.status(404).send({"Mensaje":error.message});
     }
 })
 
@@ -94,14 +102,38 @@ app.get('/',async (req,res)=>{
 
 app.get('/:id',async (req,res)=>{
     try{
-        let registros=await servicios.tlicitacionGetter(req.params.id);
+        let registros=await servicios.legitimoAbGetter(req.params.id);
         if (registros.length==0){
-            throw new Error ('No se han encontrado tipos de licitaciones con ese id.');
+            throw new Error ('No se han encontrado legitimos abonos con ese id.');
         } 
         res.status(200).send(registros);
     }
     catch(error){
-        if(error.message!= 'No se han encontrado tipos de licitaciones con ese id.'){
+        if(error.message!= 'No se han encontrado legitimos abonos con ese id.'){
+            res.status(404).send({"Mensaje": "error inesperado"});
+            return;    
+        }
+        res.status(404).send({"Mensaje": error.message});
+    }
+})
+
+/*******************************************************************************/
+/**
+ * Devuelve la información del legitimo abono que tiene como proveedor al 
+ * id de proveedor que se pasa por parámetro.
+ * @returns {JSON} json
+ */
+
+ app.get('/proveedor/:id',async (req,res)=>{
+    try{
+        let registros=await servicios.legitimoAbGetterIp(req.params.id);
+        if (registros.length==0){
+            throw new Error ('No se han encontrado legitimos abonos para ese proveedor.');
+        } 
+        res.status(200).send(registros);
+    }
+    catch(error){
+        if(error.message!= 'No se han encontrado legitimos abonos para ese proveedor.'){
             res.status(404).send({"Mensaje": "error inesperado"});
             return;    
         }

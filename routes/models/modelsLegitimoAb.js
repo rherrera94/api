@@ -23,7 +23,9 @@ const qy= util.promisify(conexion.query).bind(conexion); //permitira el uso de a
 /*********************************************************************/
 
 /**
- * @param {object} legitimoAbono objeto con la informacion del legitimo abono a agregar 
+ * @param {object} legitimoAbono objeto con la informacion del legitimo abono a agregar
+ * @returns {Array} Devuelve la información que fue cargada en la base de datos o de haber algun
+ * error devuelve un array vacio. 
  */
 async function legitimoAb(legitimoAbono){
     let query='INSERT INTO legitimoabono (idorganismo,idproveedor,descripcion,fechainicio,fechafin,monto,justificacion,actoDispositivo,idusuario) values (?,?,?,?,?,?,?,?,?)';
@@ -35,11 +37,36 @@ async function legitimoAb(legitimoAbono){
     }catch{
         //el legitimo abono ya ha sido ingresado pero al querer devolver al usuario el registro ingresado existio un error de lectura
         return [];
-    }
-    
+    }    
 }
-
-
+/**
+ * @returns {JSON} Devuelve el resultado de la consulta generalizada
+ * a la tabla legitimo abono.  
+ */
+ async function legitimoAbList(){
+    let registros=await qy ('SELECT legitimoabono.id as id, organismo.denominacion as organismo, proveedor.razonSocial as proveedor, legitimoabono.descripcion as descripcion, fechaInicio, fechaFin, monto,justificacion,actoDispositivo FROM legitimoabono,organismo, proveedor WHERE legitimoabono.idOrganismo=organismo.id and legitimoabono.idProveedor=proveedor.id');
+    return registros;
+}
+/**
+ * @returns {JSON} Devuelve el resultado de la consulta segun id de legitimo abono
+ * a la tabla legitimo abono.  
+ */
+async function legitimoAb(id){
+    let query='SELECT legitimoabono.id as id, organismo.denominacion as organismo, proveedor.razonSocial as proveedor, legitimoabono.descripcion as descripcion, fechaInicio, fechaFin, monto,justificacion,actoDispositivo FROM legitimoabono,organismo, proveedor WHERE legitimoabono.idOrganismo=organismo.id and legitimoabono.idProveedor=proveedor.id and legitimoabono.id=?';
+    let registros=await qy (query,[id]);
+    return registros;
+}
+/**
+ * @returns {JSON} Devuelve el resultado de la consulta segun id de legitimo abono
+ * a la tabla legitimo abono.  
+ */
+ async function legitimoAbIpGet(proveedor){
+    let query='SELECT legitimoabono.id as id, organismo.denominacion as organismo, proveedor.razonSocial as proveedor, legitimoabono.descripcion as descripcion, fechaInicio, fechaFin, monto,justificacion,actoDispositivo FROM legitimoabono,organismo, proveedor WHERE legitimoabono.idOrganismo=organismo.id and legitimoabono.idProveedor=proveedor.id and legitimoabono.idProveedor=?';
+    let registros=await qy (query,[proveedor]);
+    return registros;
+}
 module.exports={
-    legitimoAb
+    legitimoAb,
+    legitimoAbList,
+    legitimoAbIpGet
 }

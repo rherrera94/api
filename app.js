@@ -15,6 +15,7 @@ app.use(express.urlencoded({ extended: true }));
  * Empleado (/empleado)-> Empleado de un Organismo del Estado, que esta inscripto en el sistema.
  * Organismo (/organismo)-> Organismo perteneciente al Estado, que esta inscripto en el sistema.
  * tlicitacion (/tlicitacion)-> tipo de licitacion.
+ * legitimoAb (/legitimoab)-> ruta para los legitimos abonos.
  * direccion (/direccion)-> direcciones.
  */
 
