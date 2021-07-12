@@ -18,30 +18,35 @@ app.post ('/',async (req, res)=> {
         if (!req.body.organismo ||!req.body.proveedor || !req.body.descripcion || 
             !req.body.fechaInicio || !req.body.fechaFin || !req.body.monto || 
             !req.body.justificacion ||!req.body.actodispo){
+            //si falta algun dato lanza un error
             throw new Error('faltan datos');
         }
         if(isNaN(req.body.proveedor)){
-           throw new Error ("En el campo proveedor debe haber un número de cuit"); 
+            //si se inserto algo diferente de un numero lanza error
+            throw new Error ("En el campo proveedor debe haber un número de cuit"); 
         }
         if(isNaN(req.body.monto)){
+            //si se inserto algo diferente de un numero lanza error
             throw new Error ("En el campo monto debe haber un número"); 
         } 
         if(req.body.organismo.trim()==""|| req.body.descripcion.trim()==""||
         req.body.fechaInicio.trim()==""|| req.body.fechaFin.trim()==""||
         req.body.justificacion.trim()==""|| req.body.actodispo.trim()==""){
+            //nos fijamos que no hayan ingresado algun campo con espacios en blanco
             throw new Error('No se puede realizar envio de información en blanco.');
         }
-        //me fijo si el organismo ingresado existe y si es asi me guardo el id
         let organismo=await serviceOrganismo.denominacionGetter(req.body.organismo.toUpperCase());
         if (organismo.length==0){
+            //nos fijamos si el organismo ingresado existe y si es asi me guardo el id
             throw new Error ("Organismo inexistente");
         }
-        //me fijo si el proveedor ingresado existe y si es asi me guardo el id
+        //consultamos si el proveedor ingresado existe y si es asi me guardo el id
         let proveedor=await serviceProveedor.cuitGetter(req.body.proveedor);
         if (proveedor.length==0){
             throw new Error ("Proveedor inexistente");
         }
         //hasta implementar la seccion usuario el id de usuario sera 2
+        //se guarda la información del legitimo abono en un objeto para despues pasarlo por parametro
         let legitimoAb={
             "organismo": organismo[0].id,
             "proveedor": proveedor[0].id,
@@ -134,6 +139,55 @@ app.get('/:id',async (req,res)=>{
     }
     catch(error){
         if(error.message!= 'No se han encontrado legitimos abonos para ese proveedor.'){
+            res.status(404).send({"Mensaje": "error inesperado"});
+            return;    
+        }
+        res.status(404).send({"Mensaje": error.message});
+    }
+})
+
+/*******************************************************************************/
+
+/**
+ * Devuelve la información del legitimo abono que tiene como proveedor al 
+ * cuit de proveedor que se pasa por parámetro.
+ * @returns {JSON} json
+ */
+
+ app.get('/proveedor/cuit/:cuit',async (req,res)=>{
+    try{
+        let registros=await servicios.legitimoAbGetterCuit(req.params.cuit);
+        if (registros.length==0){
+            throw new Error ('No se han encontrado legitimos abonos para ese proveedor.');
+        } 
+        res.status(200).send(registros);
+    }
+    catch(error){
+        if(error.message!= 'No se han encontrado legitimos abonos para ese proveedor.'){
+            res.status(404).send({"Mensaje": "error inesperado"});
+            return;    
+        }
+        res.status(404).send({"Mensaje": error.message});
+    }
+})
+
+/*******************************************************************************/
+/**
+ * Devuelve la información del legitimo abono que tiene como organismo al 
+ * id de organismo que se pasa por parámetro.
+ * @returns {JSON} json
+ */
+
+ app.get('/organismo/:id',async (req,res)=>{
+    try{
+        let registros=await servicios.legitimoAbGetterIo(req.params.id);
+        if (registros.length==0){
+            throw new Error ('No se han encontrado legitimos abonos para ese organismo.');
+        } 
+        res.status(200).send(registros);
+    }
+    catch(error){
+        if(error.message!= 'No se han encontrado legitimos abonos para ese organismo.'){
             res.status(404).send({"Mensaje": "error inesperado"});
             return;    
         }

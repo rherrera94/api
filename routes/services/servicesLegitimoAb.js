@@ -21,7 +21,7 @@ async function legitimoAbListado(){
  * abono que tiene número de id igual al que se pasa por parámetro. 
  */
 async function legitimoAbGetter (id){
-    return await model.legitimoAb(id);
+    return await model.legitimoAbGet(id);
 }
 /**
  * @param {integer} organismo id del organismo que se desea buscar
@@ -41,6 +41,14 @@ async function legitimoAbGetter (id){
 }
 
 /**
+ * @param {integer} proveedor cuit del proveedor que se desea buscar
+ * @returns {JSON} devuelve un JSON con la información de los legitimos 
+ * abonos que tiene cuit igual al que se pasa por parámetro.
+ */
+ async function legitimoAbGetterCuit (proveedor){
+    return await model.legitimoAbCuitGet(proveedor);
+}
+/**
  * Borrado logico del legitimo abono que tiene número de id igual al 
  * que se pasa por parámetro. 
  * @param {Integer} id id del legitimo abono
@@ -57,5 +65,6 @@ module.exports={
     legitimoAbGetter,
     legitimoAbGetterIo,
     legitimoAbGetterIp,
+    legitimoAbGetterCuit,
     legitimoAbBorrado
 }

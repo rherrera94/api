@@ -43,21 +43,23 @@ async function legitimoAb(legitimoAbono){
  * @returns {JSON} Devuelve el resultado de la consulta generalizada
  * a la tabla legitimo abono.  
  */
- async function legitimoAbList(){
-    let registros=await qy ('SELECT legitimoabono.id as id, organismo.denominacion as organismo, proveedor.razonSocial as proveedor, legitimoabono.descripcion as descripcion, fechaInicio, fechaFin, monto,justificacion,actoDispositivo FROM legitimoabono,organismo, proveedor WHERE legitimoabono.idOrganismo=organismo.id and legitimoabono.idProveedor=proveedor.id');
-    return registros;
-}
-/**
- * @returns {JSON} Devuelve el resultado de la consulta segun id de legitimo abono
- * a la tabla legitimo abono.  
- */
-async function legitimoAb(id){
+ async function legitimoAbGet(id){
     let query='SELECT legitimoabono.id as id, organismo.denominacion as organismo, proveedor.razonSocial as proveedor, legitimoabono.descripcion as descripcion, fechaInicio, fechaFin, monto,justificacion,actoDispositivo FROM legitimoabono,organismo, proveedor WHERE legitimoabono.idOrganismo=organismo.id and legitimoabono.idProveedor=proveedor.id and legitimoabono.id=?';
     let registros=await qy (query,[id]);
     return registros;
 }
+
 /**
- * @returns {JSON} Devuelve el resultado de la consulta segun id de legitimo abono
+ * @returns {JSON} Devuelve el resultado de la consulta generalizada
+ * a la tabla legitimo abono.  
+ */
+ async function legitimoAbList(){
+    let registros=await qy ('SELECT legitimoabono.id as id, organismo.denominacion as organismo, proveedor.razonSocial as proveedor, legitimoabono.descripcion as descripcion, fechaInicio, fechaFin, monto,justificacion,actoDispositivo FROM legitimoabono,organismo, proveedor WHERE legitimoabono.idOrganismo=organismo.id and legitimoabono.idProveedor=proveedor.id');
+    return registros;
+}
+
+/**
+ * @returns {JSON} Devuelve el resultado de la consulta segun id de proveedor
  * a la tabla legitimo abono.  
  */
  async function legitimoAbIpGet(proveedor){
@@ -65,8 +67,29 @@ async function legitimoAb(id){
     let registros=await qy (query,[proveedor]);
     return registros;
 }
+/**
+ * @returns {JSON} Devuelve el resultado de la consulta segun cuit de proveedor
+ * a la tabla legitimo abono.  
+ */
+ async function legitimoAbCuitGet(proveedor){
+    let query='SELECT legitimoabono.id as id, organismo.denominacion as organismo, proveedor.razonSocial as proveedor, legitimoabono.descripcion as descripcion, fechaInicio, fechaFin, monto,justificacion,actoDispositivo FROM legitimoabono,organismo, proveedor WHERE legitimoabono.idOrganismo=organismo.id and legitimoabono.idProveedor=proveedor.id and proveedor.cuit=?';
+    let registros=await qy (query,[proveedor]);
+    return registros;
+}
+/**
+ * @returns {JSON} Devuelve el resultado de la consulta segun id de organismo
+ * a la tabla legitimo abono.  
+ */
+ async function legitimoAbIoGet(organismo){
+    let query='SELECT legitimoabono.id as id, organismo.denominacion as organismo, proveedor.razonSocial as proveedor, legitimoabono.descripcion as descripcion, fechaInicio, fechaFin, monto,justificacion,actoDispositivo FROM legitimoabono,organismo, proveedor WHERE legitimoabono.idOrganismo=organismo.id and legitimoabono.idProveedor=proveedor.id and legitimoabono.idOrganismo=?';
+    let registros=await qy (query,[organismo]);
+    return registros;
+}
 module.exports={
     legitimoAb,
+    legitimoAbGet,
     legitimoAbList,
-    legitimoAbIpGet
+    legitimoAbIpGet,
+    legitimoAbIoGet,
+    legitimoAbCuitGet
 }
