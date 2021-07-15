@@ -1,4 +1,4 @@
-const qy=require('./conexion');
+const qy=require('../../config/conexion');
 /*********************************************************************/
 /**
  * @returns {JSON} Devuelve el resultado de la consulta generalizada

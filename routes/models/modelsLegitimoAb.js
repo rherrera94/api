@@ -1,4 +1,4 @@
-const qy=require('./conexion');
+const qy=require('../../config/conexion');
 /**
  * @param {object} legitimoAbono objeto con la informacion del legitimo abono a agregar
  * @returns {Array} Devuelve la información que fue cargada en la base de datos o de haber algun

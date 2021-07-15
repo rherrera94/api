@@ -1,4 +1,4 @@
-const qy=require('./conexion');
+const qy=require('../../config/conexion');
 /*********************************************************************/
 
 /**

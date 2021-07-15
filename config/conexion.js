@@ -3,7 +3,6 @@ require('dotenv').config({ path:'../../.env'});
 /*   Se utilizan variables de entorno para ocultar datos sensibles.  */
 /*********************************************************************/
 var mysql=require('mysql');
-const { REPL_MODE_SLOPPY } = require('repl');
 const util=require ('util'); // no se necesita instalarla
 
 var conexion= mysql.createConnection({
