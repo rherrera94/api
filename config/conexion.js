@@ -1,4 +1,4 @@
-require('dotenv').config({ path:'../../.env'});
+require('dotenv').config({ path:'../.env'});
 /********************CONEXIÓN A BASE DE DATOS*************************/
 /*   Se utilizan variables de entorno para ocultar datos sensibles.  */
 /*********************************************************************/
