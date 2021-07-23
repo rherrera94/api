@@ -47,6 +47,8 @@ app.post ('/',async (req, res)=> {
         }
         //hasta implementar la seccion usuario el id de usuario sera 2
         //se guarda la información del legitimo abono en un objeto para despues pasarlo por parametro
+        let d=new Date();
+        let fech=d.getFullYear()+"-"+d.getMonth()+"-"+d.getDate()+" "+d.getHours()+":"+d.getMinutes()+":"+d.getSeconds();
         let legitimoAb={
             "organismo": organismo[0].id,
             "proveedor": proveedor[0].id,
@@ -56,7 +58,8 @@ app.post ('/',async (req, res)=> {
             "monto": req.body.monto,
             "justificacion": req.body.justificacion.toUpperCase(),
             "actoDispositivo": req.body.actodispo,
-            "idusuario":2
+            "idusuario":2,
+            "fecha":fech
         }
         let registro=await servicios.legitimoAb(legitimoAb);
         if (registro.length==0){
@@ -65,13 +68,13 @@ app.post ('/',async (req, res)=> {
         res.status(200).send(registro);         
     }
     catch(e){
-        
-        if (e.message!="El Legitimo abono ha sido ingresado. Error de lectura de la base de datos." ||
-        e.message!="Proveedor inexistente"|| e.message!= "Organismo inexistente"|| 
-        e.message!= 'No se puede realizar envio de información en blanco.'|| e.message!= "En el campo monto debe haber un número" ||
-        e.message!= "En el campo proveedor debe haber un número de cuit" || e.message!='faltan datos'){
+        if (e.message!="El Legitimo abono ha sido ingresado. Error de lectura de la base de datos." &&
+        e.message!="Proveedor inexistente"&& e.message!= "Organismo inexistente"&& 
+        e.message!= 'No se puede realizar envio de información en blanco.'&& e.message!= "En el campo monto debe haber un número" &&
+        e.message!= "En el campo proveedor debe haber un número de cuit" && e.message!='faltan datos'){
             //en el caso de que el error sea uno desconocido lanzo error inesperado.
             res.status(404).send({"Mensaje": "Error inesperado. Comuniquese con el administrador"});
+            return;
         }
         res.status(404).send({"Mensaje": e.message});
     }

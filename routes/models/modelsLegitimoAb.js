@@ -5,11 +5,11 @@ const qy=require('../../config/conexion');
  * error devuelve un array vacio. 
  */
 async function legitimoAb(legitimoAbono){
-    let query='INSERT INTO legitimoabono (idorganismo,idproveedor,descripcion,fechainicio,fechafin,monto,justificacion,actoDispositivo,idusuario) values (?,?,?,?,?,?,?,?,?)';
-    await qy (query,[legitimoAbono.organismo, legitimoAbono.proveedor, legitimoAbono.descripcion,legitimoAbono.fechaInicio,legitimoAbono.fechaFin, legitimoAbono.monto, legitimoAbono.justificacion,legitimoAbono.actoDispositivo, legitimoAbono.idusuario]);
+    let query='INSERT INTO legitimoabono (idorganismo,idproveedor,descripcion,fechainicio,fechafin,monto,justificacion,actoDispositivo,idusuario,fecha) values (?,?,?,?,?,?,?,?,?,?)';
+    await qy (query,[legitimoAbono.organismo, legitimoAbono.proveedor, legitimoAbono.descripcion,legitimoAbono.fechaInicio,legitimoAbono.fechaFin, legitimoAbono.monto, legitimoAbono.justificacion,legitimoAbono.actoDispositivo, legitimoAbono.idusuario,legitimoAbono.fecha]);
     try{
-        query='SELECT * FROM legitimoabono WHERE idorganismo=? and idproveedor=? and descripcion=? and fechainicio=? and fechafin=? and monto=? and justificacion=? and actodispositivo=? and idusuario=?';
-        let resultado = await qy (query,[legitimoAbono.organismo, legitimoAbono.proveedor, legitimoAbono.descripcion,legitimoAbono.fechaInicio,legitimoAbono.fechaFin, legitimoAbono.monto, legitimoAbono.justificacion,legitimoAbono.actoDispositivo, legitimoAbono.idusuario]);
+        query='SELECT * FROM legitimoabono WHERE idorganismo=? and idproveedor=? and descripcion=? and fechainicio=? and fechafin=? and monto=? and justificacion=? and actodispositivo=? and idusuario=? and fecha=?';
+        let resultado = await qy (query,[legitimoAbono.organismo, legitimoAbono.proveedor, legitimoAbono.descripcion,legitimoAbono.fechaInicio,legitimoAbono.fechaFin, legitimoAbono.monto, legitimoAbono.justificacion,legitimoAbono.actoDispositivo, legitimoAbono.idusuario,legitimoAbono.fecha]);
         return resultado;
     }catch{
         //el legitimo abono ya ha sido ingresado pero al querer devolver al usuario el registro ingresado existio un error de lectura
