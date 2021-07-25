@@ -21,7 +21,7 @@ async function legitimoAb(legitimoAbono){
  * a la tabla legitimo abono.  
  */
  async function legitimoAbGet(id){
-    let query='SELECT legitimoabono.id as id, organismo.denominacion as organismo, proveedor.razonSocial as proveedor, legitimoabono.descripcion as descripcion, fechaInicio, fechaFin, monto,justificacion,actoDispositivo FROM legitimoabono,organismo, proveedor WHERE legitimoabono.idOrganismo=organismo.id and legitimoabono.idProveedor=proveedor.id and legitimoabono.id=?';
+    let query='SELECT legitimoabono.id as id, organismo.denominacion as organismo, proveedor.razonSocial as proveedor, legitimoabono.descripcion as descripcion, fechaInicio, fechaFin, monto,justificacion,actoDispositivo FROM legitimoabono,organismo, proveedor WHERE legitimoabono.idOrganismo=organismo.id and legitimoabono.idProveedor=proveedor.id and legitimoabono.borrado!=1 and legitimoabono.id=?';
     let registros=await qy (query,[id]);
     return registros;
 }
@@ -31,7 +31,10 @@ async function legitimoAb(legitimoAbono){
  * a la tabla legitimo abono.  
  */
  async function legitimoAbList(){
-    let registros=await qy ('SELECT legitimoabono.id as id, organismo.denominacion as organismo, proveedor.razonSocial as proveedor, legitimoabono.descripcion as descripcion, fechaInicio, fechaFin, monto,justificacion,actoDispositivo FROM legitimoabono,organismo, proveedor WHERE legitimoabono.idOrganismo=organismo.id and legitimoabono.idProveedor=proveedor.id');
+    let query= 'SELECT legitimoabono.id as id, organismo.denominacion as organismo, proveedor.razonSocial as proveedor, legitimoabono.descripcion as descripcion, fechaInicio, fechaFin, monto,justificacion,'; 
+    query=query+'actoDispositivo,legitimoabono.borrado as borrado FROM legitimoabono,organismo, proveedor';
+    query=query+' WHERE legitimoabono.idOrganismo=organismo.id and legitimoabono.idProveedor=proveedor.id';
+    let registros=await qy(query,[]);
     return registros;
 }
 
@@ -62,11 +65,29 @@ async function legitimoAb(legitimoAbono){
     let registros=await qy (query,[organismo]);
     return registros;
 }
+/**
+ * Marca como eliminado el Legitimo Abono que se solicita dar de baja. 
+ * @returns {JSON} Devuleve un JSON del registro borrado con el campo
+ * eliminado en 1.
+ */
+async function legitimoAbBorrado(id){
+    let query='UPDATE legitimoabono SET borrado = ? WHERE id = ?';
+    await qy(query,[1,id]);
+    try{
+        query='SELECT * FROM legitimoabono WHERE id=?';
+        let resultado = await qy (query,[id]);
+        return resultado;
+    }catch{
+        //el legitimo abono ya ha sido borrado pero al querer devolver al usuario el registro borrado existio un error de lectura
+        return [];
+    }   
+}
 module.exports={
     legitimoAb,
     legitimoAbGet,
     legitimoAbList,
     legitimoAbIpGet,
     legitimoAbIoGet,
-    legitimoAbCuitGet
+    legitimoAbCuitGet,
+    legitimoAbBorrado
 }

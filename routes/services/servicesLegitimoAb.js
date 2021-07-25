@@ -58,7 +58,6 @@ async function legitimoAbGetter (id){
 async function legitimoAbBorrado(id){
     return await model.legitimoAbBorrado(id);
 }
-
 module.exports={
     legitimoAb,
     legitimoAbListado,

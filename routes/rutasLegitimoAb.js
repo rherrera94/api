@@ -95,7 +95,9 @@ app.get('/',async (req,res)=>{
     }
     catch(error){
         if (error.message!='No se han encontrado legitimos abonos.'){
-            res.status(413).send({"Mensaje":'error inesperado'});    
+            console.log(error.message);
+            res.status(413).send({"Mensaje":'error inesperado'});
+            return;    
         }
         res.status(404).send({"Mensaje":error.message});
     }
@@ -208,17 +210,22 @@ app.get('/:id',async (req,res)=>{
 
 app.put('/borrado/:id', async (req,res)=>{
     try{
-        let registros=await servicios.tlicitacionGetter(req.params.id);
-        if (registros.length==0){
-            throw new Error ('No se han encontrado tipos de licitaciones con ese id.');
+        let registro=await servicios.legitimoAbGetter(req.params.id);
+        if (registro.length==0){
+            throw new Error ('No se han encontrado legitimos abonos con ese id.');
         } 
-
-        registros=await servicios.tlicitacionBorrado(req.params.id)
-        res.status(200).send(registros);
+        registro=await servicios.legitimoAbBorrado(req.params.id)
+        if (registro.length==0){
+            throw new Error ("El Legitimo abono ha sido borrado. Error de lectura de la base de datos.");
+        }
+        res.status(200).send(registro);
 
     } catch (error) {
-        if (error.message!='No se han encontrado tipos de licitaciones con ese id.'){
+        if (error.message!='No se han encontrado legitimos abonos con ese id.'&& 
+        error.message!='El Legitimo abono ha sido borrado. Error de lectura de la base de datos.'&&
+        error.message!="El legitimo abono no puede ser borrado por que ya ha sido eliminado con anterioridad"){
             res.status(404).send({"Mensaje": "error inesperado"});
+            return;
         }
         res.status(404).send({"Mensaje": error.message});
     }
