@@ -3,28 +3,7 @@ const app=express.Router();
 const servicios= require('./services/servicesLegitimoAb');
 const serviceOrganismo= require('./services/servicesOrganismo');
 const serviceProveedor= require('./services/servicesProveedor');
-const multer = require("multer")
-const path=require("path");
 
-var storageAD = multer.diskStorage({
-    destination: function(req, file, cb) {
-            cb(null, 'uploads')
-    },
-    filename: function(req, file, cb) {
-        cb(null,  Date.now()+'.pdf');
-    }  
-})
-const uploadAD = multer({
-    storage: storageAD,
-    fileFilter: function (req, file, callback) {
-        var ext = path.extname(file.originalname);
-        if(ext !== '.pdf') {
-            return callback(new Error('Solo se aceptan archivos pdf'))
-        }
-        callback(null, true)
-    }
-})
-/************************************************************************/
 /**
  * Crea un nuevo legitimo abono. Recibira por el body los datos 
  * del nuevo legitimo abono que se agregara a la base de datos.
@@ -34,11 +13,11 @@ const uploadAD = multer({
  * @returns {JSON} json
  */
 
-app.post ('/',uploadAD.single('actodispo'),async (req, res)=> {
+app.post ('/',async (req, res)=> {
     try{
         if (!req.body.organismo ||!req.body.proveedor || !req.body.descripcion || 
             !req.body.fechaInicio || !req.body.fechaFin || !req.body.monto || 
-            !req.body.justificacion ||!req.file){
+            !req.body.justificacion ||!req.body.actodispo){
             //si falta algun dato lanza un error
             throw new Error('faltan datos');
         }
@@ -52,7 +31,7 @@ app.post ('/',uploadAD.single('actodispo'),async (req, res)=> {
         } 
         if(req.body.organismo.trim()==""|| req.body.descripcion.trim()==""||
         req.body.fechaInicio.trim()==""|| req.body.fechaFin.trim()==""||
-        req.body.justificacion.trim()==""){
+        req.body.justificacion.trim()==""|| req.body.actodispo.trim()==""){
             //nos fijamos que no hayan ingresado algun campo con espacios en blanco
             throw new Error('No se puede realizar envio de información en blanco.');
         }
@@ -78,7 +57,7 @@ app.post ('/',uploadAD.single('actodispo'),async (req, res)=> {
             "fechaFin": req.body.fechaFin,
             "monto": req.body.monto,
             "justificacion": req.body.justificacion.toUpperCase(),
-            "actoDispositivo": req.file.filename,
+            "actoDispositivo": req.body.actodispo,
             "idusuario":2,
             "fecha":fech
         }
@@ -92,7 +71,7 @@ app.post ('/',uploadAD.single('actodispo'),async (req, res)=> {
         if (e.message!="El Legitimo abono ha sido ingresado. Error de lectura de la base de datos." &&
         e.message!="Proveedor inexistente"&& e.message!= "Organismo inexistente"&& 
         e.message!= 'No se puede realizar envio de información en blanco.'&& e.message!= "En el campo monto debe haber un número" &&
-        e.message!= "En el campo proveedor debe haber un número de cuit" && e.message!='faltan datos' && e.message!='Solo se aceptan archivos pdf'){
+        e.message!= "En el campo proveedor debe haber un número de cuit" && e.message!='faltan datos'){
             //en el caso de que el error sea uno desconocido lanzo error inesperado.
             res.status(404).send({"Mensaje": "Error inesperado. Comuniquese con el administrador"});
             return;

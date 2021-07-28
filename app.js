@@ -9,6 +9,9 @@ const port= process.env.PORT? process.env.PORT:3000; //si se encuentra el PORT, 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.get('/',(req,res)=>{
+    res.sendFile(__dirname + '/estatico/mul-upload.html');
+})
 /***
  * RUTAS:
  * Proveedor (/proveedor)-> empresa o persona física que se inscribe como proveedor del Estado.
