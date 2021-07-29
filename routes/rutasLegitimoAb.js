@@ -5,7 +5,6 @@ const serviceOrganismo= require('./services/servicesOrganismo');
 const serviceProveedor= require('./services/servicesProveedor');
 const multer = require("multer")
 const path=require("path");
-
 var storageAD = multer.diskStorage({
     destination: function(req, file, cb) {
             cb(null, 'uploads')
@@ -16,12 +15,49 @@ var storageAD = multer.diskStorage({
 })
 const uploadAD = multer({
     storage: storageAD,
-    fileFilter: function (req, file, callback) {
+    fileFilter: async function(req, file, callback) {
         var ext = path.extname(file.originalname);
-        if(ext !== '.pdf') {
-            return callback(new Error('Solo se aceptan archivos pdf'))
+        try{
+            if (!req.body.organismo ||!req.body.proveedor || !req.body.descripcion || 
+                !req.body.fechaInicio || !req.body.fechaFin || !req.body.monto || 
+                !req.body.justificacion){
+                //si falta algun dato lanza un error
+                throw new Error('faltan datos');
+            }
+            
+            if(isNaN(req.body.proveedor)){
+                //si se inserto algo diferente de un numero lanza error
+                throw new Error ("En el campo proveedor debe haber un número de cuit"); 
+            }
+            if(isNaN(req.body.monto)){
+                //si se inserto algo diferente de un numero lanza error
+                throw new Error ("En el campo monto debe haber un número"); 
+            } 
+            if(req.body.organismo.trim()==""|| req.body.descripcion.trim()==""||
+            req.body.fechaInicio.trim()==""|| req.body.fechaFin.trim()==""||
+            req.body.justificacion.trim()==""){
+                //nos fijamos que no hayan ingresado algun campo con espacios en blanco
+                throw new Error('No se puede realizar envio de información en blanco.');
+            }
+            let organismo=await serviceOrganismo.denominacionGetter(req.body.organismo.toUpperCase());
+            if (organismo.length==0){
+                //nos fijamos si el organismo ingresado existe y si es asi me guardo el id
+                throw new Error ("Organismo inexistente");
+            }
+            //consultamos si el proveedor ingresado existe y si es asi me guardo el id
+            let proveedor=await serviceProveedor.cuitGetter(req.body.proveedor);
+            if (proveedor.length==0){
+                throw new Error ("Proveedor inexistente");
+            }
+            if(ext !== '.pdf') {
+                throw new Error('Solo se aceptan archivos pdf');
+            }
+            callback(null, true)
+        }catch(e){
+            callback(JSON.stringify({"Mensaje": e.message}),true);
+            return;    
         }
-        callback(null, true)
+        
     }
 })
 /************************************************************************/
@@ -30,44 +66,19 @@ const uploadAD = multer({
  * del nuevo legitimo abono que se agregara a la base de datos.
  * En caso de que la peticion haya salido bien devolverá status 200 y
  * un json con el nuevo legitimo abono. De existir algún error lo
- * devolverá con Status 404.
+ * devolverá con Status 404. Las fechas deben llegar en formato aaaa/mm/dd
  * @returns {JSON} json
  */
 
 app.post ('/',uploadAD.single('actodispo'),async (req, res)=> {
     try{
-        if (!req.body.organismo ||!req.body.proveedor || !req.body.descripcion || 
-            !req.body.fechaInicio || !req.body.fechaFin || !req.body.monto || 
-            !req.body.justificacion ||!req.file){
-            //si falta algun dato lanza un error
-            throw new Error('faltan datos');
-        }
-        if(isNaN(req.body.proveedor)){
-            //si se inserto algo diferente de un numero lanza error
-            throw new Error ("En el campo proveedor debe haber un número de cuit"); 
-        }
-        if(isNaN(req.body.monto)){
-            //si se inserto algo diferente de un numero lanza error
-            throw new Error ("En el campo monto debe haber un número"); 
-        } 
-        if(req.body.organismo.trim()==""|| req.body.descripcion.trim()==""||
-        req.body.fechaInicio.trim()==""|| req.body.fechaFin.trim()==""||
-        req.body.justificacion.trim()==""){
-            //nos fijamos que no hayan ingresado algun campo con espacios en blanco
-            throw new Error('No se puede realizar envio de información en blanco.');
-        }
-        let organismo=await serviceOrganismo.denominacionGetter(req.body.organismo.toUpperCase());
-        if (organismo.length==0){
-            //nos fijamos si el organismo ingresado existe y si es asi me guardo el id
-            throw new Error ("Organismo inexistente");
-        }
-        //consultamos si el proveedor ingresado existe y si es asi me guardo el id
-        let proveedor=await serviceProveedor.cuitGetter(req.body.proveedor);
-        if (proveedor.length==0){
-            throw new Error ("Proveedor inexistente");
+        if (!req.file){
+            throw new Error("Debe ingresar un archivo del acto dispositivo")
         }
         //hasta implementar la seccion usuario el id de usuario sera 2
         //se guarda la información del legitimo abono en un objeto para despues pasarlo por parametro
+        let organismo=await serviceOrganismo.denominacionGetter(req.body.organismo.toUpperCase());
+        let proveedor=await serviceProveedor.cuitGetter(req.body.proveedor);
         let d=new Date();
         let fech=d.getFullYear()+"-"+d.getMonth()+"-"+d.getDate()+" "+d.getHours()+":"+d.getMinutes()+":"+d.getSeconds();
         let legitimoAb={
@@ -89,10 +100,12 @@ app.post ('/',uploadAD.single('actodispo'),async (req, res)=> {
         res.status(200).send(registro);         
     }
     catch(e){
+        //console.log(e);
         if (e.message!="El Legitimo abono ha sido ingresado. Error de lectura de la base de datos." &&
         e.message!="Proveedor inexistente"&& e.message!= "Organismo inexistente"&& 
         e.message!= 'No se puede realizar envio de información en blanco.'&& e.message!= "En el campo monto debe haber un número" &&
-        e.message!= "En el campo proveedor debe haber un número de cuit" && e.message!='faltan datos' && e.message!='Solo se aceptan archivos pdf'){
+        e.message!= "En el campo proveedor debe haber un número de cuit" && e.message!='faltan datos' && e.message!='Solo se aceptan archivos pdf'&&
+        e.message!="Debe ingresar un archivo del acto dispositivo"){
             //en el caso de que el error sea uno desconocido lanzo error inesperado.
             res.status(404).send({"Mensaje": "Error inesperado. Comuniquese con el administrador"});
             return;
