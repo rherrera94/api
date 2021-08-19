@@ -37,7 +37,9 @@ app.use('/direccion',routeDireccion);
 app.use('/legitimoab',routeLegitimoAb);
 
 /*************************************************************************/
-
+app.use((req, res) => {
+    res.json({"error":"Ruta no encontrada","descripcion": `ruta ${req.originalUrl} no implementada` });
+})
 app.listen(port,()=>{
     console.log('puerto '+ port);
 });
