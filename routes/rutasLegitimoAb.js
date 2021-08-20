@@ -97,7 +97,7 @@ app.post ('/',uploadAD.single('actodispo'),async (req, res)=> {
         if (registro.length==0){
             throw new Error ("El Legitimo abono ha sido ingresado. Error de lectura de la base de datos.");
         }
-        res.status(200).send(registro);         
+        res.status(200).send(registro[0]);         
     }
     catch(e){
         //console.log(e);
