@@ -1,6 +1,15 @@
 const qy=require('../../config/conexion');
 /*********************************************************************/
 /**
+ * Guarda en la base de datos, especificamente a la tabla
+ * organismo el organismo que se pasa por parametros.
+ */
+ async function guardarOrganismo(organismo){
+    let query='INSERT INTO organismo (cuit,denominacion,direccion,telefono,mail) values (?,?,?,?,?)';
+    await qy (query,[organismo.cuit,organismo.denominacion,organismo.direccion,organismo.telefono,organismo.mail]);    
+}
+
+/**
  * Realiza la consulta a la base de datos, especificamente a la tabla
  * organismo en busca de un listado generalizado todos los organismos
  * registrados.
@@ -45,6 +54,7 @@ async function denominacionGet(denominacion){
     return registros;
 }
 module.exports={
+    guardarOrganismo,
     organismoGet,
     organismosList,
     cuitGet,

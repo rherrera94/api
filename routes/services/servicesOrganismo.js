@@ -1,5 +1,12 @@
 const model= require ('../models/modelsOrganismo');
-// falta borrado logico
+
+/**
+ * guarda el organismo que se pasa por parametros
+ * @param {Object} organismo recibe un objeto que contendra el organismo.
+ */
+ async function guardarOrganismo(organismo){
+    return await model.guardarOrganismo();
+}
 /**
  * @returns {JSON} Devuelve un listado general de todos los organismos
  * que hay registrados en la tabla de organismo.
@@ -31,5 +38,6 @@ module.exports={
     organismoGetter,
     organismosListado,
     cuitGetter,
-    denominacionGetter
+    denominacionGetter,
+    guardarOrganismo
 }
