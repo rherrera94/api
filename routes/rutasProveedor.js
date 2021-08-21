@@ -109,6 +109,28 @@ app.get('/cuit/:cuit',async (req,res)=>{
         res.status(404).send({"Mensaje": error.message});
     }
 })
+/**
+ * Devuelve la información del proveedor que tiene razon social igual a la que se 
+ * pasa por parámetro.
+ * @returns {JSON} json
+ */
+ app.get('/nombre/:rsoc',async (req,res)=>{
+    try{
+        let registros=await servicios.rsocGetter(req.params.rsoc.toUpperCase());
+        if (registros.length==0){
+            throw new Error ('No se han encontrado proveedores con esa razon social.');
+        } 
+        res.status(200).send(registros);
+    }
+    catch(error){
+        if(error.message!= 'No se han encontrado proveedores con esa razon social.'){
+            res.status(413).send({"Mensaje": "error inesperado"});
+            return;    
+        }
+        res.status(404).send({"Mensaje": error.message});
+    }
+})
+
 /*******************************************************************************/
 /**
  * Borrado logico del proveedor que tiene número de cuit igual al 

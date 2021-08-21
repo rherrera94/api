@@ -22,7 +22,15 @@ async function proveedorGetter (id){
     return await model.proveedorGet(id);
 }
 /**
-* @param {String} ciut cuit del proveedor a buscar.
+* @param {String} rsoc razon social del proveedor a buscar.
+* @returns {JSON} devuelve un JSON con la información del proveedor
+* que tiene razon social igual a la que se pasa por parámetro.  
+*/
+async function rsocGetter (rsoc){
+    return await model.rsocGet(rsoc);
+}
+/**
+* @param {String} cuit cuit del proveedor a buscar.
 * @returns {JSON} devuelve un JSON con la información del proveedor
 * que tiene número de cuit igual al que se pasa por parámetro.  
 */
@@ -43,6 +51,7 @@ module.exports={
     proveedorGetter,
     proveedoresListado,
     cuitGetter,
+    rsocGetter,
     proveedorBorrado,
     proveedorGuardar
 }
