@@ -1,13 +1,6 @@
 const model= require ('../models/modelsOrganismo');
 
 /**
- * guarda el organismo que se pasa por parametros
- * @param {Object} organismo recibe un objeto que contendra el organismo.
- */
- async function guardarOrganismo(organismo){
-    return await model.guardarOrganismo();
-}
-/**
  * @returns {JSON} Devuelve un listado general de todos los organismos
  * que hay registrados en la tabla de organismo.
  */
@@ -30,7 +23,6 @@ async function organismoGetter (id){
 async function cuitGetter (cuit){
     return await model.cuitGet(cuit);
 }
-//FALTA PROBAR
 async function denominacionGetter(denominacion){
     return await model.denominacionGet(denominacion);
 }
@@ -38,6 +30,5 @@ module.exports={
     organismoGetter,
     organismosListado,
     cuitGetter,
-    denominacionGetter,
-    guardarOrganismo
+    denominacionGetter
 }
