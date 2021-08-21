@@ -1,6 +1,46 @@
 const express= require('express');
 const app=express.Router();
 const servicios= require('./services/servicesProveedor')
+/**
+ * Crea un nuevo proveedor. Recibira por el body los datos 
+ * del nuevo proveedor que se agregara a la base de datos. En el caso de la Provincia y
+ * localidad el sistema espera recibir un codigo de provincia y un codigo de localidad.
+ * En caso de que la peticion haya salido bien devolverá status 200 y
+ * un json con el nuevo proveedor. De existir algún error lo
+ * devolverá con Status 404. 
+ * @returns {JSON} json
+ */
+
+app.post ('/',async (req, res)=> {
+    try{
+        if (!req.body.cuit|| req.body.cuit.trim()==""||!req.body.razonSocial|| req.body.razonSocial.trim()==""||
+        !req.body.tPersona || req.body.tPersona.trim()==""||!req.body.provincia ||!req.body.localidad||!req.body.telefono ||
+        isNaN(req.body.telefono)||!req.body.mail||req.body.mail.trim()==""|| isNaN(req.body.provincia) ||isNaN(req.body.localidad)){
+            throw new Error("revise la informacion proporcionada");
+        }
+        let proveedor={
+            "cuit": req.body.cuit,
+            "razonSocial": req.body.razonSocial.toUpperCase(),
+            "tPersona": req.body.tPersona.toUpperCase(),
+            "provincia": req.body.provincia,
+            "localidad": req.body.localidad,
+            "mail":req.body.mail.toUpperCase(),
+            "telefono": req.body.telefono
+        }
+        let pgetter=await servicios.cuitGetter (req.body.cuit);
+        if (pgetter.length!=0){throw new Error ("cuit ya registrado")};
+        await servicios.proveedorGuardar(proveedor);
+        res.status(200).send(proveedor);         
+    }
+    catch(e){
+        if (e.message!= "cuit ya registrado" && e.message!="revise la informacion proporcionada"){
+            //en el caso de que el error sea uno desconocido lanzo error inesperado.
+            res.status(404).send({"Mensaje": "Error inesperado. Comuniquese con el administrador"});
+            return;
+        }
+        res.status(404).send({"Mensaje": e.message});
+    }
+ })
 
 /**
  * Devuelve un listado general de todos los proveedores que hay en la tabla de 

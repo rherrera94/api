@@ -1,12 +1,18 @@
 const qy=require('../../config/conexion');
 /*********************************************************************/
-
+/**
+ * Guarda un proveedor en la base de datos, especificamente en la tabla
+ * proveedor .
+ */
+ async function proveedorGuardar(proveedor){
+    let query='INSERT INTO proveedor (cuit,razonSocial,tPersona,mail,provincia,localidad,telefono) values (?,?,?,?,?,?,?)';
+    await qy (query,[proveedor.cuit,proveedor.razonSocial,proveedor.tPersona,proveedor.mail,proveedor.provincia,proveedor.localidad,proveedor.telefono]);
+}
 /**
  * Realiza la consulta a la base de datos, especificamente a la tabla
  * proveedor en busca de un listado generalizado todos los proveedores
  * registrados.
  * @returns {JSON} Devuelve un JSON con la respuesta de la tabla proveedor.
- * En el caso de existir algun error lo devuelve.
  */
 async function proveedoresList(){
     let registros=await qy ('SELECT * FROM proveedor');
@@ -54,5 +60,6 @@ module.exports={
     proveedorGet,
     proveedoresList,
     cuitGet,
-    proveedorBorrado
+    proveedorBorrado,
+    proveedorGuardar
 }

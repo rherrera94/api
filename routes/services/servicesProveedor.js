@@ -1,5 +1,10 @@
 const model= require ('../models/modelsProveedor');
-
+/**
+ * guarda el proveedor que se ingresa por parametros
+ */
+ async function proveedorGuardar(proveedor){
+    return await model.proveedorGuardar(proveedor);
+}
 /**
  * @returns {JSON} Devuelve un listado general de todos los proveedores
  * que hay en la tabla de proveedores.
@@ -38,5 +43,6 @@ module.exports={
     proveedorGetter,
     proveedoresListado,
     cuitGetter,
-    proveedorBorrado
+    proveedorBorrado,
+    proveedorGuardar
 }
