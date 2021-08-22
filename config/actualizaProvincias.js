@@ -5,9 +5,13 @@ const fetch = require("node-fetch");
  * provincias argentinas y actualizar el JSON que poseemos en el servidor.
  */
 (async()=>{
-    const response = await fetch("https://apis.datos.gob.ar/georef/api/provincias");
-    const buffer = await response.buffer();
-    let prov=JSON.parse(buffer.toString());
-    fs.writeFile(`./provincias.txt`, JSON.stringify(prov.provincias), () => 
-    console.log('se termino el proceso de descarga!'));
+    try{
+        const response = await fetch("https://apis.datos.gob.ar/georef/api/provincias");
+        const buffer = await response.buffer();
+        let prov=JSON.parse(buffer.toString());
+        fs.writeFile(`./provincias.txt`, JSON.stringify(prov.provincias), () => 
+        console.log('se termino el proceso de descarga!'));
+    }catch{
+        console.log("El proceso de carga a fallado");
+    }
 })()
