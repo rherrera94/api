@@ -1,5 +1,9 @@
 const fs=require('fs');
 const fetch = require("node-fetch");
+/**
+ * Funcion asincrona que consultara la api del estado para obtener la informacion de las 
+ * provincias argentinas y actualizar el JSON que poseemos en el servidor.
+ */
 (async()=>{
     const response = await fetch("https://apis.datos.gob.ar/georef/api/provincias");
     const buffer = await response.buffer();
