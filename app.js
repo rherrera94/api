@@ -20,6 +20,10 @@ app.get('/',(req,res)=>{
  * tlicitacion (/tlicitacion)-> tipo de licitacion.
  * legitimoAb (/legitimoab)-> ruta para los legitimos abonos.
  * direccion (/direccion)-> direcciones.
+ * provincia (/provincia)->provincias del pais. Se solicitara ésta información por ejemplo al ingresar un
+ * nuevo proveedor al sistema.
+ * localidad (/localidad)->localidades del pais. Se solicitara ésta información por ejemplo al ingresar un
+ * nuevo proveedor al sistema.
  */
 
 const routeProveedor= require('./routes/rutasProveedor');
@@ -27,7 +31,8 @@ const routeEmpleado= require('./routes/rutasEmpleado');
 const routeOrganismo= require('./routes/rutasOrganismo');
 const routeTLicitacion= require('./routes/rutasTLicitacion');
 const routeDireccion= require('./routes/rutasDireccion');
-const routeLegitimoAb=require('./routes/rutasLegitimoAb')
+const routeLegitimoAb=require('./routes/rutasLegitimoAb');
+const routeProvincia=require('./routes/rutasProvincia');
 
 app.use('/proveedor',routeProveedor);
 app.use('/empleado',routeEmpleado);
@@ -35,6 +40,7 @@ app.use('/organismo',routeOrganismo);
 app.use('/tlicitacion',routeTLicitacion);
 app.use('/direccion',routeDireccion);
 app.use('/legitimoab',routeLegitimoAb);
+app.use('/provincia',routeProvincia);
 
 /*************************************************************************/
 app.use((req, res) => {
