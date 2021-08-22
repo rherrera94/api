@@ -33,6 +33,7 @@ const routeTLicitacion= require('./routes/rutasTLicitacion');
 const routeDireccion= require('./routes/rutasDireccion');
 const routeLegitimoAb=require('./routes/rutasLegitimoAb');
 const routeProvincia=require('./routes/rutasProvincia');
+const routeLocalidad=require('./routes/rutasLocalidad');
 
 app.use('/proveedor',routeProveedor);
 app.use('/empleado',routeEmpleado);
@@ -41,6 +42,7 @@ app.use('/tlicitacion',routeTLicitacion);
 app.use('/direccion',routeDireccion);
 app.use('/legitimoab',routeLegitimoAb);
 app.use('/provincia',routeProvincia);
+app.use('/localidad',routeLocalidad);
 
 /*************************************************************************/
 app.use((req, res) => {

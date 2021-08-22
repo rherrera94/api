@@ -1,5 +1,5 @@
 
-class Provincia{
+class Localidad{
     fs=require('fs');
 
     constructor(nombreArchivo){
@@ -41,7 +41,7 @@ class Provincia{
         let i=0;
         let encontrado=0;
         while (i<contenido.length && encontrado==0){
-            if (contenido[i].nombre_completo.toUpperCase()==nombre.toUpperCase()){
+            if (contenido[i].nombre==nombre.toUpperCase()){
                 encontrado=1;
             }else{
                 i++;
@@ -56,4 +56,4 @@ class Provincia{
     
 }
 
-module.exports=new Provincia('provincias.txt');
+module.exports=new Localidad('localidades.txt');
