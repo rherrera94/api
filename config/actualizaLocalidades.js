@@ -2,7 +2,7 @@ const fs=require('fs');
 const fetch = require("node-fetch");
 /**
  * Funcion asincrona que consultara la api del estado para obtener la informacion de las 
- * provincias argentinas y actualizar el JSON que poseemos en el servidor.
+ * localidades argentinas y actualizar el JSON que poseemos en el servidor.
  */
 (async()=>{
     const response = await fetch("https://infra.datos.gob.ar/catalog/modernizacion/dataset/7/distribution/7.5/download/localidades.json");
