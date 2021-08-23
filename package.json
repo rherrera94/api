@@ -13,13 +13,12 @@
     "multer": "^1.4.2",
     "mysql": "^2.18.1",
     "node-fetch": "^2.6.1",
-    "path": "^0.12.7",
-    "tar": ">=6.1.2"
+    "path": "^0.12.7"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "actualizarProvincias":"node ./config/actualizaProvincias.js",
-    "actualizaLocalidades":"node ./config/actualizaLocalidades.js"
+    "actualizarProvincias": "node ./config/actualizaProvincias.js",
+    "actualizaLocalidades": "node ./config/actualizaLocalidades.js"
   },
   "repository": {
     "type": "git",
