@@ -54,7 +54,6 @@
   #### Rutas de localidad (/localidad):
 
   **Nota: para actualizar el json contenedor de todas las localidades utilizar el comando npm run actualizarLocalidades**
-
    * `GET` | localhost:5500/localidad -> devuelve el listado generalizado de localidades argentinas registradas.
 
    * `GET` | localhost:5500/localidad/:id -> devuelve localidad con id que se pasa por parámetro.
