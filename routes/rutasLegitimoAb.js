@@ -82,7 +82,7 @@ app.post ('/',uploadAD.single('actodispo'),async (req, res)=> {
         let d=new Date();
         let fech=d.getFullYear()+"-"+d.getMonth()+"-"+d.getDate()+" "+d.getHours()+":"+d.getMinutes()+":"+d.getSeconds();
         let legitimoAb={
-            "organismo": organismo[0].id,
+            "organismo": organismo.id,
             "proveedor": proveedor[0].id,
             "descripcion": req.body.descripcion.toUpperCase(),
             "fechaInicio": req.body.fechaInicio,

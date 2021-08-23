@@ -23,7 +23,7 @@ async function organismosList(){
 async function organismoGet (id){
     let query='SELECT * FROM organismo WHERE id=?';
     let registros=await qy (query,id);
-    return registros;
+    return registros[0];
 }
 /**
 * Realiza la consulta a la base de datos, especificamente a la tabla
@@ -36,14 +36,13 @@ async function organismoGet (id){
 async function cuitGet (cuit){
     let query='SELECT * FROM organismo WHERE cuit=?';
     let registros=await qy (query,cuit);
-    return registros;
+    return registros[0];
 }
 
-//FALTA TESTEAR
 async function denominacionGet(denominacion){
     let query='SELECT * FROM organismo WHERE denominacion=?';
     let registros=await qy (query,denominacion);
-    return registros;
+    return registros[0];
 }
 module.exports={
     organismoGet,

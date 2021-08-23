@@ -1,11 +1,20 @@
 const qy=require('../../config/conexion');
 /*********************************************************************/
 /**
+ * Realiza la insercion en la tabla de empleados del empleado que se 
+ * pasa por parametro.
+ * @param {Object} empleado empleado a ingresar
+ */
+ async function empleadoIngreso (empleado){
+    let query='INSERT INTO empleado (cuil,apellido,nombre,mail,idOrganismo,cargo) values (?,?,?,?,?,?)';
+    await qy (query,[empleado.cuil,empleado.apellido,empleado.nombre,empleado.mail,empleado.idOrganismo,empleado.cargo]);
+}
+
+/**
  * Realiza la consulta a la base de datos, especificamente a la tabla
  * empleado en busca de un listado generalizado todos los empleados
  * registrados.
  * @returns {JSON} Devuelve un JSON con la respuesta de la tabla empleado.
- * En el caso de existir algun error lo devuelve.
  */
 async function empleadosList(){
     let registros=await qy ('SELECT * FROM empleado');
@@ -39,6 +48,7 @@ async function cuilGet (cuil){
 }
 
 module.exports={
+    empleadoIngreso,
     empleadoGet,
     empleadosList,
     cuilGet

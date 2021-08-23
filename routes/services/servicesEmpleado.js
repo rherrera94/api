@@ -1,5 +1,12 @@
 const model= require ('../models/modelsEmpleado');
 /**
+ * @param {Object} empleado empleado a ingresar
+ */
+ async function empleadoIngreso (empleado){
+    return await model.empleadoIngreso (empleado);
+}
+
+/**
  * @returns {JSON} Devuelve un listado general de todos los empleado
  * que hay registrados en la tabla de empleado.
  */
@@ -25,6 +32,7 @@ async function cuilGetter (cuil){
 }
 
 module.exports={
+    empleadoIngreso,
     empleadoGetter,
     empleadosListado,
     cuilGetter

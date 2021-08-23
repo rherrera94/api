@@ -42,7 +42,7 @@ Trabajo final de la materia Práctica Profesional III de la carrera Tec. en Aná
 
    * `GET` | localhost:5500/tlicitacion/:id -> si hay devuelve tipo de licitación con id igual al que se pasa por parámetro.
 
-   * `GET` | localhost:5500/tlicitacion/borrado/:id -> eliminación lógica de un tipo de licitacion según su número de id.
+   * `PUT` | localhost:5500/tlicitacion/borrado/:id -> eliminación lógica de un tipo de licitacion según su número de id.
 
   #### provincia (/provincia):
 
@@ -63,3 +63,12 @@ Trabajo final de la materia Práctica Profesional III de la carrera Tec. en Aná
 
    * `GET` | localhost:5500/localidad/nombre/:nombre -> devuelve localidad con nombre que se pasa por parámetro.
 
+#### empleados (/empleado):
+
+   * `POST` | localhost:5500/empleado -> crea un nuevo empleado.
+
+   * `GET` | localhost:5500/empleado -> devuelve un JSON con el listado generalizado de los empleados cargados al momento.
+
+   * `GET` | localhost:5500/empleado/:id -> si hay devuelve empleado con id igual al que se pasa por parámetro.
+
+   * `GET` | localhost:5500/empleado/cuil/:cuil -> devuelve empleado con cuit igual al que se pasa por parámetro.
