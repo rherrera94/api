@@ -1,3 +1,5 @@
+Trabajo final de la materia Práctica Profesional III de la carrera Tec. en Análisis de Sistemas. En ésta seccion se encuentra la api del sistema a desarrollar.
+
 #### Rutas de la api
   #### legitimo abono (/legitimoab):
 
