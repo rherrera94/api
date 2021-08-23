@@ -13,6 +13,7 @@ app.get("/", async (req, res) => {
     }catch(e){
         if (e.message!='no hay provincias'){
             res.status(404).send({"error":"Error inesperado"})
+            return;
         }
         res.status(404).send ({"error": e.message});
     }
@@ -29,6 +30,7 @@ app.get('/:id',async (req,res)=>{
     }catch(e){
         if(e.message!='provincia no encontrada'){
             res.status(404).send({"error":"Error inesperado."})
+            return;
         }
         res.status(404).send({"error":e.message});
     }
@@ -44,6 +46,7 @@ app.get('/nombre/:nombre',async (req,res)=>{
     }catch(e){
         if(e.message!='provincia no encontrada'){
             res.status(404).send({"error":"Error inesperado."})
+            return;
         }
         res.status(404).send({"error":e.message});
     }
