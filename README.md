@@ -3,7 +3,7 @@
 
    * `POST` | localhost:5500/legitimoab en este caso hay un html para hacer la prueba de la ruta ya que se tiene que cargar un pdf y por el postman por algún motivo no dejaba subir un json y un archivo a la vez asi que generamos un pequeño html para poder probarlo. Si pone node app.js y accede al localhost:5500 podra ingresar al html correspondiente.
 
-    **Las que probamos con postman de /legitimoab**
+  **Las que probamos con postman de /legitimoab**
 
    * `GET` | localhost:5500/legitimoab -> devuelve un JSON con el listado generalizado de los legitimos abonos cargados al momento.
 
