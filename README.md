@@ -65,7 +65,7 @@ Trabajo final de la materia Práctica Profesional III de la carrera Tec. en Aná
 
    * `GET` | localhost:5500/localidad/nombre/:nombre -> devuelve localidad con nombre que se pasa por parámetro.
 
-#### empleados (/empleado):
+   #### empleados (/empleado):
 
    * `POST` | localhost:5500/empleado -> crea un nuevo empleado.
 
