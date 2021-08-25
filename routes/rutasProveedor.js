@@ -41,7 +41,7 @@ app.post ('/',async (req, res)=> {
         res.status(404).send({"Mensaje": e.message});
     }
  })
-
+/*******************************************************************************/
 /**
  * Devuelve un listado general de todos los proveedores que hay en la tabla de 
  * proveedores.
@@ -86,7 +86,6 @@ app.get('/:id',async (req,res)=>{
         res.status(404).send({"Mensaje": error.message});
     }
 })
-
 /*******************************************************************************/
 /**
  * Devuelve la información del proveedor que tiene número de cuit igual al que se 
@@ -109,6 +108,7 @@ app.get('/cuit/:cuit',async (req,res)=>{
         res.status(404).send({"Mensaje": error.message});
     }
 })
+/*******************************************************************************/
 /**
  * Devuelve la información del proveedor que tiene razon social igual a la que se 
  * pasa por parámetro.
@@ -137,7 +137,6 @@ app.get('/cuit/:cuit',async (req,res)=>{
  * que se pasa por parámetro. Devuelve el registro con el campo eliminado en 1.
  * @returns {JSON} json
  */
-
  app.put('/borrado/:cuit', async (req,res)=>{
     try{
         let registros=await servicios.proveedorGetter(req.params.cuit);
@@ -155,5 +154,5 @@ app.get('/cuit/:cuit',async (req,res)=>{
         res.status(404).send({"Mensaje": error.message});
     }
 });
-
+/*******************************************************************************/
 module.exports=app;

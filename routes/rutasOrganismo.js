@@ -69,6 +69,7 @@ app.get('/cuit/:cuit',async (req,res)=>{
         res.status(404).send({"Mensaje": error.message});
     }
 })
+/*******************************************************************************/
 /**
  * Devuelve la información del organismo que tiene número de id igual al que se 
  * pasa por parámetro.

@@ -49,6 +49,7 @@ const uploadAD = multer({
             if (proveedor.length==0){
                 throw new Error ("Proveedor inexistente");
             }
+            //si la extension del archivo que se pasa no es pdf lanza error
             if(ext !== '.pdf') {
                 throw new Error('Solo se aceptan archivos pdf');
             }
@@ -100,7 +101,6 @@ app.post ('/',uploadAD.single('actodispo'),async (req, res)=> {
         res.status(200).send(registro[0]);         
     }
     catch(e){
-        //console.log(e);
         if (e.message!="El Legitimo abono ha sido ingresado. Error de lectura de la base de datos." &&
         e.message!="Proveedor inexistente"&& e.message!= "Organismo inexistente"&& 
         e.message!= 'No se puede realizar envio de información en blanco.'&& e.message!= "En el campo monto debe haber un número" &&
@@ -113,7 +113,7 @@ app.post ('/',uploadAD.single('actodispo'),async (req, res)=> {
         res.status(404).send({"Mensaje": e.message});
     }
  })
-
+/*******************************************************************************/
 /**
  * Devuelve un listado generalizado de los legitimos abono que hay
  * registrados en la base de datos.
@@ -264,5 +264,5 @@ app.put('/borrado/:id', async (req,res)=>{
         res.status(404).send({"Mensaje": error.message});
     }
 });
-
+/*******************************************************************************/
 module.exports=app;

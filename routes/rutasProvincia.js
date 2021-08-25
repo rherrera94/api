@@ -2,7 +2,11 @@ const express= require('express');
 const app=express.Router();
 const provincias=require('./models/modelsProvincia');
 
-
+/**
+ * Devuelve un listado generalizado de todas las provincias registradas
+ * en la base de datos.
+ * @returns {JSON} listado generalizado de las provincias
+ */
 app.get("/", async (req, res) => {
     try{
         let contenido= await provincias.leer();
@@ -18,7 +22,12 @@ app.get("/", async (req, res) => {
         res.status(404).send ({"error": e.message});
     }
 });
-
+/*******************************************************************************/
+/**
+ * Devuelve provincia con numero de id igual al que se pasa por parámetros
+ * @returns {JSON} si existe devuelve la provincia con id igual al que se pasa 
+ * por parametro
+ */
 app.get('/:id',async (req,res)=>{
     
     try{
@@ -35,6 +44,12 @@ app.get('/:id',async (req,res)=>{
         res.status(404).send({"error":e.message});
     }
 })
+/*******************************************************************************/
+/**
+ * Devuelve provincia con nombre igual al que se pasa por parámetros
+ * @returns {JSON} si existe devuelve la provincia con nombre igual al que se
+ *  pasa por parametro
+ */
 app.get('/nombre/:nombre',async (req,res)=>{
     
     try{
@@ -51,5 +66,5 @@ app.get('/nombre/:nombre',async (req,res)=>{
         res.status(404).send({"error":e.message});
     }
 })
-
+/*******************************************************************************/
 module.exports=app;

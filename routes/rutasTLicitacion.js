@@ -35,7 +35,7 @@ app.post ('/',async (req, res)=> {
         res.status(404).send({"Mensaje":"Error inesperado"});
     }
  })
-
+/*******************************************************************************/
 /**
  * Devuelve un listado generalizado de los tipos de licitación que hay
  * registrados en la tabla tlicitacion.
@@ -56,7 +56,6 @@ app.get('/',async (req,res)=>{
         res.status(404).send({"Mensaje":error.message});
     }
 })
-
 /*******************************************************************************/
 /**
  * Devuelve la información del tipo de licitación que tiene número de id igual al 
@@ -106,5 +105,5 @@ app.put('/borrado/:id', async (req,res)=>{
         res.status(404).send({"Mensaje": error.message});
     }
 });
-
+/*******************************************************************************/
 module.exports=app;
