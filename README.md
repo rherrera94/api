@@ -74,3 +74,12 @@ Trabajo final de la materia Práctica Profesional III de la carrera Tec. en Aná
    * `GET` | localhost:5500/empleado/:id -> si hay devuelve empleado con id igual al que se pasa por parámetro.
 
    * `GET` | localhost:5500/empleado/cuil/:cuil -> devuelve empleado con cuit igual al que se pasa por parámetro.
+
+#### organismos (/organismo):
+
+   * `GET` | localhost:5500/organismo -> Devuelve un listado generalizado con todos los organismo existentes en la  base de datos.
+
+   * `GET` | localhost:5500/organismo/:id -> si hay devuelve organismo con id igual al que se pasa por parámetro.
+
+   * `GET` | localhost:5500/organismo/cuit/:cuit -> devuelve organismo con cuit igual al que se pasa por parámetro.
+   * `GET` | localhost:5500/organismo/denominacion/:denominacion -> devuelve organismo con denominacion igual a la que se pasa por parámetro.
