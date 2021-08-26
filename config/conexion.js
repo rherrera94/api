@@ -1,10 +1,10 @@
-require('dotenv').config({ path:'../.env'});
+
 /********************CONEXIÓN A BASE DE DATOS*************************/
 /*   Se utilizan variables de entorno para ocultar datos sensibles.  */
 /*********************************************************************/
 var mysql=require('mysql');
 const util=require ('util'); // no se necesita instalarla
-
+require('dotenv').config();
 var conexion= mysql.createConnection({
     host: process.env.APP_HOST,
     user: process.env.APP_USER,

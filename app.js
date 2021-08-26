@@ -4,11 +4,9 @@ const jwt= require('jsonwebtoken');
 const unless= require('express-unless');
 const bcrypt= require('bcrypt');
 const app=express();
-require('dotenv').config();
-const port= process.env.PORT? process.env.PORT:3000; //si se encuentra el PORT, en las variables de entorno, lo utiliza sino usa puerto 3000
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
+const {PORT}=require('./config/globals');
 app.get('/',(req,res)=>{
     res.sendFile(__dirname + '/estatico/mul-upload.html');
 })
@@ -48,6 +46,6 @@ app.use('/localidad',routeLocalidad);
 app.use((req, res) => {
     res.json({"error":"Ruta no encontrada","descripcion": `ruta ${req.originalUrl} no implementada` });
 })
-app.listen(port,()=>{
-    console.log('puerto '+ port);
+app.listen(PORT,()=>{
+    console.log('puerto '+ PORT);
 });
