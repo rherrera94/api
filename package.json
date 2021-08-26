@@ -17,8 +17,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "actualizarProvincias": "node ./config/actualizaProvincias.js",
-    "actualizaLocalidades": "node ./config/actualizaLocalidades.js"
+    "actualizarProvincias": "node ./routes/models/db/migrations/actualizaProvincias.js",
+    "actualizaLocalidades": "node ./routes/models/db/migrations/actualizaLocalidades.js"
   },
   "repository": {
     "type": "git",
