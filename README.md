@@ -1,9 +1,10 @@
 
-Trabajo final de la materia Práctica Profesional III de la carrera Tec. en Análisis de Sistemas. En ésta seccion se encuentra la api del sistema a desarrollar.
+# Trabajo final de la materia Práctica Profesional III de la carrera Tec. en Análisis de Sistemas.
+## En ésta seccion se encuentra la api del sistema a desarrollar.
 
 **Nota: se configuraron ciertas variables de entorno que deberán tambien ser configuradas, en nuestro caso pusimos el PORT como 5500 pero ese puerto dependerá de lo que se tenga configurado tambien habra que configurar como variables de entorno APP_USER, APP_HOST, APP_DB que son las variables que se necesitarán para la comunicación a la BBDD**
 
-#### Rutas de la api
+## Rutas de la api
   #### legitimo abono (/legitimoab):
 
    * `POST` | localhost:5500/legitimoab en este caso hay un html para hacer la prueba de la ruta ya que se tiene que cargar un pdf y por el postman por algún motivo no dejaba subir un json y un archivo a la vez asi que generamos un pequeño html para poder probarlo. Si pone node app.js y accede al localhost:5500 podra ingresar al html correspondiente.
@@ -65,7 +66,7 @@ Trabajo final de la materia Práctica Profesional III de la carrera Tec. en Aná
 
    * `GET` | localhost:5500/localidad/nombre/:nombre -> devuelve localidad con nombre que se pasa por parámetro.
 
-   #### empleados (/empleado):
+   #### Rutas de empleados (/empleado):
 
    * `POST` | localhost:5500/empleado -> crea un nuevo empleado.
 
@@ -75,7 +76,7 @@ Trabajo final de la materia Práctica Profesional III de la carrera Tec. en Aná
 
    * `GET` | localhost:5500/empleado/cuil/:cuil -> devuelve empleado con cuit igual al que se pasa por parámetro.
 
-#### organismos (/organismo):
+#### Rutas de organismos (/organismo):
 
    * `GET` | localhost:5500/organismo -> Devuelve un listado generalizado con todos los organismo existentes en la  base de datos.
 
