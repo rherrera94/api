@@ -1,6 +1,7 @@
 
 # Trabajo final de la materia Práctica Profesional III de la carrera Tec. en Análisis de Sistemas.
-## En ésta seccion se encuentra la api del sistema a desarrollar.
+
+EN ÉSTA SECCION SE ENCUENTRA LA API DEL SISTEMA A DESARROLLAR.
 
 **Nota: se configuraron ciertas variables de entorno que deberán tambien ser configuradas, en nuestro caso pusimos el PORT como 5500 pero ese puerto dependerá de lo que se tenga configurado tambien habra que configurar como variables de entorno APP_USER, APP_HOST, APP_DB que son las variables que se necesitarán para la comunicación a la BBDD**
 
