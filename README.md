@@ -17,13 +17,13 @@ Para poder operar el Backend utiliza diferentes librerias que se detallan a cont
 
 - [jsonWebtoken](https://www.npmjs.com/package/jsonwebtoken) - para formar el token
 
-- [node.bcrypt.js] (https://www.npmjs.com/package/bcrypt) - para hacer hash de las contraseñas
+- [bcrypt](https://www.npmjs.com/package/bcrypt) - para hacer hash de las contraseñas
 
-- [multer] (https://www.npmjs.com/package/multer) - manejo de archivos
+- [multer](https://www.npmjs.com/package/multer) - manejo de archivos
 
-- [node-fetch] (https://www.npmjs.com/package/node-fetch) - para hacer fetch y levantar informacion desde una api externa.
+- [node-fetch](https://www.npmjs.com/package/node-fetch) - para hacer fetch y levantar informacion desde una api externa.
 
-- [cors] (https://www.npmjs.com/package/cors)
+- [cors](https://www.npmjs.com/package/cors)
 
 - [MySql] (https://www.npmjs.com/package/mysql) - para conexion a base de datos.
 
