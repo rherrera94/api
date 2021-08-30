@@ -31,13 +31,14 @@ const routeUserInterno=require('./routes/rutasUserInterno');
 
 const auth=(req,res,next)=>{
     try{
+        //nos fijamos si la request viene con un token
         let token=req.headers['authorization'];
-        if (!token){
+        if (!token){//si no tiene token lanzamos error
             throw new Error ("No ha iniciado sesión");
         }
-        token= token.replace ('Bearer ', '');
+        token= token.replace ('Bearer ', '');//hay que despejar el token para que quede solo
         jwt.verify(token, SECRET_WORD, (err,user)=>{
-            if(err){
+            if(err){//si hay algun problema con el token se lanza error
                 throw new Error("Token inválido");		
             }
         });
