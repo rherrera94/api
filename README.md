@@ -5,8 +5,38 @@ EN ÉSTA SECCION SE ENCUENTRA LA API DEL SISTEMA A DESARROLLAR.
 
 **Nota: se configuraron ciertas variables de entorno que deberán tambien ser configuradas, en nuestro caso pusimos el PORT como 5500 pero ese puerto dependerá de lo que se tenga configurado tambien habra que configurar como variables de entorno APP_USER, APP_HOST, APP_DB que son las variables que se necesitarán para la comunicación a la BBDD**
 
+# - Tech
+
+Para poder operar el Backend utiliza diferentes librerias que se detallan a continuación
+
+- [Express](https://expressjs.com/) - Framework de Node.js
+
+- [Node.js](https://nodejs.org/es/) - ambiente de desarrollo
+
+- [Nodemon](https://www.npmjs.com/package/nodemon) - servidor en modo escucha
+
+- [jsonWebtoken](https://www.npmjs.com/package/jsonwebtoken) - para formar el token
+
+- [bcrypt] (https://www.npmjs.com/package/bcrypt) - para hacer hash de las contraseñas
+
+- [multer] (https://www.npmjs.com/package/multer) - manejo de archivos
+
+- [node-fetch] (https://www.npmjs.com/package/node-fetch) - para hacer fetch y levantar informacion desde una api externa.
+
+- [cors] (https://www.npmjs.com/package/cors)
+
+- [MySql] (https://www.npmjs.com/package/mysql) - para conexion a base de datos.
+
+## Rutas usuarios internos
+   #### Rutas usuario interno (/userinterno):
+
+   * `POST` | localhost:5500/userinterno -> crea un nuevo usuario interno.
+
+   * `POST` | localhost:5500/userinterno/login -> logeo de usuarios.
+
+
 ## Rutas de la api
-  #### legitimo abono (/legitimoab):
+  #### Rutas legitimo abono (/legitimoab):
 
    * `POST` | localhost:5500/legitimoab en este caso hay un html para hacer la prueba de la ruta ya que se tiene que cargar un pdf y por el postman por algún motivo no dejaba subir un json y un archivo a la vez asi que generamos un pequeño html para poder probarlo. Si pone node app.js y accede al localhost:5500 podra ingresar al html correspondiente.
 
@@ -24,7 +54,7 @@ EN ÉSTA SECCION SE ENCUENTRA LA API DEL SISTEMA A DESARROLLAR.
 
    * `PUT` | localhost:5500/legitimoab /borrado/:id -> realiza un borrado lógico del legitimo abono que tiene por id el que se pasa por parametro.
 
-  #### proveedores (/proveedor):
+  #### Rutas proveedores (/proveedor):
 
    * `POST` | localhost:5500/proveedor -> crea un nuevo proveedor.
 
@@ -38,7 +68,7 @@ EN ÉSTA SECCION SE ENCUENTRA LA API DEL SISTEMA A DESARROLLAR.
 
    * `PUT` | localhost:5500/proveedor/borrado/:cuit -> eliminación lógica de un proveedor según su número de cuit.
 
-  #### tipos de licitaciones (/tlicitacion):
+  #### Rutas tipos de licitaciones (/tlicitacion):
 
    * `POST` | localhost:5500/tlicitacion -> crea un nuevo tipo de licitacion.
 
@@ -48,7 +78,7 @@ EN ÉSTA SECCION SE ENCUENTRA LA API DEL SISTEMA A DESARROLLAR.
 
    * `PUT` | localhost:5500/tlicitacion/borrado/:id -> eliminación lógica de un tipo de licitacion según su número de id.
 
-  #### provincia (/provincia):
+  #### Rutas provincia (/provincia):
 
    **Nota: para actualizar el json contenedor de todas las provincias utilizar el comando npm run actualizarProvincias**
 

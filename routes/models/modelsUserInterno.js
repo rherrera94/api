@@ -15,11 +15,5 @@ class UserIntetnoModel{
         let resultado= await qy (query,[rol]);
 		return resultado;
 	}
-	async findByNombreAndUpdate(nombre, usuarioUpdated){
-		
-	}
-	async findByNombreAndDelete(nombre){
-
-	}
 }
 module.exports=new UserIntetnoModel();
