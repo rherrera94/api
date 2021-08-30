@@ -1,8 +1,11 @@
-
+const jwt= require('jsonwebtoken');
+const unless=require('express-unless');
+const{SECRET_WORD}=require('./config/globals');
 const express= require('express');
 const app=express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
 const {PORT}=require('./config/globals');
 
 app.get('/',(req,res)=>{
@@ -33,6 +36,37 @@ const routeProvincia=require('./routes/rutasProvincia');
 const routeLocalidad=require('./routes/rutasLocalidad');
 const routeUserInterno=require('./routes/rutasUserInterno');
 
+const auth=(req,res,next)=>{
+	try{
+        let token=req.headers['authorization'];
+        if (!token){
+           throw new Error ("No ha iniciado sesión");
+        }
+        token= token.replace ('Bearer ', '');
+        jwt.verify(token, SECRET_WORD, (err,user)=>{
+            if(err){
+                throw new Error("Token inválido");		
+            }
+        });
+        next();
+       }
+       catch(e){
+           res.status(403).send({"message": e.message});
+       }			 	
+   
+}
+/**
+ * Lo que se hace aca es que el usuario no va a poder entrar a ninguna ruta si
+ * es que no tiene un token valido (salvo a la ruta de login).
+ */
+auth.unless= unless;
+app.use(
+    auth.unless({
+        path:[
+            {url: '/userinterno/login', method: ['POST']}
+        ]
+    })
+)
 app.use('/proveedor',routeProveedor);
 app.use('/empleado',routeEmpleado);
 app.use('/organismo',routeOrganismo);
