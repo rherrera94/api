@@ -17,7 +17,7 @@ Para poder operar el Backend utiliza diferentes librerias que se detallan a cont
 
 - [jsonWebtoken](https://www.npmjs.com/package/jsonwebtoken) - para formar el token
 
-- [bcrypt] (https://www.npmjs.com/package/bcrypt) - para hacer hash de las contraseñas
+- [node.bcrypt.js] (https://www.npmjs.com/package/bcrypt) - para hacer hash de las contraseñas
 
 - [multer] (https://www.npmjs.com/package/multer) - manejo de archivos
 
