@@ -10,6 +10,11 @@ class UserIntetnoModel{
         let resultado= await qy (query,[nombre]);
         return resultado;
 	}
+	async getPermisos(rol){
+		let query='select * from permisos where role_id=?';
+        let resultado= await qy (query,[rol]);
+		return resultado;
+	}
 	async findByNombreAndUpdate(nombre, usuarioUpdated){
 		
 	}

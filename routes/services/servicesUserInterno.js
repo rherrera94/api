@@ -15,5 +15,9 @@ class UserInterno{
 	async deleteUser(nombre){
 		await userModel.findByNombreAndDelete(nombre);
 	}
+	async getPermisos(rol){
+		const permisos= await userModel.getPermisos(rol);
+		return permisos;
+	}
 }
 module.exports=new UserInterno;

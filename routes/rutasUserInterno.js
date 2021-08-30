@@ -5,6 +5,7 @@ const servicesEmpleado=require('./services/servicesEmpleado');
 const jwt= require('jsonwebtoken');
 const bcrypt= require('bcrypt');
 const{SECRET_WORD}=require('../config/globals');
+
 /**
  * Agrega un nuevo Usuario a la tabla usuariosInternos.
  * @returns {JSON} json que contiene el nuevo Usuario agregado.
@@ -66,10 +67,8 @@ app.post('/login', async(req,res)=>{
         if(!bcrypt.compareSync (req.body.contrasenia, respuesta[0].contrasenia)){
 		    throw new Error("Usuario o contraseña incorrectos");
 	    }
-	    
         let d=new Date();
         let fech=d.getFullYear()+"-"+d.getMonth()+"-"+d.getDate()+"T"+d.getHours()+":"+d.getMinutes()+":"+d.getSeconds()+"Z";
-        
 	    const tokenData={
 		    idusuario: respuesta[0].id, 
 		    nombreusuario:respuesta[0].nombre,
@@ -79,9 +78,19 @@ app.post('/login', async(req,res)=>{
 	   const token= jwt.sign(tokenData, SECRET_WORD,{
 		expiresIn: 60*60*2 // expira en 2hs
 	   });
-       //HASTA QUE ESTE TODO IMPLEMENTADO SOLO MANDARE EL TOKEN DESPUES SE ENVIARA OTRA INFORMACION MAS
-	   res.send({token});	
-	    				
+       let permisos=await servicios.getPermisos(respuesta[0].idRol)
+       let rol={
+           "id":respuesta[0].idRol,
+           "role_permits":permisos
+        };
+       let jsonrta={
+           "id":respuesta[0].id,
+           "email":respuesta[0].mail,
+           "username":respuesta[0].nombre,
+           "role_id":respuesta[0].idRol,
+           "role":rol
+       }
+	   res.send({"data":jsonrta,"token":token});					
 	}
 	catch(e){
         if(e.message!="Revise los datos ingresados" && e.message!='Usuario o contraseña incorrectos'){
