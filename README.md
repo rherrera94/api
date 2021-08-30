@@ -5,7 +5,7 @@ EN ÉSTA SECCION SE ENCUENTRA LA API DEL SISTEMA A DESARROLLAR.
 
 **Nota: se configuraron ciertas variables de entorno que deberán tambien ser configuradas, en nuestro caso pusimos el PORT como 5500 pero ese puerto dependerá de lo que se tenga configurado tambien habra que configurar como variables de entorno APP_USER, APP_HOST, APP_DB que son las variables que se necesitarán para la comunicación a la BBDD**
 
-# - Tech
+#  Tech
 
 Para poder operar el Backend utiliza diferentes librerias que se detallan a continuación
 
