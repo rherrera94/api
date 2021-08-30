@@ -7,29 +7,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 const {PORT}=require('./config/globals');
-
-app.get('/',(req,res)=>{
-    res.sendFile(__dirname + '/estatico/mul-upload.html');
-})
-
-
-/**
- * SE REQUIREN LOS DIFERENTES ARCHIVOS DE LAS RUTAS
- */
-const routeProveedor= require('./routes/rutasProveedor');
-const routeEmpleado= require('./routes/rutasEmpleado');
-const routeOrganismo= require('./routes/rutasOrganismo');
-const routeTLicitacion= require('./routes/rutasTLicitacion');
-const routeDireccion= require('./routes/rutasDireccion');
-const routeLegitimoAb=require('./routes/rutasLegitimoAb');
-const routeProvincia=require('./routes/rutasProvincia');
-const routeLocalidad=require('./routes/rutasLocalidad');
-const routeUserInterno=require('./routes/rutasUserInterno');
 /**
  * AUTENTICACIÓN
  */
 
-const auth=(req,res,next)=>{
+ const auth=(req,res,next)=>{
     try{
         //nos fijamos si la request viene con un token
         let token=req.headers['authorization'];
@@ -62,6 +44,24 @@ app.use(
         ]
     })
 )
+app.get('/',(req,res)=>{
+    res.sendFile(__dirname + '/estatico/mul-upload.html');
+})
+
+
+/**
+ * SE REQUIREN LOS DIFERENTES ARCHIVOS DE LAS RUTAS
+ */
+const routeProveedor= require('./routes/rutasProveedor');
+const routeEmpleado= require('./routes/rutasEmpleado');
+const routeOrganismo= require('./routes/rutasOrganismo');
+const routeTLicitacion= require('./routes/rutasTLicitacion');
+const routeDireccion= require('./routes/rutasDireccion');
+const routeLegitimoAb=require('./routes/rutasLegitimoAb');
+const routeProvincia=require('./routes/rutasProvincia');
+const routeLocalidad=require('./routes/rutasLocalidad');
+const routeUserInterno=require('./routes/rutasUserInterno');
+
 /*************************************************************************/
 /***
  * RUTAS:
