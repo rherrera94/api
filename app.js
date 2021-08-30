@@ -12,6 +12,56 @@ app.get('/',(req,res)=>{
     res.sendFile(__dirname + '/estatico/mul-upload.html');
 })
 
+
+/**
+ * SE REQUIREN LOS DIFERENTES ARCHIVOS DE LAS RUTAS
+ */
+const routeProveedor= require('./routes/rutasProveedor');
+const routeEmpleado= require('./routes/rutasEmpleado');
+const routeOrganismo= require('./routes/rutasOrganismo');
+const routeTLicitacion= require('./routes/rutasTLicitacion');
+const routeDireccion= require('./routes/rutasDireccion');
+const routeLegitimoAb=require('./routes/rutasLegitimoAb');
+const routeProvincia=require('./routes/rutasProvincia');
+const routeLocalidad=require('./routes/rutasLocalidad');
+const routeUserInterno=require('./routes/rutasUserInterno');
+/**
+ * AUTENTICACIÓN
+ */
+
+const auth=(req,res,next)=>{
+    try{
+        let token=req.headers['authorization'];
+        if (!token){
+            throw new Error ("No ha iniciado sesión");
+        }
+        token= token.replace ('Bearer ', '');
+        jwt.verify(token, SECRET_WORD, (err,user)=>{
+            if(err){
+                throw new Error("Token inválido");		
+            }
+        });
+        next();
+    }
+    catch(e){
+        res.status(403).send({"message": e.message});
+    }			 	
+   
+}
+
+/**
+ * Lo que se hace aca es que el usuario no va a poder entrar a ninguna ruta si
+ * es que no tiene un token valido (salvo a la ruta de login).
+ */
+auth.unless= unless;
+app.use(
+    auth.unless({
+        path:[
+            {url: '/userinterno/login', method: ['POST']}
+        ]
+    })
+)
+/*************************************************************************/
 /***
  * RUTAS:
  * Proveedor (/proveedor)-> empresa o persona física que se inscribe como proveedor del Estado.
@@ -26,47 +76,6 @@ app.get('/',(req,res)=>{
  * nuevo proveedor al sistema.
  */
 
-const routeProveedor= require('./routes/rutasProveedor');
-const routeEmpleado= require('./routes/rutasEmpleado');
-const routeOrganismo= require('./routes/rutasOrganismo');
-const routeTLicitacion= require('./routes/rutasTLicitacion');
-const routeDireccion= require('./routes/rutasDireccion');
-const routeLegitimoAb=require('./routes/rutasLegitimoAb');
-const routeProvincia=require('./routes/rutasProvincia');
-const routeLocalidad=require('./routes/rutasLocalidad');
-const routeUserInterno=require('./routes/rutasUserInterno');
-
-const auth=(req,res,next)=>{
-	try{
-        let token=req.headers['authorization'];
-        if (!token){
-           throw new Error ("No ha iniciado sesión");
-        }
-        token= token.replace ('Bearer ', '');
-        jwt.verify(token, SECRET_WORD, (err,user)=>{
-            if(err){
-                throw new Error("Token inválido");		
-            }
-        });
-        next();
-       }
-       catch(e){
-           res.status(403).send({"message": e.message});
-       }			 	
-   
-}
-/**
- * Lo que se hace aca es que el usuario no va a poder entrar a ninguna ruta si
- * es que no tiene un token valido (salvo a la ruta de login).
- */
-auth.unless= unless;
-app.use(
-    auth.unless({
-        path:[
-            {url: '/userinterno/login', method: ['POST']}
-        ]
-    })
-)
 app.use('/proveedor',routeProveedor);
 app.use('/empleado',routeEmpleado);
 app.use('/organismo',routeOrganismo);
