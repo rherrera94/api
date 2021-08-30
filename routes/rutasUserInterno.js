@@ -79,10 +79,12 @@ app.post('/login', async(req,res)=>{
 		expiresIn: 60*60*2 // expira en 2hs
 	   });
        let permisos=await servicios.getPermisos(respuesta[0].idRol)
+       //armo la parte del rol donde tendre que id de rol es y ademas los permisos que tiene el rol
        let rol={
            "id":respuesta[0].idRol,
            "role_permits":permisos
         };
+        //armo la informacion que le voy a devolver al front para que se pueda armar los menu etc
        let jsonrta={
            "id":respuesta[0].id,
            "email":respuesta[0].mail,
