@@ -7,6 +7,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 const {PORT}=require('./config/globals');
+app.get('/',(req,res)=>{
+    res.sendFile(__dirname + '/estatico/mul-upload.html');
+})
 /**
  * AUTENTICACIÓN
  */
@@ -44,9 +47,7 @@ app.use(
         ]
     })
 )
-app.get('/',(req,res)=>{
-    res.sendFile(__dirname + '/estatico/mul-upload.html');
-})
+
 
 
 /**
