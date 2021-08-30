@@ -25,7 +25,7 @@ Para poder operar el Backend utiliza diferentes librerias que se detallan a cont
 
 - [cors](https://www.npmjs.com/package/cors)
 
-- [MySql] (https://www.npmjs.com/package/mysql) - para conexion a base de datos.
+- [MySql](https://www.npmjs.com/package/mysql) - para conexion a base de datos.
 
 ## Rutas usuarios internos
    #### Rutas usuario interno (/userinterno):
