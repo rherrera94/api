@@ -1,15 +1,14 @@
 
 const express= require('express');
-const jwt= require('jsonwebtoken');
-const unless= require('express-unless');
-const bcrypt= require('bcrypt');
 const app=express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 const {PORT}=require('./config/globals');
+
 app.get('/',(req,res)=>{
     res.sendFile(__dirname + '/estatico/mul-upload.html');
 })
+
 /***
  * RUTAS:
  * Proveedor (/proveedor)-> empresa o persona física que se inscribe como proveedor del Estado.
@@ -32,6 +31,7 @@ const routeDireccion= require('./routes/rutasDireccion');
 const routeLegitimoAb=require('./routes/rutasLegitimoAb');
 const routeProvincia=require('./routes/rutasProvincia');
 const routeLocalidad=require('./routes/rutasLocalidad');
+const routeUserInterno=require('./routes/rutasUserInterno');
 
 app.use('/proveedor',routeProveedor);
 app.use('/empleado',routeEmpleado);
@@ -41,6 +41,7 @@ app.use('/direccion',routeDireccion);
 app.use('/legitimoab',routeLegitimoAb);
 app.use('/provincia',routeProvincia);
 app.use('/localidad',routeLocalidad);
+app.use('/userinterno',routeUserInterno);
 
 /*************************************************************************/
 app.use((req, res) => {
