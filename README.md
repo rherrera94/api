@@ -5,7 +5,27 @@ EN ÉSTA SECCION SE ENCUENTRA LA API DEL SISTEMA A DESARROLLAR.
 
 **Nota: se configuraron ciertas variables de entorno que deberán tambien ser configuradas, en nuestro caso pusimos el PORT como 5500 pero ese puerto dependerá de lo que se tenga configurado tambien habra que configurar como variables de entorno APP_USER, APP_HOST, APP_DB que son las variables que se necesitarán para la comunicación a la BBDD**
 
-#  Tech
+# Instalación
+
+El proyecto necesita para funcionar [Node.js](https://nodejs.org/es/) preferentemente la última versión.
+
+#### Instalar dependencias
+
+```sh
+$ npm install
+```
+
+#### Configuración de variables de entorno
+
+```Ejemplo:``` [Env.ejemplo](./.env.ejemplo)
+
+#### Iniciar el proyecto de manera local
+
+```sh
+$ npm start
+```
+
+#  Librerias utilizadas
 
 Para poder operar el Backend utiliza diferentes librerias que se detallan a continuación
 
