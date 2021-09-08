@@ -1,14 +1,22 @@
 const {db} = require('../db');//tomo la conexion
+const{CONT_SUPER}=require('../../../config/globals');
+const bcrypt= require('bcrypt');
 (async () =>{
     try{
+        console.log("******************************************************");
+        console.log("******************************************************");
+        console.log("*Se inicia proceso inicial de creación tablas de BBDD*");
+        console.log("******************************************************");
+        console.log("******************************************************");
         await db.schema.createTable('direccion',table =>{
             table.increments('id');
             table.string('direccion').notNullable();
             table.integer('altura').defaultTo(null);
+            table.integer('piso').defaultTo(null);
             table.string('depto',20).defaultTo(null);
             table.string('codPos',10).notNullable();
-            table.integer('provincia').unsigned().notNullable();
-            table.integer('localidad').unsigned().notNullable();
+            table.string('provincia',20).notNullable();
+            table.string('localidad',20).notNullable();
             table.integer('eliminado').defaultTo(null);
         })
         .then(()=>console.log("Tabla direccion creada"))
@@ -46,8 +54,8 @@ const {db} = require('../db');//tomo la conexion
                 table.string('razonSocial',100).notNullable();
                 table.string('tPersona',20).notNullable();
                 table.string('mail',100).notNullable();
-                table.integer('provincia').unsigned().notNullable();
-                table.integer('localidad').unsigned().notNullable();
+                table.string('provincia',20).notNullable();
+                table.string('localidad',20).notNullable();
                 table.string('telefono',50).notNullable();
                 table.integer('eliminado').defaultTo(null);
             })
@@ -177,6 +185,120 @@ const {db} = require('../db');//tomo la conexion
 	        })
         })
         .then(()=>console.log("Tabla propuestaslicitacion creada"))
+        .then(()=>{
+            console.log("*****************************************************");
+            console.log("*****************************************************");
+            console.log("*Se inicia proceso de creación de usuarios iniciales*");
+            console.log("*****************************************************");
+            console.log("*****************************************************");
+        })
+        .then(async()=>{
+            let nombre="ADMINISTRADOR"
+            await db("rol").insert({
+                nombre
+            })
+            nombre="PROVEEDOR"
+            await db("rol").insert({
+                nombre
+            })
+            nombre="SUPERIOR"
+            await db("rol").insert({
+                nombre
+            })
+            nombre="EMPLEADO"
+            await db("rol").insert({
+                nombre
+            })
+        })
+        .then(()=>console.log("Roles genéricos creados"))
+        .then(async()=>{
+            let id="PERMIT_LOGIN";
+            const idrol=1;
+            await db("permiso").insert({
+                id,
+                idrol
+            })
+            id="PERMIT_ADMINISTRATE";
+            await db("permiso").insert({
+                id,
+                idrol
+            })
+            id="PERMIT_ADMINISTRATE_ROLES";
+            await db("permiso").insert({
+                id,
+                idrol
+            })
+            id="PERMIT_ADMINISTRATE_USERS";
+            await db("permiso").insert({
+                id,
+                idrol
+            })
+        })
+        .then(()=>console.log("Permisos rol administrador creados"))
+        .then(async()=>{
+            const direccion="JULIO A. ROCA"
+            const altura=651;
+            const piso=7;
+            const codPos=1067;
+            const provincia="02";
+            const localidad="02000010000";
+            await db("direccion").insert({
+                direccion,
+                altura,
+                piso,
+                codPos,
+                provincia,
+                localidad
+            })
+        })
+        .then(()=>console.log("Calle creada"))
+        .then(async()=>{
+            const cuit="30-33333333-3"
+            const denominacion="TRIBUNAL FISCAL DE LA NACION";
+            const direccion=1;
+            const telefono="01148885678"
+            const mail="TRIBUNALFISCAL@MECON.GOB.AR";
+            await db("organismo").insert({
+                cuit,
+                denominacion,
+                direccion,
+                telefono,
+                mail
+            })
+        })
+        .then(()=>console.log("Tribunal creado"))
+        .then(async()=>{
+            const cuil="22-22222222-0"
+            const apellido="PEREZ";
+            const nombre="JUAN";
+            const mail="ADMIN@ADMIN.GOB.AR";
+            const idOrganismo=1;
+            const cargo="JEFE AREA SISTEMAS"
+            await db("empleado").insert({
+                cuil,
+                apellido,
+                nombre,
+                mail,
+                idOrganismo,
+                cargo
+            })
+        })
+        .then(()=>console.log("empleado creado"))
+        .then(async()=>{
+            const nombre="SUPERUSUARIO"
+            const contrasenia=await bcrypt.hash(CONT_SUPER,10);
+            const idRol=1;
+            const idEmpleado=1;
+            const mail="ADMIN@ADMIN.GOB.AR"
+            await db("usuariointerno").insert({
+                nombre,
+                contrasenia,
+                idRol,
+                idEmpleado,
+                mail
+            })
+        })
+        .then(()=>console.log("usuario superusario creado"))
     }catch(e){
         console.log(e)
         console.log("Se ha producido un error en el proceso de migración")
