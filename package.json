@@ -18,7 +18,8 @@
   "scripts": {
     "start": "node app.js",
     "actualizarProvincias": "node ./routes/models/db/migrations/actualizaProvincias.js",
-    "actualizaLocalidades": "node ./routes/models/db/migrations/actualizaLocalidades.js"
+    "actualizaLocalidades": "node ./routes/models/db/migrations/actualizaLocalidades.js",
+    "runMigration": " npm install --prefix migration && npm run migration --prefix migration"
   },
   "repository": {
     "type": "git",
