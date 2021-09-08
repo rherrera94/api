@@ -80,9 +80,9 @@ const bcrypt= require('bcrypt');
         .then(async ()=>{
             await db.schema.createTable('permiso',table =>{
                 table.string('id',30).notNullable();
-                table.integer('idrol').unsigned().notNullable();
+                table.integer('role_id').unsigned().notNullable();
                 table.integer('eliminado').defaultTo(null);
-                table.foreign('idrol').references('id').inTable('rol');
+                table.foreign('role_id').references('id').inTable('rol');
             })
         })
         .then(()=>console.log("Tabla permiso creada"))
@@ -213,25 +213,25 @@ const bcrypt= require('bcrypt');
         .then(()=>console.log("Roles genéricos creados"))
         .then(async()=>{
             let id="PERMIT_LOGIN";
-            const idrol=1;
+            const role_id=1;
             await db("permiso").insert({
                 id,
-                idrol
+                role_id
             })
             id="PERMIT_ADMINISTRATE";
             await db("permiso").insert({
                 id,
-                idrol
+                role_id
             })
             id="PERMIT_ADMINISTRATE_ROLES";
             await db("permiso").insert({
                 id,
-                idrol
+                role_id
             })
             id="PERMIT_ADMINISTRATE_USERS";
             await db("permiso").insert({
                 id,
-                idrol
+                role_id
             })
         })
         .then(()=>console.log("Permisos rol administrador creados"))

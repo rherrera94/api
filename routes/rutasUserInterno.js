@@ -43,6 +43,7 @@ app.post('/',async(req,res)=>{
         await servicios.createUser(usuarioReg);
         res.json(usuarioReg);
     }catch(e){
+
         if(e.message!="Revise la información ingresada" && e.message!="El nombre de usuario ya se encuentra registrado"
         && e.message!="El numero de cuil ingresado no se corresponde con empleado registrado"){
             res.status(404).json({"error":"Error inesperado"})
@@ -95,6 +96,7 @@ app.post('/login', async(req,res)=>{
 	   res.send({"data":jsonrta,"token":token});					
 	}
 	catch(e){
+        console.log(e)
         if(e.message!="Revise los datos ingresados" && e.message!='Usuario o contraseña incorrectos'){
             res.status(404).json({"error":"Error inesperado"})
             return;
