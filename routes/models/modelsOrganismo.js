@@ -40,9 +40,16 @@ async function cuitGet (cuit){
 }
 
 async function denominacionGet(denominacion){
+    console.log(denominacion)
     let query='SELECT * FROM organismo WHERE denominacion=?';
     let registros=await qy (query,denominacion);
-    return registros[0];
+    console.log(registros)
+    if (registros.length==0){
+        return registros;
+    }else{
+        return registros[0];
+    }
+    
 }
 module.exports={
     organismoGet,

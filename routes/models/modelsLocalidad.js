@@ -21,7 +21,7 @@ class Localidad{
         let i=0;
         let encontrado=0;
         while (i<contenido.length && encontrado==0){
-            if (contenido[i].id==id.toString()){
+            if (contenido[i].id==id){
                 encontrado=1;
             }else{
                 i++;

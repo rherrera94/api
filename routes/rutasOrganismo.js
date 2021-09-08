@@ -39,6 +39,7 @@ app.get('/:id',async (req,res)=>{
         res.status(200).send(registros);
     }
     catch(error){
+
         if(error.message!= 'No se han encontrado organismos con ese id.'){
             res.status(413).send({"Mensaje": "error inesperado"});
             return;    
