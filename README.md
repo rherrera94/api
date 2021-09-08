@@ -18,12 +18,15 @@ $ npm install
 #### Configuración de variables de entorno
 
 ```Ejemplo:``` [Env.ejemplo](./.env.ejemplo)
+```Ejemplo env para migración:``` [Env.ejemplo](./migration/.env.ejemplo)
 
 #### Iniciar el proyecto de manera local
 
 ```sh
+$ npn run runMigration
 $ npm start
 ```
+**Nota: para comenzar a utilizar el sistema se debe crear la base de datos compras y configurar las variables de entorno correspondientes. Posteriormente correr el comando npm run runMigration para que se generen todas las tablas de la base de datos y el nuevo super usuario que a modo de ejemplo se lo asignamos a una persona ficticia llamada juan perez.**
 
 #  Librerias utilizadas
 
@@ -49,7 +52,7 @@ Para poder operar el Backend utiliza diferentes librerias que se detallan a cont
 
 - [MySql](https://www.npmjs.com/package/mysql) - para conexion a base de datos.
 
-  **Nota: para comenzar a utilizar el sistema se debe crear la base de datos compras y configurar las variables de entorno correspondientes. Posteriormente correr el comando npm run runMigration para que se generen todas las tablas de la base de datos y el nuevo super usuario que a modo de ejemplo se lo asignamos a una persona ficticia llamada juan perez.**
+  
 
 ## Rutas usuarios internos
    #### Rutas usuario interno (/userinterno):
