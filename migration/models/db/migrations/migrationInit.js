@@ -268,6 +268,51 @@ const bcrypt= require('bcrypt');
         })
         .then(()=>console.log("Tribunal creado"))
         .then(async()=>{
+            const cuit="34-54667611-2"
+            const denominacion="TRIBUNAL DE TASACIONES DE LA NACION";
+            const direccion=1;
+            const telefono="01143493032"
+            const mail="TRIBUNALTASACION@PRODUCCION.GOB.AR";
+            await db("organismo").insert({
+                cuit,
+                denominacion,
+                direccion,
+                telefono,
+                mail
+            })
+        })
+        .then(()=>console.log("Tribunal creado"))
+        .then(async()=>{
+            const cuit="34-54666666-2"
+            const denominacion="BANCO CENTRAL DE LA REPUBLICA ARGENTINA";
+            const direccion=1;
+            const telefono="01143675243"
+            const mail="BCRA@ECONOMIA.GOB.AR";
+            await db("organismo").insert({
+                cuit,
+                denominacion,
+                direccion,
+                telefono,
+                mail
+            })
+        })
+        .then(()=>console.log("Banco creado"))
+        .then(async()=>{
+            const cuit="34-5413131313-2"
+            const denominacion="COMISION NACIONAL DE VALORES";
+            const direccion=1;
+            const telefono="01143494444"
+            const mail="CNV@ECONOMIA.GOB.AR";
+            await db("organismo").insert({
+                cuit,
+                denominacion,
+                direccion,
+                telefono,
+                mail
+            })
+        })
+        .then(()=>console.log("CNV creada"))
+        .then(async()=>{
             const cuil="22-22222222-0"
             const apellido="PEREZ";
             const nombre="JUAN";
