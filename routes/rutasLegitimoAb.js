@@ -25,7 +25,7 @@ const uploadAD = multer({
                 throw new Error('faltan datos');
             }
             
-            if(isNaN(req.body.proveedor)){
+            if(!isNaN(req.body.proveedor)){
                 //si se inserto algo diferente de un numero lanza error
                 throw new Error ("En el campo proveedor debe haber un número de cuit"); 
             }
@@ -76,7 +76,7 @@ app.post ('/',uploadAD.single('actodispo'),async (req, res)=> {
         if (!req.file){
             throw new Error("Debe ingresar un archivo del acto dispositivo")
         }
-        //hasta implementar la seccion usuario el id de usuario sera 2
+        //hasta implementar la seccion usuario el id de usuario sera 1
         //se guarda la información del legitimo abono en un objeto para despues pasarlo por parametro
         let organismo=await serviceOrganismo.denominacionGetter(req.body.organismo.toUpperCase());
         let proveedor=await serviceProveedor.cuitGetter(req.body.proveedor);
@@ -91,7 +91,7 @@ app.post ('/',uploadAD.single('actodispo'),async (req, res)=> {
             "monto": req.body.monto,
             "justificacion": req.body.justificacion.toUpperCase(),
             "actoDispositivo": req.file.filename,
-            "idusuario":2,
+            "idusuario":1,
             "fecha":fech
         }
         let registro=await servicios.legitimoAb(legitimoAb);
@@ -129,7 +129,6 @@ app.get('/',async (req,res)=>{
     }
     catch(error){
         if (error.message!='No se han encontrado legitimos abonos.'){
-            console.log(error.message);
             res.status(413).send({"Mensaje":'error inesperado'});
             return;    
         }

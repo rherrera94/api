@@ -123,6 +123,7 @@ const bcrypt= require('bcrypt');
                 table.float('monto').notNullable();
                 table.text('justificacion').notNullable();
                 table.text('actoDispositivo').notNullable();
+                table.timestamp('fecha').notNullable();
                 table.integer('borrado').defaultTo(null);
 		        table.integer('idUsuario').unsigned().notNullable();
                 table.foreign('idOrganismo').references('id').inTable('organismo');
