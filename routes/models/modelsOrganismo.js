@@ -23,6 +23,9 @@ async function organismosList(){
 async function organismoGet (id){
     let query='SELECT * FROM organismo WHERE id=?';
     let registros=await qy (query,id);
+    if (registros.length==0){
+        return registros;
+    }
     return registros[0];
 }
 /**
@@ -36,20 +39,19 @@ async function organismoGet (id){
 async function cuitGet (cuit){
     let query='SELECT * FROM organismo WHERE cuit=?';
     let registros=await qy (query,cuit);
+    if (registros.length==0){
+        return registros;
+    }
     return registros[0];
 }
 
 async function denominacionGet(denominacion){
-    console.log(denominacion)
     let query='SELECT * FROM organismo WHERE denominacion=?';
     let registros=await qy (query,denominacion);
-    console.log(registros)
     if (registros.length==0){
         return registros;
-    }else{
-        return registros[0];
     }
-    
+        return registros[0];    
 }
 module.exports={
     organismoGet,
