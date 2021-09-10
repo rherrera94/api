@@ -18,6 +18,7 @@ $ npm install
 #### Configuración de variables de entorno
 
 ```Ejemplo:``` [Env.ejemplo](./.env.ejemplo)
+
 ```Ejemplo env para migración:``` [Env.ejemplo](./migration/.env.ejemplo)
 
 #### Iniciar el proyecto de manera local
