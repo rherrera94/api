@@ -52,7 +52,7 @@ async function rsocGet (rsoc){
 */
 async function cuitGet (cuit){
     let query='SELECT * FROM proveedor WHERE cuit=?';
-    let registros=await qy (query,cuit);
+    let registros=await qy (query,[cuit]);
     return registros;
 }
 /**

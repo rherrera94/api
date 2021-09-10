@@ -139,16 +139,14 @@ app.get('/cuit/:cuit',async (req,res)=>{
  */
  app.put('/borrado/:cuit', async (req,res)=>{
     try{
-        let registros=await servicios.proveedorGetter(req.params.cuit);
+        let registros=await servicios.proveedorBorrado(req.params.cuit)
         if (registros.length==0){
-            throw new Error ('No se han encontrado proveedores con ese id.');
-        } 
-
-        registros=await servicios.proveedorBorrado(req.params.cuit)
+            throw new Error ("No se ha podido realizar el borrado")
+        }
         res.status(200).send(registros);
 
     } catch (error) {
-        if (error.message!='No se han encontrado proveedores con ese id.'){
+        if (error.message!="No se ha podido realizar el borrado"){
             res.status(400).send({"Mensaje": "error inesperado"});
         }
         res.status(404).send({"Mensaje": error.message});
