@@ -54,6 +54,9 @@ Para poder operar el Backend utiliza diferentes librerias que se detallan a cont
 - [MySql](https://www.npmjs.com/package/mysql) - para conexion a base de datos.
 
   
+#  Documentación Postman
+
+https://documenter.getpostman.com/view/14621250/U16kr5Cr
 
 ## Rutas usuarios internos
    #### Rutas usuario interno (/userinterno):
@@ -147,6 +150,3 @@ Para poder operar el Backend utiliza diferentes librerias que se detallan a cont
    * `GET` | localhost:5500/organismo/cuit/:cuit -> devuelve organismo con cuit igual al que se pasa por parámetro.
    * `GET` | localhost:5500/organismo/denominacion/:denominacion -> devuelve organismo con denominacion igual a la que se pasa por parámetro.
 
-#  Documentación Postman
-
-https://documenter.getpostman.com/view/14621250/U16kr5Cr
