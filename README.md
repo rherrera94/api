@@ -62,6 +62,8 @@ Para poder operar el Backend utiliza diferentes librerias que se detallan a cont
 
    * `POST` | localhost:5500/userinterno/login -> logeo de usuarios.
 
+   * `POST` | localhost:5500/userinterno/permiso -> asigna permisos a un cierto rol.
+
 
 ## Rutas de la api
   #### Rutas legitimo abono (/legitimoab):

@@ -103,4 +103,34 @@ app.post('/login', async(req,res)=>{
         res.status(404).json({"error":e.message});
 	}
 });
+/**
+ * Permisos. Debe llegar un array con 1 o mas permisos para ingresar a la base de datos.
+ * @returns{JSON} devuelven los permisos ingresados y a que rol le corresponden.
+ */
+ app.post('/permiso', async(req,res)=>{
+	try{
+	    if(!req.body.rolusuario||req.body.permisos.length==0){
+		    throw new Error ("Revise los datos ingresados");
+	    }
+        let respuesta=await servicios.getRol(req.body.rolusuario.toUpperCase());
+        if (respuesta.length==0){
+            throw new Error ('Rol de usuario no encontrado');
+        }
+        let permisosSolicitados={
+            "rolusuario":respuesta[0].id,
+            "permisos":req.body.permisos
+        }
+        respuesta=await servicios.setPermisos(permisosSolicitados);
+        res.json(respuesta)					
+	}
+	catch(e){
+        console.log(e)
+        if(e.message!="Revise los datos ingresados" && e.message!='Rol de usuario no encontrado'){
+            res.status(404).json({"error":"Error inesperado"})
+            return;
+        }
+        res.status(404).json({"error":e.message});
+	}
+});
+
 module.exports=app;

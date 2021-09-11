@@ -25,5 +25,21 @@ class UserInterno{
 		const permisos= await userModel.getPermisos(rol);
 		return permisos;
 	}
+	/**
+	 * Devuelve el rol de usuario por el cual se consulta
+	 * @param {Number} rol id de rol al cual se necesita asignarle permisos
+	 * @returns {Array} devuelve un array con la informacion encontrada 
+	 */
+	 async getRol(rol){
+		const rolSolicitado= await userModel.getRol(rol);
+		return rolSolicitado;
+	}
+	/**
+	 * Ingresa los permisos correspondientes al usuario dado
+	 * @param {Number} rol id de rol del cual se necesitan saber los permisos 
+	 */
+	 async setPermisos(permisos){
+		return userModel.setPermisos(permisos);
+	}
 }
 module.exports=new UserInterno;
