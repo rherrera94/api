@@ -96,7 +96,6 @@ app.post('/login', async(req,res)=>{
 	   res.send({"data":jsonrta,"token":token});					
 	}
 	catch(e){
-        console.log(e)
         if(e.message!="Revise los datos ingresados" && e.message!='Usuario o contraseña incorrectos'){
             res.status(404).json({"error":"Error inesperado"})
             return;
