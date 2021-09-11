@@ -76,7 +76,7 @@ app.get('/:id',async (req,res)=>{
         if (registros.length==0){
             throw new Error ('No se han encontrado proveedores con ese id.');
         } 
-        res.status(200).send(registros);
+        res.status(200).send(registros[0]);
     }
     catch(error){
         if(error.message!= 'No se han encontrado proveedores con ese id.'){
@@ -98,7 +98,7 @@ app.get('/cuit/:cuit',async (req,res)=>{
         if (registros.length==0){
             throw new Error ('No se han encontrado proveedores con ese cuit.');
         } 
-        res.status(200).send(registros);
+        res.status(200).send(registros[0]);
     }
     catch(error){
         if(error.message!= 'No se han encontrado proveedores con ese cuit.'){
