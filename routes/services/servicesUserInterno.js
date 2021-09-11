@@ -36,10 +36,17 @@ class UserInterno{
 	}
 	/**
 	 * Ingresa los permisos correspondientes al usuario dado
-	 * @param {Number} rol id de rol del cual se necesitan saber los permisos 
+	 * @param {JSON} permisos a crear 
 	 */
 	 async setPermisos(permisos){
 		return userModel.setPermisos(permisos);
+	}
+	/**
+	 * Ingresa nuevo rol de usuario
+	 * @param {String} rol rol a crear
+	 */
+	 async setRol(rol){
+		return userModel.setRol(rol);
 	}
 }
 module.exports=new UserInterno;

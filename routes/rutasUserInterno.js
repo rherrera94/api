@@ -132,5 +132,29 @@ app.post('/login', async(req,res)=>{
         res.status(404).json({"error":e.message});
 	}
 });
+/**
+ * Roles. Se ingresa un rol a la base de datos.
+ * @returns{JSON} devuelve el nuevo rol.
+ */
+ app.post('/rol', async(req,res)=>{
+	try{
+	    if(!req.body.rolusuario){
+		    throw new Error ("Revise los datos ingresados");
+	    }
+        let respuesta=await servicios.getRol(req.body.rolusuario.toUpperCase());
+        if (respuesta.length!=0){
+            throw new Error ('Rol de usuario ya existe');
+        }
+        await servicios.setRol(req.body.rolusuario.toUpperCase());
+        res.json({"rol":req.body.rolusuario.toUpperCase()})					
+	}
+	catch(e){
+        if(e.message!='Rol de usuario ya existe'){
+            res.status(404).json({"error":"Error inesperado"})
+            return;
+        }
+        res.status(404).json({"error":e.message});
+	}
+});
 
 module.exports=app;

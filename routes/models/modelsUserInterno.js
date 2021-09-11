@@ -35,5 +35,9 @@ class UserIntetnoModel{
 		}
 		return arrayPermisos;
 	}
+	async setRol(rol){
+		let query='INSERT INTO rol (nombre) values (?)';
+        await qy (query,[rol]);
+	}
 }
 module.exports=new UserIntetnoModel();
