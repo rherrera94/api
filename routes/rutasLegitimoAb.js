@@ -257,6 +257,9 @@ app.get('/:id',async (req,res)=>{
 
 app.put('/borrado/:id', async (req,res)=>{
     try{
+        if (isNaN(req.params.id) || req.params.id.replace(/ /g, "")==""||req.params.id.replace(/ /g, "")!=req.params.id){
+            throw new Error ("Chequee la información ingresada")
+        }
         let registro=await servicios.legitimoAbGetter(req.params.id);
         if (registro.length==0){
             throw new Error ('No se han encontrado legitimos abonos con ese id.');
@@ -270,7 +273,8 @@ app.put('/borrado/:id', async (req,res)=>{
     } catch (error) {
         if (error.message!='No se han encontrado legitimos abonos con ese id.'&& 
         error.message!='El Legitimo abono ha sido borrado. Error de lectura de la base de datos.'&&
-        error.message!="El legitimo abono no puede ser borrado por que ya ha sido eliminado con anterioridad"){
+        error.message!="El legitimo abono no puede ser borrado por que ya ha sido eliminado con anterioridad"
+        && error.message!="Chequee la información ingresada"){
             res.status(404).send({"Mensaje": "error inesperado"});
             return;
         }
