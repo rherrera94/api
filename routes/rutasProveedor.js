@@ -72,6 +72,9 @@ app.get('/',async (req,res)=>{
  */
 app.get('/:id',async (req,res)=>{
     try{
+        if (isNaN(req.params.id) || req.params.id.replace(/ /g, "")==""||req.params.id.replace(/ /g, "")!=req.params.id){
+            throw new Error ("Chequee la información ingresada")
+        }
         let registros=await servicios.proveedorGetter(req.params.id);
         if (registros.length==0){
             throw new Error ('No se han encontrado proveedores con ese id.');
@@ -79,7 +82,7 @@ app.get('/:id',async (req,res)=>{
         res.status(200).send(registros[0]);
     }
     catch(error){
-        if(error.message!= 'No se han encontrado proveedores con ese id.'){
+        if(error.message!= 'No se han encontrado proveedores con ese id.' && error.message!="Chequee la información ingresada"){
             res.status(413).send({"Mensaje": "error inesperado"});
             return;    
         }
@@ -94,6 +97,11 @@ app.get('/:id',async (req,res)=>{
  */
 app.get('/cuit/:cuit',async (req,res)=>{
     try{
+        if (!isNaN(req.params.cuit) || req.params.cuit.trim()==""||req.params.cuit.replace(/ /g, "")!=req.params.cuit){
+            //esta preguntando si estas mandando espacios vacios o si estas mandando algo es que un numero cuando
+            //se espera un string o si se colocaron espacios intermedios cuando no son permitidos los mismos
+            throw new Error ("Chequee la información ingresada")
+        }
         let registros=await servicios.cuitGetter(req.params.cuit);
         if (registros.length==0){
             throw new Error ('No se han encontrado proveedores con ese cuit.');
@@ -101,7 +109,7 @@ app.get('/cuit/:cuit',async (req,res)=>{
         res.status(200).send(registros[0]);
     }
     catch(error){
-        if(error.message!= 'No se han encontrado proveedores con ese cuit.'){
+        if(error.message!= 'No se han encontrado proveedores con ese cuit.' && error.message!="Chequee la información ingresada"){
             res.status(413).send({"Mensaje": "error inesperado"});
             return;    
         }
@@ -116,6 +124,9 @@ app.get('/cuit/:cuit',async (req,res)=>{
  */
  app.get('/nombre/:rsoc',async (req,res)=>{
     try{
+        if (!isNaN(req.params.rsoc) || req.params.rsoc.trim()==""){
+            throw new Error ("Chequee la información ingresada")
+        }
         let registros=await servicios.rsocGetter(req.params.rsoc.toUpperCase());
         if (registros.length==0){
             throw new Error ('No se han encontrado proveedores con esa razon social.');
@@ -123,7 +134,7 @@ app.get('/cuit/:cuit',async (req,res)=>{
         res.status(200).send(registros);
     }
     catch(error){
-        if(error.message!= 'No se han encontrado proveedores con esa razon social.'){
+        if(error.message!= 'No se han encontrado proveedores con esa razon social.' && error.message!="Chequee la información ingresada"){
             res.status(413).send({"Mensaje": "error inesperado"});
             return;    
         }
@@ -139,6 +150,9 @@ app.get('/cuit/:cuit',async (req,res)=>{
  */
  app.put('/borrado/:cuit', async (req,res)=>{
     try{
+        if (isNaN(req.params.cuit) || req.params.cuit.replace(/ /g, "")==""||req.params.cuit.replace(/ /g, "")!=req.params.cuit){
+            throw new Error ("Chequee la información ingresada")
+        }
         let registros=await servicios.proveedorBorrado(req.params.cuit)
         if (registros.length==0){
             throw new Error ("No se ha podido realizar el borrado")
@@ -146,7 +160,7 @@ app.get('/cuit/:cuit',async (req,res)=>{
         res.status(200).send(registros);
 
     } catch (error) {
-        if (error.message!="No se ha podido realizar el borrado"){
+        if (error.message!="No se ha podido realizar el borrado"  && error.message!="Chequee la información ingresada"){
             res.status(400).send({"Mensaje": "error inesperado"});
         }
         res.status(404).send({"Mensaje": error.message});
