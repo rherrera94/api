@@ -145,6 +145,9 @@ app.get('/',async (req,res)=>{
 
 app.get('/:id',async (req,res)=>{
     try{
+        if (isNaN(req.params.id) || req.params.id.replace(/ /g, "")==""||req.params.id.replace(/ /g, "")!=req.params.id){
+            throw new Error ("Chequee la información ingresada")
+        }
         let registros=await servicios.legitimoAbGetter(req.params.id);
         if (registros.length==0){
             throw new Error ('No se han encontrado legitimos abonos con ese id.');
@@ -152,7 +155,7 @@ app.get('/:id',async (req,res)=>{
         res.status(200).send(registros);
     }
     catch(error){
-        if(error.message!= 'No se han encontrado legitimos abonos con ese id.'){
+        if(error.message!= 'No se han encontrado legitimos abonos con ese id.' && error.message!="Chequee la información ingresada"){
             res.status(404).send({"Mensaje": "error inesperado"});
             return;    
         }
@@ -169,6 +172,9 @@ app.get('/:id',async (req,res)=>{
 
  app.get('/proveedor/:id',async (req,res)=>{
     try{
+        if (isNaN(req.params.id) || req.params.id.replace(/ /g, "")==""||req.params.id.replace(/ /g, "")!=req.params.id){
+            throw new Error ("Chequee la información ingresada")
+        }
         let registros=await servicios.legitimoAbGetterIp(req.params.id);
         if (registros.length==0){
             throw new Error ('No se han encontrado legitimos abonos para ese proveedor.');
@@ -176,7 +182,7 @@ app.get('/:id',async (req,res)=>{
         res.status(200).send(registros);
     }
     catch(error){
-        if(error.message!= 'No se han encontrado legitimos abonos para ese proveedor.'){
+        if(error.message!= 'No se han encontrado legitimos abonos para ese proveedor.' && error.message!="Chequee la información ingresada"){
             res.status(404).send({"Mensaje": "error inesperado"});
             return;    
         }
@@ -194,6 +200,11 @@ app.get('/:id',async (req,res)=>{
 
  app.get('/proveedor/cuit/:cuit',async (req,res)=>{
     try{
+        if (!isNaN(req.params.cuit) || req.params.cuit.trim()==""||req.params.cuit.replace(/ /g, "")!=req.params.cuit){
+            //esta preguntando si estas mandando espacios vacios o si estas mandando algo es que un numero cuando
+            //se espera un string o si se colocaron espacios intermedios cuando no son permitidos los mismos
+            throw new Error ("Chequee la información ingresada")
+        }
         let registros=await servicios.legitimoAbGetterCuit(req.params.cuit);
         if (registros.length==0){
             throw new Error ('No se han encontrado legitimos abonos para ese proveedor.');
@@ -201,7 +212,7 @@ app.get('/:id',async (req,res)=>{
         res.status(200).send(registros);
     }
     catch(error){
-        if(error.message!= 'No se han encontrado legitimos abonos para ese proveedor.'){
+        if(error.message!= 'No se han encontrado legitimos abonos para ese proveedor.' && error.message!="Chequee la información ingresada"){
             res.status(404).send({"Mensaje": "error inesperado"});
             return;    
         }
@@ -218,6 +229,9 @@ app.get('/:id',async (req,res)=>{
 
  app.get('/organismo/:id',async (req,res)=>{
     try{
+        if (isNaN(req.params.id) || req.params.id.replace(/ /g, "")==""||req.params.id.replace(/ /g, "")!=req.params.id){
+            throw new Error ("Chequee la información ingresada")
+        }
         let registros=await servicios.legitimoAbGetterIo(req.params.id);
         if (registros.length==0){
             throw new Error ('No se han encontrado legitimos abonos para ese organismo.');
@@ -225,7 +239,7 @@ app.get('/:id',async (req,res)=>{
         res.status(200).send(registros);
     }
     catch(error){
-        if(error.message!= 'No se han encontrado legitimos abonos para ese organismo.'){
+        if(error.message!= 'No se han encontrado legitimos abonos para ese organismo.' && error.message!="Chequee la información ingresada"){
             res.status(404).send({"Mensaje": "error inesperado"});
             return;    
         }

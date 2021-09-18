@@ -32,6 +32,9 @@ app.get('/',async (req,res)=>{
  */
 app.get('/:id',async (req,res)=>{
     try{
+        if (isNaN(req.params.id) || req.params.id.replace(/ /g, "")==""){
+            throw new Error ("Chequee la información ingresada")
+        }
         let registros=await servicios.organismoGetter(req.params.id);
         if (registros.length==0){
             throw new Error ('No se han encontrado organismos con ese id.');
@@ -39,7 +42,7 @@ app.get('/:id',async (req,res)=>{
         res.status(200).send(registros);
     }
     catch(error){
-        if(error.message!= 'No se han encontrado organismos con ese id.'){
+        if(error.message!= 'No se han encontrado organismos con ese id.' && error.message!="Chequee la información ingresada"){
             res.status(413).send({"Mensaje": "error inesperado"});
             return;    
         }
@@ -55,6 +58,11 @@ app.get('/:id',async (req,res)=>{
  */
 app.get('/cuit/:cuit',async (req,res)=>{
     try{
+        if (!isNaN(req.params.cuit) || req.params.cuit.trim()==""||req.params.cuit.replace(/ /g, "")!=req.params.cuit){
+            //esta preguntando si estas mandando espacios vacios o si estas mandando algo es que un numero cuando
+            //se espera un string o si se colocaron espacios intermedios cuando no son permitidos los mismos
+            throw new Error ("Chequee la información ingresada")
+        }
         let registros=await servicios.cuitGetter(req.params.cuit);
         if (registros.length==0){
             throw new Error ('No se han encontrado organismos con ese cuit.');
@@ -62,7 +70,7 @@ app.get('/cuit/:cuit',async (req,res)=>{
         res.status(200).send(registros);
     }
     catch(error){
-        if(error.message!= 'No se han encontrado organismos con ese cuit.'){
+        if(error.message!= 'No se han encontrado organismos con ese cuit.' && error.message!="Chequee la información ingresada"){
             res.status(413).send({"Mensaje": "error inesperado"});
             return;    
         }
@@ -77,6 +85,11 @@ app.get('/cuit/:cuit',async (req,res)=>{
  */
  app.get('/denominacion/:denominacion',async (req,res)=>{
     try{
+        if (req.params.denominacion.trim()==""|| !isNaN(parseInt(req.params.denominacion,10))){
+            //esta preguntando si estas mandando espacios vacios o si estas mandando algo es que un numero cuando
+            //se espera un string
+            throw new Error ("Chequee la información ingresada")
+        }
         let registros=await servicios.denominacionGetter(req.params.denominacion);
         if (registros.length==0){
             throw new Error ('No se han encontrado organismos con esa denominación.');
@@ -84,7 +97,7 @@ app.get('/cuit/:cuit',async (req,res)=>{
         res.status(200).send(registros);
     }
     catch(error){
-        if(error.message!= 'No se han encontrado organismos con esa denominación.'){
+        if(error.message!= 'No se han encontrado organismos con esa denominación.' && error.message!="Chequee la información ingresada"){
             res.status(404).send({"Mensaje": "error inesperado"});
             return;    
         }
