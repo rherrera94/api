@@ -6,7 +6,7 @@ const qy=require('../../config/conexion');
  */
  async function proveedorGuardar(proveedor){
         let query='INSERT INTO proveedor (cuit,razonSocial,tPersona,mail,provincia,localidad,telefono) values (?,?,?,?,?,?,?)';
-        let resultado=await qy (query,[proveedor.cuit,proveedor.razonSocial,proveedor.tPersona,proveedor.mail,proveedor.provincia,proveedor.localidad,proveedor.telefono])
+        await qy (query,[proveedor.cuit,proveedor.razonSocial,proveedor.tPersona,proveedor.mail,proveedor.provincia,proveedor.localidad,proveedor.telefono])
 }
 /**
  * Realiza la consulta a la base de datos, especificamente a la tabla
