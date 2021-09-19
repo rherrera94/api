@@ -14,7 +14,7 @@ app.get('/',(req,res)=>{
  * AUTENTICACIÓN
  */
 
- const auth=(req,res,next)=>{
+/* const auth=(req,res,next)=>{
     try{
         //nos fijamos si la request viene con un token
         let token=req.headers['authorization'];
@@ -33,12 +33,13 @@ app.get('/',(req,res)=>{
         res.status(403).send({"message": e.message});
     }			 	
    
-}
+}*/
 
 /**
  * Lo que se hace aca es que el usuario no va a poder entrar a ninguna ruta si
  * es que no tiene un token valido (salvo a la ruta de login).
  */
+/*
 auth.unless= unless;
 app.use(
     auth.unless({
@@ -48,7 +49,7 @@ app.use(
     })
 )
 
-
+*/
 
 /**
  * SE REQUIREN LOS DIFERENTES ARCHIVOS DE LAS RUTAS
