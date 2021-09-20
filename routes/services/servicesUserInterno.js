@@ -67,5 +67,11 @@ class UserInterno{
 	 async cuilGetter(cuil){
 		return userModel.cuitGetter(cuil);
 	}
+	/**
+	 * coloca el dato baja en 1.
+	 */
+	async usuarioBorrado(usuario){
+		return userModel.usuarioBorrado(usuario);
+	}
 }
 module.exports=new UserInterno;

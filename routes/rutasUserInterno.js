@@ -65,6 +65,9 @@ app.post('/login', async(req,res)=>{
         if (respuesta.length==0){
             throw new Error ('Usuario o contraseña incorrectos');
         }
+        if (respuesta[0].baja==1){
+            throw new Error("Usuario inhabilitado consulte con el administrador");
+        }
         if(!bcrypt.compareSync (req.body.contrasenia, respuesta[0].contrasenia)){
 		    throw new Error("Usuario o contraseña incorrectos");
 	    }
@@ -96,7 +99,7 @@ app.post('/login', async(req,res)=>{
 	   res.send({"data":jsonrta,"token":token});					
 	}
 	catch(e){
-        if(e.message!="Revise los datos ingresados" && e.message!='Usuario o contraseña incorrectos'){
+        if(e.message!="Revise los datos ingresados" && e.message!='Usuario o contraseña incorrectos' && e.message!="Usuario inhabilitado consulte con el administrador"){
             res.status(404).json({"error":"Error inesperado"})
             return;
         }
@@ -226,6 +229,30 @@ app.post('/login', async(req,res)=>{
         res.status(404).send({"Mensaje": error.message});
     }
 })
+/**
+ * deshabilita usuario que tiene nombre igual al  que se pasa por parámetro.
+ * Devuelve el registro con el campo eliminado en 1.
+ * @returns {JSON} json
+ */
+ app.put('/borrado/:usuario', async (req,res)=>{
+    try{
+        if (!isNaN(req.params.usuario) || req.params.usuario.replace(/ /g, "")==""||req.params.usuario.replace(/ /g, "")!=req.params.usuario){
+            throw new Error ("Chequee la información ingresada")
+        }
+        let registros=await servicios.usuarioBorrado(req.params.usuario.toUpperCase())
+        if (registros.length==0){
+            throw new Error ("No se ha podido realizar el borrado")
+        }
+        res.status(200).send(registros[0]);
+
+    } catch (error) {
+        if (error.message!="No se ha podido realizar el borrado"  && error.message!="Chequee la información ingresada"){
+            res.status(400).send({"Mensaje": "error inesperado"});
+            return;
+        }
+        res.status(404).send({"Mensaje": error.message});
+    }
+});
 
 
 module.exports=app;
