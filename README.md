@@ -69,6 +69,12 @@ https://documenter.getpostman.com/view/14621250/U16kr5Cr
 
    * `POST` | localhost:5500/userinterno/rol -> crea un cierto rol.
 
+   * `GET`  | localhost:5500/userinterno -> genera un listado generalizado de los usuarios internos registrados.
+
+   * `GET`  | localhost:5500/userinterno/:id -> devuelve usuario interno con id que se pasa por parametro.
+
+   * `GET`  | localhost:5500/userinterno/cuil/:cuil -> devuelve usuario interno con cuil que se pasa por parametro.
+
 ## Rutas de la api
   #### Rutas legitimo abono (/legitimoab):
 
@@ -148,5 +154,6 @@ https://documenter.getpostman.com/view/14621250/U16kr5Cr
    * `GET` | localhost:5500/organismo/:id -> si hay devuelve organismo con id igual al que se pasa por parámetro.
 
    * `GET` | localhost:5500/organismo/cuit/:cuit -> devuelve organismo con cuit igual al que se pasa por parámetro.
+
    * `GET` | localhost:5500/organismo/denominacion/:denominacion -> devuelve organismo con denominacion igual a la que se pasa por parámetro.
 

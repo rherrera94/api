@@ -39,5 +39,32 @@ class UserIntetnoModel{
 		let query='INSERT INTO rol (nombre) values (?)';
         await qy (query,[rol]);
 	}
+	async usuariosListado(){
+		let queryP1='SELECT usuariointerno.id as id, usuariointerno.nombre as usuario, empleado.apellido as apellido,';
+		let queryP2=' empleado.nombre as nombre, rol.nombre as rol, usuariointerno.mail as mail,';
+		let queryP3=' usuariointerno.baja as baja FROM usuariointerno,empleado,rol ';
+		let queryP4='WHERE usuariointerno.idRol=rol.id and usuariointerno.idEmpleado=empleado.id';
+		let query=queryP1+queryP2+queryP3+queryP4;
+		let usuarios=await qy(query)
+		return usuarios;
+	}
+	async usuarioGetter(id){
+		let queryP1='SELECT usuariointerno.id as id, usuariointerno.nombre as usuario, empleado.apellido as apellido,';
+		let queryP2=' empleado.nombre as nombre, rol.nombre as rol, usuariointerno.mail as mail,';
+		let queryP3=' usuariointerno.baja as baja FROM usuariointerno,empleado,rol ';
+		let queryP4='WHERE usuariointerno.id=? and usuariointerno.idRol=rol.id and usuariointerno.idEmpleado=empleado.id';
+		let query=queryP1+queryP2+queryP3+queryP4;
+		let usuarios=await qy(query,[id]);
+		return usuarios;
+	}
+	async cuitGetter(cuil){
+		let queryP1='SELECT usuariointerno.id as id, usuariointerno.nombre as usuario, empleado.apellido as apellido,';
+		let queryP2=' empleado.nombre as nombre, rol.nombre as rol, usuariointerno.mail as mail,';
+		let queryP3=' usuariointerno.baja as baja FROM usuariointerno,empleado,rol ';
+		let queryP4='WHERE empleado.cuil=? and usuariointerno.idRol=rol.id and usuariointerno.idEmpleado=empleado.id';
+		let query=queryP1+queryP2+queryP3+queryP4;
+		let usuarios=await qy(query,[cuil]);
+		return usuarios;
+	}
 }
 module.exports=new UserIntetnoModel();

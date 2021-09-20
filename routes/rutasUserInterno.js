@@ -156,5 +156,76 @@ app.post('/login', async(req,res)=>{
         res.status(404).json({"error":e.message});
 	}
 });
+/**
+ * Devuelve un listado generalizado con todos los usuarios existentes en la 
+ * base de datos.
+ * @returns {JSON} json
+ */
+ app.get('/',async (req,res)=>{
+    try{
+        let registros=await servicios.usuariosListado();
+        if (registros.length==0){
+            throw new Error ('No se han encontrado usuarios.');
+        }
+        res.status(200).send(registros);
+    }
+    catch(error){
+        if (error.message!='No se han encontrado usuarios.'){
+            res.status(413).send({"Mensaje":'error inesperado'});    
+        }
+        res.status(404).send({"Mensaje":error.message});
+    }
+})
+/**
+ * Devuelve la información del usuario que tiene número de id igual al que se 
+ * pasa por parámetro.
+ * @returns {JSON} json
+ */
+ app.get('/:id',async (req,res)=>{
+    try{
+        if (isNaN(req.params.id) || req.params.id.replace(/ /g, "")==""){
+            throw new Error ("Chequee la información ingresada")
+        }
+        let registros=await servicios.usuarioGetter(req.params.id);
+        if (registros.length==0){
+            throw new Error ('No se han encontrado usuarios con ese id.');
+        } 
+        res.status(200).send(registros[0]);
+    }
+    catch(error){
+        if(error.message!= 'No se han encontrado usuarios con ese id.' && error.message!="Chequee la información ingresada"){
+            res.status(413).send({"Mensaje": "error inesperado"});
+            return;    
+        }
+        res.status(404).send({"Mensaje": error.message});
+    }
+})
+/**
+ * Devuelve la información del usuario que tiene número de cuil igual al que se 
+ * pasa por parámetro.
+ * @returns {JSON} json
+ */
+ app.get('/cuil/:cuil',async (req,res)=>{
+    try{
+        if (!isNaN(req.params.cuil) || req.params.cuil.trim()==""||req.params.cuil.replace(/ /g, "")!=req.params.cuil){
+            //esta preguntando si estas mandando espacios vacios o si estas mandando algo es que un numero cuando
+            //se espera un string o si se colocaron espacios intermedios cuando no son permitidos los mismos
+            throw new Error ("Chequee la información ingresada")
+        }
+        let registros=await servicios.cuilGetter(req.params.cuil);
+        if (registros.length==0){
+            throw new Error ('No se han encontrado usuarios con ese cuil.');
+        } 
+        res.status(200).send(registros[0]);
+    }
+    catch(error){
+        if(error.message!= 'No se han encontrado usuarios con ese cuil.' && error.message!="Chequee la información ingresada"){
+            res.status(413).send({"Mensaje": "error inesperado"});
+            return;    
+        }
+        res.status(404).send({"Mensaje": error.message});
+    }
+})
+
 
 module.exports=app;

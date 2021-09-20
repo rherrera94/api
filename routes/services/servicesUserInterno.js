@@ -48,5 +48,24 @@ class UserInterno{
 	 async setRol(rol){
 		return userModel.setRol(rol);
 	}
+	/**
+	 * Se busca realizar un listado generalizado de los usuarios 
+	 * registrados.
+	 */
+	async usuariosListado(){
+		return userModel.usuariosListado()
+	}
+	/**
+	 * Devuelve el usuario de id que se pasa por parametro.
+	 */
+	async usuarioGetter(id){
+		return userModel.usuarioGetter(id);
+	}
+	/**
+	 * Devuelve el usuario de cuil que se pasa por parametro.
+	 */
+	 async cuilGetter(cuil){
+		return userModel.cuitGetter(cuil);
+	}
 }
 module.exports=new UserInterno;
