@@ -77,6 +77,8 @@ https://documenter.getpostman.com/view/14621250/U16kr5Cr
 
    * `PUT`  | localhost:5500/userinterno/borrado/:usuario -> Se inhabilita el usuario que se pasa por parametros.
 
+   * `PUT`  | localhost:5500/userinterno/rehabilitar/:usuario -> Se rehabilita el usuario que se pasa por parametros.
+
 ## Rutas de la api
   #### Rutas legitimo abono (/legitimoab):
 

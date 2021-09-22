@@ -253,6 +253,31 @@ app.post('/login', async(req,res)=>{
         res.status(404).send({"Mensaje": error.message});
     }
 });
+/**
+ * rehabilita usuario que tiene nombre igual al  que se pasa por parámetro.
+ * Devuelve el registro con el campo eliminado en NULL.
+ * @returns {JSON} json
+ */
+ app.put('/rehabilitar/:usuario', async (req,res)=>{
+    try{
+        if (!isNaN(req.params.usuario) || req.params.usuario.replace(/ /g, "")==""||req.params.usuario.replace(/ /g, "")!=req.params.usuario){
+            throw new Error ("Chequee la información ingresada")
+        }
+        let registros=await servicios.usuarioRehabilitar(req.params.usuario.toUpperCase())
+        if (registros.length==0){
+            throw new Error ("Algo fallo al realizar la rehabilitacion")
+        }
+        res.status(200).send(registros[0]);
+
+    } catch (error) {
+        console.log(error)
+        if (error.message!="Algo fallo al realizar la rehabilitacion"  && error.message!="Chequee la información ingresada"){
+            res.status(400).send({"Mensaje": "error inesperado"});
+            return;
+        }
+        res.status(404).send({"Mensaje": error.message});
+    }
+});
 
 
 module.exports=app;

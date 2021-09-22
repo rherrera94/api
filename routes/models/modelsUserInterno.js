@@ -71,5 +71,10 @@ class UserIntetnoModel{
     	await qy(query, [1, usuario]);
     	return this.findByNombre(usuario);
 	}
+	async usuarioRehabilitar(usuario){
+		let query = 'UPDATE usuariointerno SET baja=? WHERE nombre = ?';
+    	await qy(query, [null, usuario]);
+    	return this.findByNombre(usuario);
+	}
 }
 module.exports=new UserIntetnoModel();

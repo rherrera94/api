@@ -73,5 +73,11 @@ class UserInterno{
 	async usuarioBorrado(usuario){
 		return userModel.usuarioBorrado(usuario);
 	}
+	/**
+	 * coloca el dato baja en NULL.
+	 */
+	 async usuarioRehabilitar(usuario){
+		return userModel.usuarioRehabilitar(usuario);
+	}
 }
 module.exports=new UserInterno;
