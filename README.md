@@ -27,7 +27,7 @@ $ npm install
 $ npn run runMigration
 $ npm start
 ```
-**Nota: para comenzar a utilizar el sistema se debe crear la base de datos compras y configurar las variables de entorno correspondientes. Posteriormente correr el comando npm run runMigration para que se generen todas las tablas de la base de datos y el nuevo super usuario que a modo de ejemplo se lo asignamos a una persona ficticia llamada juan perez.**
+**Nota: para comenzar a utilizar el sistema se debe crear la base de datos compras (de no estar creada la base de datos la migracion no se podra realizar) y configurar las variables de entorno correspondientes. Posteriormente correr el comando npm run runMigration para que se generen todas las tablas de la base de datos y el nuevo super usuario que a modo de ejemplo se lo asignamos a una persona ficticia llamada juan perez.**
 
 #  Librerias utilizadas
 
