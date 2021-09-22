@@ -5,6 +5,8 @@ const serviceOrganismo= require('./services/servicesOrganismo');
 const serviceProveedor= require('./services/servicesProveedor');
 const multer = require("multer")
 const path=require("path");
+const jwt= require('jsonwebtoken');
+const{SECRET_WORD}=require('../config/globals');
 var storageAD = multer.diskStorage({
     destination: function(req, file, cb) {
             cb(null, 'uploads')
@@ -76,6 +78,11 @@ app.post ('/',uploadAD.single('actodispo'),async (req, res)=> {
         if (!req.file){
             throw new Error("Debe ingresar un archivo del acto dispositivo")
         }
+        let token=req.headers['authorization'];
+        token= token.replace ('Bearer ', '');
+        let usuario=jwt.verify(token, SECRET_WORD, function(err, decoded) {
+            return decoded.idusuario;
+        });
         //hasta implementar la seccion usuario el id de usuario sera 1
         //se guarda la información del legitimo abono en un objeto para despues pasarlo por parametro
         let organismo=await serviceOrganismo.denominacionGetter(req.body.organismo.toUpperCase());
@@ -91,7 +98,7 @@ app.post ('/',uploadAD.single('actodispo'),async (req, res)=> {
             "monto": req.body.monto,
             "justificacion": req.body.justificacion.toUpperCase(),
             "actoDispositivo": req.file.filename,
-            "idusuario":1,
+            "idusuario":usuario,
             "fecha":fech
         }
         let registro=await servicios.legitimoAb(legitimoAb);
