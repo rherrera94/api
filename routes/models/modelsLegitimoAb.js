@@ -17,8 +17,8 @@ async function legitimoAb(legitimoAbono){
     }    
 }
 /**
- * @returns {JSON} Devuelve el resultado de la consulta generalizada
- * a la tabla legitimo abono.  
+ * @returns {JSON} Devuelve el legitimo abono de id que se pasa por parametros siempre y cuando el legitimo
+ * abono no haya sido borrado de manera logica.  
  */
  async function legitimoAbGet(id){
     let query='SELECT legitimoabono.id as id, organismo.denominacion as organismo, proveedor.razonSocial as proveedor, legitimoabono.descripcion as descripcion, fechaInicio, fechaFin, monto,justificacion,actoDispositivo FROM legitimoabono,organismo, proveedor WHERE legitimoabono.idOrganismo=organismo.id and legitimoabono.idProveedor=proveedor.id and legitimoabono.id=?  and legitimoabono.borrado is NULL';
@@ -28,40 +28,40 @@ async function legitimoAb(legitimoAbono){
 
 /**
  * @returns {JSON} Devuelve el resultado de la consulta generalizada
- * a la tabla legitimo abono.  
+ * a la tabla legitimo abono devolviendo los legitimos abonos no borrados.  
  */
  async function legitimoAbList(){
     let query= 'SELECT legitimoabono.id as id, organismo.denominacion as organismo, proveedor.razonSocial as proveedor, legitimoabono.descripcion as descripcion, fechaInicio, fechaFin, monto,justificacion,'; 
     query=query+'actoDispositivo,legitimoabono.borrado as borrado FROM legitimoabono,organismo, proveedor';
-    query=query+' WHERE legitimoabono.idOrganismo=organismo.id and legitimoabono.idProveedor=proveedor.id';
+    query=query+' WHERE legitimoabono.idOrganismo=organismo.id and legitimoabono.idProveedor=proveedor.id and legitimoabono.borrado is NULL';
     let registros=await qy(query,[]);
     return registros;
 }
 
 /**
  * @returns {JSON} Devuelve el resultado de la consulta segun id de proveedor
- * a la tabla legitimo abono.  
+ * a la tabla legitimo abono (devuelve los que no estan borrados).  
  */
  async function legitimoAbIpGet(proveedor){
-    let query='SELECT legitimoabono.id as id, organismo.denominacion as organismo, proveedor.razonSocial as proveedor, legitimoabono.descripcion as descripcion, fechaInicio, fechaFin, monto,justificacion,actoDispositivo FROM legitimoabono,organismo, proveedor WHERE legitimoabono.idOrganismo=organismo.id and legitimoabono.idProveedor=proveedor.id and legitimoabono.idProveedor=?';
+    let query='SELECT legitimoabono.id as id, organismo.denominacion as organismo, proveedor.razonSocial as proveedor, legitimoabono.descripcion as descripcion, fechaInicio, fechaFin, monto,justificacion,actoDispositivo FROM legitimoabono,organismo, proveedor WHERE legitimoabono.idOrganismo=organismo.id and legitimoabono.idProveedor=proveedor.id and legitimoabono.idProveedor=? and legitimoabono.borrado is NULL';
     let registros=await qy (query,[proveedor]);
     return registros;
 }
 /**
  * @returns {JSON} Devuelve el resultado de la consulta segun cuit de proveedor
- * a la tabla legitimo abono.  
+ * a la tabla legitimo abono (devuelve los que no estan borrados).  
  */
  async function legitimoAbCuitGet(proveedor){
-    let query='SELECT legitimoabono.id as id, organismo.denominacion as organismo, proveedor.razonSocial as proveedor, legitimoabono.descripcion as descripcion, fechaInicio, fechaFin, monto,justificacion,actoDispositivo FROM legitimoabono,organismo, proveedor WHERE legitimoabono.idOrganismo=organismo.id and legitimoabono.idProveedor=proveedor.id and proveedor.cuit=?';
+    let query='SELECT legitimoabono.id as id, organismo.denominacion as organismo, proveedor.razonSocial as proveedor, legitimoabono.descripcion as descripcion, fechaInicio, fechaFin, monto,justificacion,actoDispositivo FROM legitimoabono,organismo, proveedor WHERE legitimoabono.idOrganismo=organismo.id and legitimoabono.idProveedor=proveedor.id and proveedor.cuit=? and legitimoabono.borrado is NULL';
     let registros=await qy (query,[proveedor]);
     return registros;
 }
 /**
  * @returns {JSON} Devuelve el resultado de la consulta segun id de organismo
- * a la tabla legitimo abono.  
+ * a la tabla legitimo abono (devuelve los que no estan borrados).  
  */
  async function legitimoAbIoGet(organismo){
-    let query='SELECT legitimoabono.id as id, organismo.denominacion as organismo, proveedor.razonSocial as proveedor, legitimoabono.descripcion as descripcion, fechaInicio, fechaFin, monto,justificacion,actoDispositivo FROM legitimoabono,organismo, proveedor WHERE legitimoabono.idOrganismo=organismo.id and legitimoabono.idProveedor=proveedor.id and legitimoabono.idOrganismo=?';
+    let query='SELECT legitimoabono.id as id, organismo.denominacion as organismo, proveedor.razonSocial as proveedor, legitimoabono.descripcion as descripcion, fechaInicio, fechaFin, monto,justificacion,actoDispositivo FROM legitimoabono,organismo, proveedor WHERE legitimoabono.idOrganismo=organismo.id and legitimoabono.idProveedor=proveedor.id and legitimoabono.idOrganismo=? and legitimoabono.borrado is NULL';
     let registros=await qy (query,[organismo]);
     return registros;
 }

@@ -116,7 +116,7 @@ app.post ('/',uploadAD.single('actodispo'),async (req, res)=> {
 /*******************************************************************************/
 /**
  * Devuelve un listado generalizado de los legitimos abono que hay
- * registrados en la base de datos.
+ * registrados (sin borrar) en la base de datos.
  * @returns {JSON} json
  */
 app.get('/',async (req,res)=>{
@@ -139,7 +139,7 @@ app.get('/',async (req,res)=>{
 /*******************************************************************************/
 /**
  * Devuelve la información del legitimo abono que tiene número de id igual al 
- * que se pasa por parámetro.
+ * que se pasa por parámetro siempre y cuando el legitimo abono no este borrado.
  * @returns {JSON} json
  */
 

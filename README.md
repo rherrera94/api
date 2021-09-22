@@ -86,9 +86,9 @@ https://documenter.getpostman.com/view/14621250/U16kr5Cr
 
   **Las que probamos con postman de /legitimoab**
 
-   * `GET` | localhost:5500/legitimoab -> devuelve un JSON con el listado generalizado de los legitimos abonos cargados al momento.
+   * `GET` | localhost:5500/legitimoab -> devuelve un JSON con el listado generalizado de los legitimos abonos cargados al momento y no borrados.
 
-   * `GET` | localhost:5500/legitimoab /:id-> devuelve un JSON con el legitimo abono con numero de id que se pasa por parametros.
+   * `GET` | localhost:5500/legitimoab /:id-> devuelve un JSON con el legitimo abono con numero de id que se pasa por parametros y no borrados.
 
    * `GET` | localhost:5500/legitimoab /proveedor/:id -> devuelve un JSON con todos los legitimos abonos que son del proveedor de id que se pasa por parámetro.
 
