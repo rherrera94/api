@@ -90,11 +90,11 @@ https://documenter.getpostman.com/view/14621250/U16kr5Cr
 
    * `GET` | localhost:5500/legitimoab /:id-> devuelve un JSON con el legitimo abono con numero de id que se pasa por parametros y no borrados.
 
-   * `GET` | localhost:5500/legitimoab /proveedor/:id -> devuelve un JSON con todos los legitimos abonos que son del proveedor de id que se pasa por parámetro.
+   * `GET` | localhost:5500/legitimoab /proveedor/:id -> devuelve un JSON con todos los legitimos abonos que son del proveedor de id que se pasa por parámetro (legitimos abonos no borrados).
 
-   * `GET` | localhost:5500/legitimoab /proveedor/cuit/:cuit -> devuelve un JSON con todos los legitimos abonos que son del proveedor de cuit que se pasa por parámetro.
+   * `GET` | localhost:5500/legitimoab /proveedor/cuit/:cuit -> devuelve un JSON con todos los legitimos abonos que son del proveedor de cuit que se pasa por parámetro (legitimos abonos no borrados).
 
-   * `GET` | localhost:5500/legitimoab /organismo/:id -> devuelve un JSON con todos los legitimos abonos que son del organismo de id que se pasa por parámetro.
+   * `GET` | localhost:5500/legitimoab /organismo/:id -> devuelve un JSON con todos los legitimos abonos que son del organismo de id que se pasa por parámetro (legitimos abonos no borrados).
 
    * `PUT` | localhost:5500/legitimoab /borrado/:id -> realiza un borrado lógico del legitimo abono que tiene por id el que se pasa por parametro.
 
