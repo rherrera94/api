@@ -10,6 +10,9 @@ class Dashboard{
     async getProveedoresCount(){
         return model.getProveedoresCount();
     }
+    async getProveedoresCountProv(){
+        return model.getProveedoresCountProv();
+    }
 
 }
 module.exports=new Dashboard;

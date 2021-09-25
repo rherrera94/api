@@ -54,7 +54,24 @@ app.get('/legabusuarios',async (req,res)=>{
         }
         res.status(200).send(consulta);
     }catch(error){
-        console.log(error)
+        if(error.message!= "No se han encontrado no se han encontrado proveedores"){
+            res.status(413).send({"Mensaje": "error inesperado"});
+            return;    
+        }
+        res.status(404).send({"Mensaje": error.message});
+    } 
+})
+/**
+ * Se devuelve la cantidad de proveedores segun la provincia de donde provienen
+ */
+ app.get('/proveedorescountprov',async (req,res)=>{
+    try{
+        let consulta=await servicios.getProveedoresCountProv();
+        if (consulta.length==0){
+            throw new Error ("No se han encontrado no se han encontrado proveedores")
+        }
+        res.status(200).send(consulta);
+    }catch(error){
         if(error.message!= "No se han encontrado no se han encontrado proveedores"){
             res.status(413).send({"Mensaje": "error inesperado"});
             return;    

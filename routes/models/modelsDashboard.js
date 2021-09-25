@@ -64,5 +64,11 @@ class DashboardModel{
         return {"cantproveedores":cantproveedores,"canthabilitados":canthabilitados,"cantinhabilitados":cantinhabilitados}
 
     }
+    async getProveedoresCountProv(){
+        let queryCantProveedores='select provincia, count(*) as cantidad from proveedor group by provincia  order by provincia';
+        let resultadoCantProveedores= await qy (queryCantProveedores);
+        
+        return resultadoCantProveedores;
+    }
 }
 module.exports=new DashboardModel;

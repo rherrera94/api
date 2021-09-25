@@ -168,3 +168,5 @@ https://documenter.getpostman.com/view/14621250/U16kr5Cr
    * `GET` | localhost:5500/dashboard/usuarioscount -> devuelve la cantidad de usuarios registrados vs la cantidad de usuarios habilitados vs la cantidad de usuarios inhabilitados.
 
    * `GET` | localhost:5500/dashboard/proveedorescount -> devuelve la cantidad de usuarios proveedores registrados vs la cantidad habilitados vs la cantidad inhabilitados.
+
+   * `GET` | localhost:5500/dashboard/proveedorescountprov -> devuelve la cantidad de usuarios proveedores registrados diferencias por provincia.
