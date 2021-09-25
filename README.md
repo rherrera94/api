@@ -161,3 +161,10 @@ https://documenter.getpostman.com/view/14621250/U16kr5Cr
 
    * `GET` | localhost:5500/organismo/denominacion/:denominacion -> devuelve organismo con denominacion igual a la que se pasa por parámetro.
 
+#### Rutas de dashboard (/dashboard):
+
+   * `GET` | localhost:5500/dashboard/legabusuarios -> Devuelve el top 10 de los usuarios que mas crearon legitimos abonos con la cantidad de legitimos abonos que crearon.
+
+   * `GET` | localhost:5500/dashboard/usuarioscount -> devuelve la cantidad de usuarios registrados vs la cantidad de usuarios habilitados vs la cantidad de usuarios inhabilitados.
+
+   * `GET` | localhost:5500/dashboard/proveedorescount -> devuelve la cantidad de usuarios proveedores registrados vs la cantidad habilitados vs la cantidad inhabilitados.

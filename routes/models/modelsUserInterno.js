@@ -1,5 +1,5 @@
 const qy=require('../../config/conexion');
-class UserIntetnoModel{
+class UserInternoModel{
 	async create(user){
         let query='INSERT INTO usuariointerno (nombre,contrasenia,idRol,idEmpleado,mail) values (?,?,?,?,?)';
         await qy (query,[user.nombre,user.contrasenia,user.idRol,user.idEmpleado,user.mail]);
@@ -77,4 +77,4 @@ class UserIntetnoModel{
     	return this.findByNombre(usuario);
 	}
 }
-module.exports=new UserIntetnoModel();
+module.exports=new UserInternoModel();

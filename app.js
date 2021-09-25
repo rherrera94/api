@@ -63,6 +63,7 @@ const routeLegitimoAb=require('./routes/rutasLegitimoAb');
 const routeProvincia=require('./routes/rutasProvincia');
 const routeLocalidad=require('./routes/rutasLocalidad');
 const routeUserInterno=require('./routes/rutasUserInterno');
+const routeDashboard=require('./routes/rutasDashboard');
 
 /*************************************************************************/
 /***
@@ -88,6 +89,7 @@ app.use('/legitimoab',routeLegitimoAb);
 app.use('/provincia',routeProvincia);
 app.use('/localidad',routeLocalidad);
 app.use('/userinterno',routeUserInterno);
+app.use('/dashboard', routeDashboard);
 
 /*************************************************************************/
 app.use((req, res) => {
