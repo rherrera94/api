@@ -79,4 +79,22 @@ app.get('/legabusuarios',async (req,res)=>{
         res.status(404).send({"Mensaje": error.message});
     } 
 })
+/**
+ * Se devuelve la cantidad de legitimos abonos que tienen los organismos
+ */
+ app.get('/countlaorg',async (req,res)=>{
+    try{
+        let consulta=await servicios.getLAorganismo();
+        if (consulta.length==0){
+            throw new Error ("No se han encontrado no se han encontrado legitimos abonos")
+        }
+        res.status(200).send(consulta);
+    }catch(error){
+        if(error.message!= "No se han encontrado no se han encontrado legitimos abonos"){
+            res.status(413).send({"Mensaje": "error inesperado"});
+            return;    
+        }
+        res.status(404).send({"Mensaje": error.message});
+    } 
+})
 module.exports=app;

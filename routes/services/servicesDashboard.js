@@ -13,6 +13,9 @@ class Dashboard{
     async getProveedoresCountProv(){
         return model.getProveedoresCountProv();
     }
+    async getLAorganismo(){
+        return model.getLAorganismo();
+    }
 
 }
 module.exports=new Dashboard;

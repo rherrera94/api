@@ -70,5 +70,11 @@ class DashboardModel{
         
         return resultadoCantProveedores;
     }
+    async getLAorganismo(){
+        let queryCantxorganismo='select organismo.denominacion as organismo, count(*) as cantidad from legitimoabono, organismo where legitimoabono.idOrganismo=organismo.id group by organismo.denominacion  order by cantidad';
+        let resultadoCantxorganismo= await qy (queryCantxorganismo);
+        
+        return resultadoCantxorganismo;
+    }
 }
 module.exports=new DashboardModel;
