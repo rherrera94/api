@@ -2,6 +2,7 @@ const jwt= require('jsonwebtoken');
 const unless=require('express-unless');
 const{SECRET_WORD}=require('./config/globals');
 const express= require('express');
+const cors=require ('cors');
 const app=express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
