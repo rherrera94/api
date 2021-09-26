@@ -6,7 +6,7 @@ const cors=require ('cors');
 const app=express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
+app.use(cors());
 const {PORT}=require('./config/globals');
 app.get('/',(req,res)=>{
     res.sendFile(__dirname + '/estatico/mul-upload.html');
@@ -80,7 +80,7 @@ const routeDashboard=require('./routes/rutasDashboard');
  * localidad (/localidad)->localidades del pais. Se solicitara ésta información por ejemplo al ingresar un
  * nuevo proveedor al sistema.
  */
-app.use(cors());
+
 app.use('/proveedor',routeProveedor);
 app.use('/empleado',routeEmpleado);
 app.use('/organismo',routeOrganismo);
