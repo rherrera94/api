@@ -80,7 +80,7 @@ const routeDashboard=require('./routes/rutasDashboard');
  * localidad (/localidad)->localidades del pais. Se solicitara ésta información por ejemplo al ingresar un
  * nuevo proveedor al sistema.
  */
-
+app.use(cors());
 app.use('/proveedor',routeProveedor);
 app.use('/empleado',routeEmpleado);
 app.use('/organismo',routeOrganismo);
