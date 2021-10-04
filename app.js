@@ -14,7 +14,7 @@ app.get('/',(req,res)=>{
 /**
  * AUTENTICACIÓN
  */
-/*
+
 const auth=(req,res,next)=>{
     try{
         //nos fijamos si la request viene con un token
@@ -35,13 +35,13 @@ const auth=(req,res,next)=>{
     }			 	
    
 }
-*/
+
 /**
  * Lo que se hace aca es que el usuario no va a poder entrar a ninguna ruta si
  * es que no tiene un token valido (salvo a la ruta de login).
  */
 
-/*auth.unless= unless;
+auth.unless= unless;
 app.use(
     auth.unless({
         path:[
@@ -49,7 +49,7 @@ app.use(
         ]
     })
 )
-*/
+
 
 
 /**
