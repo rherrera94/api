@@ -11,8 +11,8 @@ app.post('/',async(req,res)=>{
         //controla que todos los campos necesarios vengan sin estar vacios
         if(!req.body.cuil||!isNaN(req.body.cuil)||req.body.cuil.trim()==""||!req.body.apellido||!isNaN(req.body.apellido)
         ||req.body.apellido.trim()==""|| !req.body.nombre||!isNaN(req.body.nombre)||req.body.nombre.trim()==""||
-        !req.body.mail||!isNaN(req.body.mail)||req.body.mail.trim()==""||!req.body.organismo||!isNaN(req.body.organismo)||
-        req.body.organismo.trim()==""||!req.body.cargo||!isNaN(req.body.cargo)||req.body.cargo.trim()==""){
+        !req.body.mail||!isNaN(req.body.mail)||req.body.mail.trim()==""||!req.body.idOrganismo||isNaN(req.body.idOrganismo)||
+        !req.body.cargo||!isNaN(req.body.cargo)||req.body.cargo.trim()==""){
             throw new Error("Revise la información ingresada");
         }
         //me fijo si el empleado ya se encuentra registrado
@@ -21,7 +21,7 @@ app.post('/',async(req,res)=>{
             throw new Error("El empleado ya se encuentra registrado");
         }
         //me fijo si el organismo esta en los registros
-        let organismo=await serviceOrganismo.denominacionGetter(req.body.organismo.toUpperCase());
+        let organismo=await serviceOrganismo.organismoGetter(req.body.idOrganismo);
         if (organismo.length==0){
             throw new Error("El organismo ingresado es incorrecto");
         }
