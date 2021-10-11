@@ -76,5 +76,10 @@ class UserInternoModel{
     	await qy(query, [null, usuario]);
     	return this.findByNombre(usuario);
 	}
+	async usuarioCambioContra(usuario){
+		let query = 'UPDATE usuariointerno SET contrasenia=? WHERE nombre = ?';
+    	await qy(query, [usuario.contrasenia, usuario.nombre]);
+    	return this.findByNombre(usuario.nombre);
+	}
 }
 module.exports=new UserInternoModel();

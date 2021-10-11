@@ -278,6 +278,29 @@ app.post('/login', async(req,res)=>{
         res.status(404).send({"Mensaje": error.message});
     }
 });
+/**
+ * Cambio de contraseña
+ */
+ app.put('/cambio/:usuario', async (req,res)=>{
+    try{
+        if (!isNaN(req.params.usuario) || req.params.usuario.replace(/ /g, "")==""||req.params.usuario.replace(/ /g, "")!=req.params.usuario
+        || !req.body.contrasenia){
+            throw new Error ("Chequee la información ingresada")
+        }
+        const claveEncriptada= await bcrypt.hash(req.body.contrasenia,10);
+        let registros=await servicios.usuarioCambioContra({"nombre":req.params.usuario.toUpperCase(),"contrasenia":claveEncriptada})
+        if (registros.length==0){
+            throw new Error ("Algo fallo al realizar el cambio de contraseña")
+        }
+        res.status(200).send(registros[0]);
 
+    } catch (error) {
+        if (error.message!="Algo fallo al realizar el cambio de contraseña"  && error.message!="Chequee la información ingresada"){
+            res.status(400).send({"Mensaje": "error inesperado"});
+            return;
+        }
+        res.status(404).send({"Mensaje": error.message});
+    }
+});
 
 module.exports=app;
