@@ -150,6 +150,7 @@ https://documenter.getpostman.com/view/14621250/U16kr5Cr
    * `GET` | localhost:5500/empleado/:id -> si hay devuelve empleado con id igual al que se pasa por parámetro.
 
    * `GET` | localhost:5500/empleado/cuil/:cuil -> devuelve empleado con cuit igual al que se pasa por parámetro.
+   * `DELETE`  | localhost:5500/empleado/:id -> Se realiza un borrado logico del empleado que se pasa por parametros.
 
 #### Rutas de organismos (/organismo):
 
