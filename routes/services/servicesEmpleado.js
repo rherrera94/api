@@ -30,10 +30,13 @@ async function empleadoGetter (id){
 async function cuilGetter (cuil){
     return await model.cuilGet(cuil);
 }
-
+async function empleadoBorrado(empleado){
+    return model.empleadoBorrado(empleado);
+}
 module.exports={
     empleadoIngreso,
     empleadoGetter,
     empleadosListado,
-    cuilGetter
+    cuilGetter,
+    empleadoBorrado
 }

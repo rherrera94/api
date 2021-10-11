@@ -128,13 +128,14 @@ app.get('/cuil/:cuil',async (req,res)=>{
         if (isNaN(req.params.id)|| !req.params.id){
             throw new Error ("Chequee la información ingresada")
         }
-        let registros=await servicios.empleadoBorrado(req.params.id)
+        let registros=await servicios.empleadoBorrado(req.params.id);
         if (registros.length==0){
             throw new Error ("No se ha podido realizar el borrado")
         }
         res.status(200).send(registros[0]);
 
     } catch (error) {
+        console.log(error.message)
         if (error.message!="No se ha podido realizar el borrado"  && error.message!="Chequee la información ingresada"){
             res.status(400).send({"Mensaje": "error inesperado"});
             return;

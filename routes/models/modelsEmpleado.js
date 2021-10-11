@@ -46,10 +46,15 @@ async function cuilGet (cuil){
     let registros=await qy (query,cuil);
     return registros;
 }
-
+async function empleadoBorrado(empleado){
+    let query = 'UPDATE empleado SET eliminado=? WHERE id = ?';
+    await qy(query, [1, empleado]);
+    return empleadoGet (empleado);
+}
 module.exports={
     empleadoIngreso,
     empleadoGet,
     empleadosList,
-    cuilGet
+    cuilGet,
+    empleadoBorrado
 }
