@@ -234,7 +234,7 @@ app.post('/login', async(req,res)=>{
  * Devuelve el registro con el campo eliminado en 1.
  * @returns {JSON} json
  */
- app.put('/borrado/:usuario', async (req,res)=>{
+ app.delete('/:usuario', async (req,res)=>{
     try{
         if (!isNaN(req.params.usuario) || req.params.usuario.replace(/ /g, "")==""||req.params.usuario.replace(/ /g, "")!=req.params.usuario){
             throw new Error ("Chequee la información ingresada")

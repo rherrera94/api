@@ -75,7 +75,7 @@ https://documenter.getpostman.com/view/14621250/U16kr5Cr
 
    * `GET`  | localhost:5500/userinterno/cuil/:cuil -> devuelve usuario interno con cuil que se pasa por parametro.
 
-   * `PUT`  | localhost:5500/userinterno/borrado/:usuario -> Se inhabilita el usuario que se pasa por parametros.
+   * `DELETE`  | localhost:5500/userinterno/:usuario -> Se inhabilita el usuario que se pasa por parametros.
 
    * `PUT`  | localhost:5500/userinterno/rehabilitar/:usuario -> Se rehabilita el usuario que se pasa por parametros.
 
