@@ -17,7 +17,7 @@ const qy=require('../../config/conexion');
  * @returns {JSON} Devuelve un JSON con la respuesta de la tabla empleado.
  */
 async function empleadosList(){
-    let registros=await qy ('SELECT empleado.*, organismo.denominacion as organismo  FROM empleado, organismo where empleado.idOrganismo=organismo.id');
+    let registros=await qy ('SELECT empleado.*, organismo.denominacion as organismo  FROM empleado, organismo where empleado.idOrganismo=organismo.id and empleado.eliminado is null');
     return registros;
 }
 /**

@@ -118,6 +118,30 @@ app.get('/cuil/:cuil',async (req,res)=>{
         res.status(404).send({"Mensaje": error.message});
     }
 })
+/**
+ * Borrado logico de empleado que tiene id igual al  que se pasa por parámetro.
+ * Devuelve el registro con el campo eliminado en 1.
+ * @returns {JSON} json
+ */
+ app.delete('/:id', async (req,res)=>{
+    try{
+        if (isNaN(req.params.id)|| !req.params.id){
+            throw new Error ("Chequee la información ingresada")
+        }
+        let registros=await servicios.empleadoBorrado(req.params.id)
+        if (registros.length==0){
+            throw new Error ("No se ha podido realizar el borrado")
+        }
+        res.status(200).send(registros[0]);
+
+    } catch (error) {
+        if (error.message!="No se ha podido realizar el borrado"  && error.message!="Chequee la información ingresada"){
+            res.status(400).send({"Mensaje": "error inesperado"});
+            return;
+        }
+        res.status(404).send({"Mensaje": error.message});
+    }
+});
 
 /*******************************************************************************/
 
