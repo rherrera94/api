@@ -288,5 +288,13 @@ app.put('/borrado/:id', async (req,res)=>{
         res.status(404).send({"Mensaje": error.message});
     }
 });
+app.get('/download/:archivo',(req,res)=>{
+    var archivo = './uploads/' + req.params.archivo;
+    res.download(archivo, req.params.archivo,function(err){
+        if(err){
+            res.status(404).send({"error":"No se ha podido realizar la descarga"})
+        }
+    });
+})
 /*******************************************************************************/
 module.exports=app;
