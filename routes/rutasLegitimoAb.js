@@ -288,6 +288,9 @@ app.put('/borrado/:id', async (req,res)=>{
         res.status(404).send({"Mensaje": error.message});
     }
 });
+/**
+ * Devuelve el acto dispositivo que se solicita por parametro.
+ */
 app.get('/download/:archivo',(req,res)=>{
     var archivo = './uploads/' + req.params.archivo;
     res.download(archivo, req.params.archivo,function(err){
