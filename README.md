@@ -98,6 +98,8 @@ https://documenter.getpostman.com/view/14621250/U16kr5Cr
 
    * `PUT` | localhost:5500/legitimoab /borrado/:id -> realiza un borrado lógico del legitimo abono que tiene por id el que se pasa por parametro.
 
+   * `GET` | localhost:5500/legitimoab /download/:archivo -> devuelve el archivo que se solicita por parametro.
+
   #### Rutas proveedores (/proveedor):
 
    * `POST` | localhost:5500/proveedor -> crea un nuevo proveedor.
