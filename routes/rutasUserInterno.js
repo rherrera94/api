@@ -12,10 +12,12 @@ const{SECRET_WORD}=require('../config/globals');
  */
 app.post('/',async(req,res)=>{
     try{
+        if (!req.body.contrasenia||!isNaN(req.body.contrasenia)||req.body.contrasenia.trim()==""){
+            throw new Error ("La contraseña no cumple los parametros exigidos")
+        }
         //controla que todos los campos necesarios vengan sin estar vacios
         if(!req.body.cuil||!isNaN(req.body.cuil)||req.body.cuil.trim()==""||
         !req.body.usuario||!isNaN(req.body.usuario)||req.body.usuario.trim()==""||
-        !req.body.contrasenia||!isNaN(req.body.contrasenia)||req.body.contrasenia.trim()==""||
         !req.body.email||!isNaN(req.body.email)||req.body.email.trim()==""||
         !req.body.rol||isNaN(req.body.rol)){
             throw new Error("Revise la información ingresada");
@@ -45,7 +47,7 @@ app.post('/',async(req,res)=>{
     }catch(e){
 
         if(e.message!="Revise la información ingresada" && e.message!="El nombre de usuario ya se encuentra registrado"
-        && e.message!="El numero de cuil ingresado no se corresponde con empleado registrado"){
+        && e.message!="El numero de cuil ingresado no se corresponde con empleado registrado" && e.message!="La contraseña no cumple los parametros exigidos"){
             res.status(404).json({"error":"Error inesperado"})
             return;
         }
