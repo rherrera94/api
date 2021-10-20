@@ -35,13 +35,13 @@ const uploadAD = multer({
                 //si se inserto algo diferente de un numero lanza error
                 throw new Error ("En el campo monto debe haber un número"); 
             } 
-            if(req.body.organismo.trim()==""|| req.body.descripcion.trim()==""||
+            if(req.body.descripcion.trim()==""||
             req.body.fechaInicio.trim()==""|| req.body.fechaFin.trim()==""||
             req.body.justificacion.trim()==""){
                 //nos fijamos que no hayan ingresado algun campo con espacios en blanco
                 throw new Error('No se puede realizar envio de información en blanco.');
             }
-            let organismo=await serviceOrganismo.denominacionGetter(req.body.organismo.toUpperCase());
+            let organismo=await serviceOrganismo.organismoGetter(req.body.organismo);
             if (organismo.length==0){
                 //nos fijamos si el organismo ingresado existe y si es asi me guardo el id
                 throw new Error ("Organismo inexistente");
@@ -85,7 +85,7 @@ app.post ('/',uploadAD.single('actodispo'),async (req, res)=> {
         });
         //hasta implementar la seccion usuario el id de usuario sera 1
         //se guarda la información del legitimo abono en un objeto para despues pasarlo por parametro
-        let organismo=await serviceOrganismo.denominacionGetter(req.body.organismo.toUpperCase());
+        let organismo=await serviceOrganismo.organismoGetter(req.body.organismo);
         let proveedor=await serviceProveedor.cuitGetter(req.body.proveedor);
         let d=new Date();
         let fech=d.getFullYear()+"-"+d.getMonth()+"-"+d.getDate()+" "+d.getHours()+":"+d.getMinutes()+":"+d.getSeconds();
