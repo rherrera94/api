@@ -150,7 +150,7 @@ app.get('/cuit/:cuit',async (req,res)=>{
  */
  app.put('/borrado/:cuit', async (req,res)=>{
     try{
-        if (isNaN(req.params.cuit) || req.params.cuit.replace(/ /g, "")==""||req.params.cuit.replace(/ /g, "")!=req.params.cuit){
+        if (!isNaN(req.params.cuit) || req.params.cuit.replace(/ /g, "")==""||req.params.cuit.replace(/ /g, "")!=req.params.cuit){
             throw new Error ("Chequee la información ingresada")
         }
         let registros=await servicios.proveedorBorrado(req.params.cuit)
