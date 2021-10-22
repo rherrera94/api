@@ -48,6 +48,15 @@ class UserInternoModel{
 		let usuarios=await qy(query)
 		return usuarios;
 	}
+	async usuariosListadoad(){
+		let queryP1='SELECT usuariointerno.id as id, usuariointerno.nombre as usuario, empleado.apellido as apellido,';
+		let queryP2=' empleado.nombre as nombre, rol.nombre as rol, usuariointerno.mail as mail,';
+		let queryP3=' usuariointerno.baja as baja FROM usuariointerno,empleado,rol ';
+		let queryP4='WHERE usuariointerno.idRol=rol.id and usuariointerno.idEmpleado=empleado.id';
+		let query=queryP1+queryP2+queryP3+queryP4;
+		let usuarios=await qy(query)
+		return usuarios;
+	}
 	async usuarioGetter(id){
 		let queryP1='SELECT usuariointerno.id as id, usuariointerno.nombre as usuario, empleado.apellido as apellido,';
 		let queryP2=' empleado.nombre as nombre, rol.nombre as rol, usuariointerno.mail as mail,';

@@ -182,6 +182,27 @@ app.post('/login', async(req,res)=>{
     }
 })
 /**
+ * Devuelve un listado generalizado con todos los usuarios existentes en la 
+ * base de datos hayan sido borrados o no.
+ * @returns {JSON} json
+ */
+ app.get('/administrarus',async (req,res)=>{
+    try{
+        let registros=await servicios.usuariosListadoad();
+        if (registros.length==0){
+            throw new Error ('No se han encontrado usuarios.');
+        }
+        res.status(200).send(registros);
+    }
+    catch(error){
+        if (error.message!='No se han encontrado usuarios.'){
+            res.status(413).send({"Mensaje":'error inesperado'});    
+        }
+        res.status(404).send({"Mensaje":error.message});
+    }
+})
+
+/**
  * Devuelve la información del usuario que tiene número de id igual al que se 
  * pasa por parámetro.
  * @returns {JSON} json

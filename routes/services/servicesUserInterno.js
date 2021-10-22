@@ -55,6 +55,9 @@ class UserInterno{
 	async usuariosListado(){
 		return userModel.usuariosListado()
 	}
+	async usuariosListadoad(){
+		return userModel.usuariosListadoad()
+	}
 	/**
 	 * Devuelve el usuario de id que se pasa por parametro.
 	 */
