@@ -32,8 +32,8 @@ async function legitimoAb(legitimoAbono){
  */
  async function legitimoAbList(){
     let query= 'SELECT legitimoabono.id as id, organismo.denominacion as organismo, proveedor.razonSocial as proveedor, legitimoabono.descripcion as descripcion, fechaInicio, fechaFin, monto,justificacion,'; 
-    query=query+'actoDispositivo,legitimoabono.borrado as borrado FROM legitimoabono,organismo, proveedor';
-    query=query+' WHERE legitimoabono.idOrganismo=organismo.id and legitimoabono.idProveedor=proveedor.id and legitimoabono.borrado is NULL';
+    query=query+'actoDispositivo,legitimoabono.borrado as borrado,usuariointerno.nombre as usuario, legitimoabono.fecha as fecha FROM legitimoabono,organismo, proveedor,usuariointerno';
+    query=query+' WHERE legitimoabono.idOrganismo=organismo.id and legitimoabono.idProveedor=proveedor.id and legitimoabono.borrado is NULL and usuariointerno.id=legitimoabono.idUsuario';
     let registros=await qy(query,[]);
     return registros;
 }
