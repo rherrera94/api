@@ -89,12 +89,18 @@ app.post ('/',uploadAD.single('actodispo'),async (req, res)=> {
         let proveedor=await serviceProveedor.cuitGetter(req.body.proveedor);
         let d=new Date();
         let fech=d.getFullYear()+"-"+d.getMonth()+"-"+d.getDate()+" "+d.getHours()+":"+d.getMinutes()+":"+d.getSeconds();
+        let fechInicio=new Date(req.body.fechaInicio);
+        let fechini=fechInicio.getFullYear()+"-"+fechInicio.getMonth()+"-"+fechInicio.getDate();
+        let fechFin=new Date(req.body.fechaFin);
+        let mesfin=fechFin.getMonth();
+        mesfin=mesfin+1;
+        let fechfin=fechFin.getFullYear()+"-"+mesfin+"-"+fechFin.getDate();
         let legitimoAb={
             "organismo": organismo.id,
             "proveedor": proveedor[0].id,
             "descripcion": req.body.descripcion.toUpperCase(),
-            "fechaInicio": req.body.fechaInicio,
-            "fechaFin": req.body.fechaFin,
+            "fechaInicio": fechini,
+            "fechaFin": fechFin,
             "monto": req.body.monto,
             "justificacion": req.body.justificacion.toUpperCase(),
             "actoDispositivo": req.file.filename,
