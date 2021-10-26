@@ -53,6 +53,27 @@ class Localidad{
             return [];
         }
     }
+    async buscarProvincia (id){
+        const contenido=await this.leer();
+        let localidades=[];
+        if (contenido.length==0){
+            return [];
+        }
+        let encontrado=0;
+        for (let i=0;i<contenido.length;i++){
+            if (contenido[i].provincia.id==id){
+                encontrado=1;
+                localidades.push(contenido[i]);
+            }else{
+                i++;
+            }
+        }
+        if (encontrado==1){
+            return localidades;
+        }else{
+            return [];
+        }
+    }
     
 }
 

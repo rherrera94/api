@@ -66,5 +66,26 @@ app.get('/nombre/:nombre',async (req,res)=>{
         res.status(404).send({"error":e.message});
     }
 })
+/**
+ * Devuelve localidad con nombre igual al que se pasa por parámetros
+ * @returns {JSON} si existe devuelve la localidad con nombre igual al que se pasa
+ *  por parametro
+ */
+
+ app.get('/provincia/:codigo',async (req,res)=>{
+    //devuelve las localidades de la provincia solicitada
+    try{
+        let contenido=await localidades.buscarProvincia(req.params.codigo);
+        if (contenido.length==0){
+            throw new Error ('localidades no encontradas');
+        }
+        res.json(contenido);
+    }catch(e){
+        if(e.message!='localidades no encontradas'){
+            res.status(404).send({"error":"Error inesperado."})
+        }
+        res.status(404).send({"error":e.message});
+    }
+})
 /*******************************************************************************/
 module.exports=app;
