@@ -13,7 +13,7 @@ const servicios= require('./services/servicesProveedor')
 
 app.post ('/',async (req, res)=> {
     try{
-        if (!req.body.cuit|| req.body.cuit.trim()==""||!req.body.razonSocial|| req.body.razonSocial.trim()==""||
+        if (!req.body.cuit|| req.body.cuit.trim()==""|| !isNaN(req.body.cuit)|| !req.body.razonSocial|| req.body.razonSocial.trim()==""||
         !req.body.tPersona || req.body.tPersona.trim()==""||!req.body.provincia ||!req.body.localidad||!req.body.telefono ||
         isNaN(req.body.telefono)||!req.body.mail||req.body.mail.trim()==""|| isNaN(req.body.provincia) ||isNaN(req.body.localidad)){
             throw new Error("revise la informacion proporcionada");
