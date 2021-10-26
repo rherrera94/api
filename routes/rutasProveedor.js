@@ -13,7 +13,10 @@ const servicios= require('./services/servicesProveedor')
 
 app.post ('/',async (req, res)=> {
     try{
-        if (!req.body.cuit|| req.body.cuit.trim()==""|| !isNaN(req.body.cuit)|| !req.body.razonSocial|| req.body.razonSocial.trim()==""||
+        if(!req.body.cuit|| req.body.cuit.trim()==""|| !isNaN(req.body.cuit)){
+            throw new Error("cuit ingresado es incorrecto");
+        }
+        if (!req.body.razonSocial|| req.body.razonSocial.trim()==""||
         !req.body.tPersona || req.body.tPersona.trim()==""||!req.body.provincia ||!req.body.localidad||!req.body.telefono ||
         isNaN(req.body.telefono)||!req.body.mail||req.body.mail.trim()==""|| isNaN(req.body.provincia) ||isNaN(req.body.localidad)){
             throw new Error("revise la informacion proporcionada");
@@ -33,7 +36,7 @@ app.post ('/',async (req, res)=> {
         res.status(200).send(proveedor);         
     }
     catch(e){
-        if (e.message!= "cuit ya registrado" && e.message!="revise la informacion proporcionada"){
+        if (e.message!= "cuit ya registrado" && e.message!="revise la informacion proporcionada" && e.message!="cuit ingresado es incorrecto"){
             //en el caso de que el error sea uno desconocido lanzo error inesperado.
             res.status(404).send({"Mensaje": "Error inesperado. Comuniquese con el administrador"});
             return;
