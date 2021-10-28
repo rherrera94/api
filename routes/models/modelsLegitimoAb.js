@@ -52,7 +52,9 @@ async function legitimoAb(legitimoAbono){
  * a la tabla legitimo abono (devuelve los que no estan borrados).  
  */
  async function legitimoAbCuitGet(proveedor){
-    let query='SELECT legitimoabono.id as id, organismo.denominacion as organismo, proveedor.razonSocial as proveedor, legitimoabono.descripcion as descripcion, fechaInicio, fechaFin, monto,justificacion,actoDispositivo FROM legitimoabono,organismo, proveedor WHERE legitimoabono.idOrganismo=organismo.id and legitimoabono.idProveedor=proveedor.id and proveedor.cuit=? and legitimoabono.borrado is NULL';
+    let query= 'SELECT legitimoabono.id as id, organismo.denominacion as organismo, proveedor.razonSocial as proveedor, legitimoabono.descripcion as descripcion, fechaInicio, fechaFin, monto,justificacion,'; 
+    query=query+'actoDispositivo,legitimoabono.borrado as borrado,usuariointerno.nombre as usuario, legitimoabono.fecha as fecha FROM legitimoabono,organismo, proveedor,usuariointerno';
+    query=query+' WHERE legitimoabono.idOrganismo=organismo.id and legitimoabono.idProveedor=proveedor.id and legitimoabono.borrado is NULL and usuariointerno.id=legitimoabono.idUsuario and legitimoabono.iProveedor=?';
     let registros=await qy (query,[proveedor]);
     return registros;
 }
