@@ -118,6 +118,32 @@ app.get('/cuil/:cuil',async (req,res)=>{
         res.status(404).send({"Mensaje": error.message});
     }
 })
+app.put('/:id',async (req,res)=>{
+   try{
+        //controla que todos los campos necesarios vengan sin estar vacios
+        if(!req.body.cuil||!isNaN(req.body.cuil)||req.body.cuil.trim()==""||!req.body.apellido||!isNaN(req.body.apellido)
+        ||req.body.apellido.trim()==""|| !req.body.nombre||!isNaN(req.body.nombre)||req.body.nombre.trim()==""||
+        !req.body.mail||!isNaN(req.body.mail)||req.body.mail.trim()==""||!req.body.idOrganismo||isNaN(req.body.idOrganismo)||
+        !req.body.cargo||!isNaN(req.body.cargo)||req.body.cargo.trim()==""){
+            throw new Error("Revise la información ingresada");
+        }
+        let empleadoModificado={
+            "cuil":req.body.cuil,
+            "apellido":req.body.apellido.toUpperCase(),
+            "nombre":req.body.nombre.toUpperCase(),
+            "mail":req.body.mail.toUpperCase(),
+            "idOrganismo":req.body.idOrganismo,
+            "cargo":req.body.cargo.toUpperCase()
+        }
+        let registro=await servicios.putxid(req.params.id,empleadoModificado);
+        res.status(200).send(registro)
+    }catch(e){
+        console.log(e.message)
+        res.status(404).send({"error":"No se ha podido realizar la operación"})
+    }
+    
+
+})
 /**
  * Borrado logico de empleado que tiene id igual al  que se pasa por parámetro.
  * Devuelve el registro con el campo eliminado en 1.

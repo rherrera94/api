@@ -51,10 +51,16 @@ async function empleadoBorrado(empleado){
     await qy(query, [1, empleado]);
     return empleadoGet (empleado);
 }
+async function putxid(id,empleado){
+    let query = 'UPDATE empleado SET cuil=?, apellido=?, nombre=?, mail=?, idOrganismo=?,cargo=? WHERE id = ?';
+    await qy(query, [empleado.cuil, empleado.apellido, empleado.nombre, empleado.mail, empleado.idOrganismo, empleado.cargo, id]);
+    return empleadoGet (id);
+}
 module.exports={
     empleadoIngreso,
     empleadoGet,
     empleadosList,
     cuilGet,
-    empleadoBorrado
+    empleadoBorrado,
+    putxid
 }

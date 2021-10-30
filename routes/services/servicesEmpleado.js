@@ -33,10 +33,14 @@ async function cuilGetter (cuil){
 async function empleadoBorrado(empleado){
     return model.empleadoBorrado(empleado);
 }
+async function putxid(id, empleado){
+    return await model.putxid(id, empleado);
+}
 module.exports={
     empleadoIngreso,
     empleadoGetter,
     empleadosListado,
     cuilGetter,
-    empleadoBorrado
+    empleadoBorrado,
+    putxid
 }
