@@ -87,8 +87,6 @@ app.post ('/',uploadAD.single('actodispo'),async (req, res)=> {
         //se guarda la información del legitimo abono en un objeto para despues pasarlo por parametro
         let organismo=await serviceOrganismo.organismoGetter(req.body.organismo);
         let proveedor=await serviceProveedor.cuitGetter(req.body.proveedor);
-        let d=new Date();
-        let fech=d.getFullYear()+"-"+d.getMonth()+"-"+d.getDate()+" "+d.getHours()+":"+d.getMinutes()+":"+d.getSeconds();
         let fechInicio=new Date(req.body.fechaInicio);
         let mesini=fechInicio.getMonth();
         mesini=mesini+1;
@@ -106,8 +104,7 @@ app.post ('/',uploadAD.single('actodispo'),async (req, res)=> {
             "monto": req.body.monto,
             "justificacion": req.body.justificacion.toUpperCase(),
             "actoDispositivo": req.file.filename,
-            "idusuario":usuario,
-            "fecha":fech
+            "idusuario":usuario
         }
         let registro=await servicios.legitimoAb(legitimoAb);
         if (registro.length==0){

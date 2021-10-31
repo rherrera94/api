@@ -5,8 +5,8 @@ const qy=require('../../config/conexion');
  * error devuelve un array vacio. 
  */
 async function legitimoAb(legitimoAbono){
-    let query='INSERT INTO legitimoabono (idorganismo,idproveedor,descripcion,fechainicio,fechafin,monto,justificacion,actoDispositivo,idusuario,fecha) values (?,?,?,?,?,?,?,?,?,?)';
-    let result=await qy (query,[legitimoAbono.organismo, legitimoAbono.proveedor, legitimoAbono.descripcion,legitimoAbono.fechaInicio,legitimoAbono.fechaFin, legitimoAbono.monto, legitimoAbono.justificacion,legitimoAbono.actoDispositivo, legitimoAbono.idusuario,legitimoAbono.fecha]);
+    let query='INSERT INTO legitimoabono (idorganismo,idproveedor,descripcion,fechainicio,fechafin,monto,justificacion,actoDispositivo,idusuario) values (?,?,?,?,?,?,?,?,?)';
+    let result=await qy (query,[legitimoAbono.organismo, legitimoAbono.proveedor, legitimoAbono.descripcion,legitimoAbono.fechaInicio,legitimoAbono.fechaFin, legitimoAbono.monto, legitimoAbono.justificacion,legitimoAbono.actoDispositivo, legitimoAbono.idusuario]);
     try{
         query='SELECT * FROM legitimoabono WHERE id=?';
         let resultado = await qy (query,[result.insertId]);
