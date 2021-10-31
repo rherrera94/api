@@ -219,19 +219,19 @@ const bcrypt= require('bcrypt');
                 id,
                 role_id
             })
-            let id="PERMIT_LOGIN";
+            id="PERMIT_LOGIN";
             const role_id=2;
             await db("permiso").insert({
                 id,
                 role_id
             })
-            let id="PERMIT_LOGIN";
+            id="PERMIT_LOGIN";
             const role_id=3;
             await db("permiso").insert({
                 id,
                 role_id
             })
-            let id="PERMIT_LOGIN";
+            id="PERMIT_LOGIN";
             const role_id=4;
             await db("permiso").insert({
                 id,
