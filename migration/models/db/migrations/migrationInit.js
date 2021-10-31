@@ -214,30 +214,31 @@ const bcrypt= require('bcrypt');
         .then(()=>console.log("Roles genéricos creados"))
         .then(async()=>{
             let id="PERMIT_LOGIN";
-            const role_id=1;
+            let role_id=1;
             await db("permiso").insert({
                 id,
                 role_id
             })
             id="PERMIT_LOGIN";
-            const role_id=2;
+            role_id=2;
             await db("permiso").insert({
                 id,
                 role_id
             })
             id="PERMIT_LOGIN";
-            const role_id=3;
+            role_id=3;
             await db("permiso").insert({
                 id,
                 role_id
             })
             id="PERMIT_LOGIN";
-            const role_id=4;
+            role_id=4;
             await db("permiso").insert({
                 id,
                 role_id
             })
             id="PERMIT_ADMINISTRATE";
+            role_id=1;
             await db("permiso").insert({
                 id,
                 role_id
