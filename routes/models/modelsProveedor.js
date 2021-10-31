@@ -15,7 +15,7 @@ const qy=require('../../config/conexion');
  * @returns {JSON} Devuelve un JSON con la respuesta de la tabla proveedor.
  */
 async function proveedoresList(){
-    let registros=await qy ('SELECT * FROM proveedor');
+    let registros=await qy ('SELECT * FROM proveedor where eliminado is null');
     return registros;
 }
 /**
