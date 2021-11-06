@@ -91,7 +91,9 @@ app.use('/provincia',routeProvincia);
 app.use('/localidad',routeLocalidad);
 app.use('/userinterno',routeUserInterno);
 app.use('/dashboard', routeDashboard);
-
+app.use(function errorHandler(err, req, res, next) {
+     res.status(404).send(err);
+   })
 /*************************************************************************/
 app.use((req, res) => {
     res.json({"error":"Ruta no encontrada","descripcion": `ruta ${req.originalUrl} no implementada` });
