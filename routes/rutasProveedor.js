@@ -22,7 +22,7 @@ app.post ('/',async (req, res)=> {
             throw new Error("revise la informacion proporcionada");
         }
         let proveedor={
-            "cuit": req.body.cuit,
+            "cuit": req.body.cuit.trim(),
             "razonSocial": req.body.razonSocial.toUpperCase(),
             "tPersona": req.body.tPersona.toUpperCase(),
             "provincia": req.body.provincia,
@@ -30,7 +30,7 @@ app.post ('/',async (req, res)=> {
             "mail":req.body.mail.toUpperCase(),
             "telefono": req.body.telefono
         }
-        let pgetter=await servicios.cuitGetter (req.body.cuit);
+        let pgetter=await servicios.cuitGetter (req.body.cuit.trim());
         if (pgetter.length!=0){throw new Error ("cuit ya registrado")};
         await servicios.proveedorGuardar(proveedor);
         res.status(200).send(proveedor);         
