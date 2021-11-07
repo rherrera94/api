@@ -120,7 +120,7 @@ const bcrypt= require('bcrypt');
                 table.text('descripcion').notNullable();
                 table.date('fechaInicio').notNullable();
                 table.date('fechaFin').notNullable();
-                table.float('monto').notNullable();
+                table.float('monto',18,2).notNullable();
                 table.text('justificacion').notNullable();
                 table.text('actoDispositivo').notNullable();
                 table.timestamp('fecha').notNullable();
